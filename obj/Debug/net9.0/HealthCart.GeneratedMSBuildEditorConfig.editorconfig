@@ -17,101 +17,101 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = HealthCart
 build_property.RootNamespace = HealthCart
-build_property.ProjectDir = C:\Users\Passcom\Desktop\HealthCart\healthCart\
+build_property.ProjectDir = C:\Users\Passcom\Desktop\HealthCart\HealthCart\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Passcom\Desktop\HealthCart\healthCart
+build_property.MSBuildProjectDirectory = C:\Users\Passcom\Desktop\HealthCart\HealthCart
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Admin/CreateProduct.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Admin/CreateProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlUHJvZHVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Admin/EditProduct.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Admin/EditProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFByb2R1Y3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Admin/Index.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Admin/IndexAdmin.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Admin/IndexAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXhBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Admin/OrderList.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Admin/OrderList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cT3JkZXJMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Admin/ProductList.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Admin/ProductList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvZHVjdExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Admin/UserDb.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Admin/UserDb.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlckRiLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Home/About.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Home/About.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Home/Index.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Home/Privacy.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Home/UserIndex.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Home/UserIndex.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVc2VySW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Shared/AdminGuide.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Shared/AdminGuide.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEFkbWluR3VpZGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Shared/Error.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Shared/_PartialIndex.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Shared/_PartialIndex.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/User/ForgotPassword.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/User/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/User/Login.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/User/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/User/Register.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/User/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/User/VerifyPasswordReset.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/User/VerifyPasswordReset.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWZXJpZnlQYXNzd29yZFJlc2V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/_ViewImports.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/_ViewStart.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Passcom/Desktop/HealthCart/healthCart/Views/Shared/_Layout.cshtml]
+[C:/Users/Passcom/Desktop/HealthCart/HealthCart/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-m4kkqsy5l6
