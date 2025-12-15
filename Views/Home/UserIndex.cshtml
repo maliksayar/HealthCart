@@ -1,0 +1,378 @@
+@using HealthCart.Types
+@model HealthCart.Models.ViewModels.ProductViewModel
+
+@{
+	ViewData["Title"] = "Home - HealthCart";
+}
+
+
+@* hero section  *@
+<section id="home-section" class="hero">
+	<div class="home-slider js-fullheight owl-carousel">
+		<div class="slider-item js-fullheight">
+			<div class="overlay"></div>
+			<div class="container-fluid p-0">
+				<div class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end"
+					data-scrollax-parent="true">
+
+					<div class="one-third order-md-last img js-fullheight"
+						style="background-image:url(images/bg_1.jpg);">
+					</div>
+
+					<div class="one-forth d-flex js-fullheight align-items-center ftco-animate"
+						data-scrollax=" properties: { translateY: '70%' }">
+						<div class="text">
+							<h1 class="mb-3"> Welcome @Model?.User?.Username</h1>
+
+							<span class="subheading">HealthCart - Your Trusted Pharmacy</span>
+							<div class="horizontal">
+								<h3 class="vr" style="background-image: url(~/images/divider.jpg);">Serving You Since 2022
+								</h3>
+								<h1 class="mb-4 mt-3">Your Health <br><span>Our Priority</span></h1>
+								<p>HealthCart brings you authentic medicines and healthcare products with fast delivery and expert guidance for your wellness needs.</p>
+
+								<p><a asp-controller="Product" asp-action="Index" asp-route-Category="Prescription" class="btn btn-primary px-5 py-3 mt-3">Shop Medicines</a></p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="slider-item js-fullheight">
+			<div class="overlay"></div>
+			<div class="container-fluid p-0">
+				<div class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end"
+					data-scrollax-parent="true">
+
+					<div class="one-third order-md-last img js-fullheight"
+						style="background-image:url(/images/bg_2.jpg);">
+					</div>
+					
+					<div class="one-forth d-flex js-fullheight align-items-center ftco-animate"
+						data-scrollax=" properties: { translateY: '70%' }">
+						
+						<div class="text">
+                            <h1 class="mb-3"> Welcome @Model?.User?.Username</h1>
+							<span class="subheading">HealthCart - Your Trusted Pharmacy</span>
+							<div class="horizontal">
+								<h3 class="vr" style="background-image: url(~/images/divider.jpg);">Best Online Healthcare Store</h3>
+								<h1 class="mb-4 mt-3">Quality <span>Healthcare</span> Products</h1>
+								<p>Discover a wide range of healthcare products, wellness supplements, and personal care items. Shop now and prioritize your health with HealthCart!</p>
+
+								<p><a asp-controller="Product" asp-action="Index" asp-route-Category="Wellness" class="btn btn-primary px-5 py-3 mt-3">Explore Wellness</a></p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+@* Best Sellers  *@
+<section class="ftco-section bg-light pt-3">
+	<div class="container">
+		<div class="row justify-content-center mb-3 pb-3">
+			<div class="col-md-12 heading-section text-center ftco-animate">
+				<h2 class="mb-4">Best Selling Products</h2>
+				<p>Discover our most trusted products—customer favorites that deliver quality, reliability, and value. From essential medicines to wellness supplements, these are the products our customers rely on every day!</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+
+			@foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.Prescription || p.Category == ProductCategory.OtcMedicines).Take(8).Skip(4))
+			{
+				<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId"
+							class="img-prod"><img class="img-fluid" src="@product.ImageUrl" alt="">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 px-3">
+							<h3><a asp-controller="Product" asp-action="Details"
+									asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$ @product.Price</span></p>
+								</div>
+								<div class="rating">
+									<p class="text-right">
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+									</p>
+								</div>
+							</div>
+							<p class="bottom-area d-flex px-3">
+								<a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId"
+									class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
+											class="ion-ios-add ml-1"></i></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+			}
+
+		</div>
+	</div>
+</section>
+
+@* featured categories  *@
+<section class="ftco-section ftco-choose ftco-no-pb ftco-no-pt">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 d-flex align-items-stretch">
+				<div class="img" style="background-image: url('@Url.Content("~/images/about-1.jpg")');"></div>
+			</div>
+			<div class="col-md-4 py-md-5 ftco-animate">
+				<div class="text py-3 py-md-5">
+					<h2 class="mb-4">Wellness & Vitamin Supplements</h2>
+					<p class="text-dark">Boost your immunity and enhance your wellbeing with our premium collection of vitamins, minerals, and health supplements designed to support your active lifestyle.</p>
+
+					<a asp-controller="Product" asp-action="Index" asp-route-category="Wellness"
+						class="btn btn-white px-4 py-3">Shop Wellness</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-5 order-md-last d-flex align-items-stretch">
+				<div class="img img-2" style="background-image: url('@Url.Content("~/images/about-2.jpg")');"></div>
+			</div>
+			<div class="col-md-7 py-3 py-md-5 ftco-animate">
+				<div class="text text-2 py-md-5">
+					<h2 class="mb-4">Personal Care & Hygiene Products</h2>
+					<p class="text-dark">Explore our extensive range of personal care essentials—from skincare to oral hygiene—featuring trusted brands that keep you feeling fresh and confident every day.</p>
+
+					<a asp-controller="Product" asp-action="Index" asp-route-category="PersonalCare"
+						class="btn btn-primary px-4 py-3">Shop Personal Care</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+@* Prescription Medicines  *@
+<section class="ftco-section bg-light pt-3 pb-2">
+	<div class="container">
+		<div class="row justify-content-center mb-3 pb-3">
+			<div class="col-md-12 heading-section text-center ftco-animate">
+				<h2 class="mb-4">Prescription Medicines</h2>
+				<p class="text-dark">Authentic prescription medications from verified manufacturers, ensuring your health and safety with every order.</p>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			@foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.Prescription).Take(4))
+			{
+				<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId"
+							class="img-prod"><img class="img-fluid" src="@product.ImageUrl" alt="">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 px-3">
+							<h3><a asp-controller="Product" asp-action="Details"
+									asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
+							<div class="d-flex">
+								
+								<div class="pricing">
+									<p class="price"><span>$ @product.Price</span></p>
+								</div>
+
+								<div class="rating">
+									<p class="text-right">
+										@{
+											var rating = (int)(product?.Rating ?? 0);
+											for (int i = 1; i <= 5; i++)
+											{
+												if (i <= rating)
+												{
+													<a href="#"><span class="ion-ios-star"></span></a>
+												}
+												else
+												{
+													<a href="#"><span class="ion-ios-star-outline"></span></a>
+												}
+											}
+										}
+									</p>
+								</div>
+
+							</div>
+							<p class="bottom-area d-flex px-3">
+								<a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId"
+									class="add-to-cart text-center py-2 mr-1">
+									<span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>
+
+@* OTC Medicines  *@
+<section class="ftco-section bg-light pt-2 pb-2">
+	<div class="container">
+		<div class="row justify-content-center mb-3 pb-3">
+			<div class="col-md-12 heading-section text-center ftco-animate">
+				<h2 class="mb-4">Over-The-Counter Medicines</h2>
+				<p class="text-dark">Quick relief for common ailments—pain relievers, cold medicines, and digestive aids available without prescription.</p>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+
+			@foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.OtcMedicines).Take(5).Skip(1))
+			{
+				<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId"
+							class="img-prod"><img class="img-fluid" src="@product.ImageUrl" alt="">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 px-3">
+							<h3><a asp-controller="Product" asp-action="Details"
+									asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$ @product.Price</span></p>
+								</div>
+								<div class="rating">
+									<p class="text-right">
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+									</p>
+								</div>
+							</div>
+							<p class="bottom-area d-flex px-3">
+								<a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId"
+									class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
+											class="ion-ios-add ml-1"></i></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>
+
+@* Wellness Products  *@
+<section class="ftco-section bg-light pt-2 pb-2">
+	<div class="container">
+		<div class="row justify-content-center mb-3 pb-3">
+			<div class="col-md-12 heading-section text-center ftco-animate">
+				<h2 class="mb-4">Wellness & Supplements</h2>
+				<p class="text-dark">Vitamins, minerals, and dietary supplements to support your overall health and wellness journey.</p>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+
+			@foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.Wellness).Take(4))
+			{
+				<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId"
+							class="img-prod"><img class="img-fluid" src="@product.ImageUrl" alt="">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 px-3">
+							<h3><a asp-controller="Product" asp-action="Details"
+									asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$ @product.Price</span></p>
+								</div>
+								<div class="rating">
+									<p class="text-right">
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+									</p>
+								</div>
+							</div>
+							<p class="bottom-area d-flex px-3">
+								<a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId"
+									class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
+											class="ion-ios-add ml-1"></i></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+			}
+
+		</div>
+	</div>
+</section>
+
+@* Personal Care  *@
+<section class="ftco-section bg-light pt-2 pb-2">
+	<div class="container">
+		<div class="row justify-content-center mb-3 pb-3">
+			<div class="col-md-12 heading-section text-center ftco-animate">
+				<h2 class="mb-4">Personal Care & Hygiene</h2>
+				<p class="text-dark">Essential personal care products—skincare, oral care, and hygiene items from trusted brands you can rely on.</p>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+
+			@foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.PersonalCare).Take(4))
+			{
+				<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId"
+							class="img-prod"><img class="img-fluid" src="@product.ImageUrl" alt="">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 px-3">
+							<h3><a asp-controller="Product" asp-action="Details"
+									asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$ @product.Price</span></p>
+								</div>
+								<div class="rating">
+									<p class="text-right">
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+										<a href="#"><span class="ion-ios-star-outline"></span></a>
+									</p>
+								</div>
+							</div>
+							<p class="bottom-area d-flex px-3">
+								<a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId"
+									class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
+											class="ion-ios-add ml-1"></i></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>

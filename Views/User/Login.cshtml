@@ -1,0 +1,47 @@
+﻿﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+  ViewData["Title"] = "Login";
+}
+
+<div class="container pt-5 ">
+
+
+
+  <h3> Login to your account</h3>
+
+
+  <form method="post">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Email">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" name="Password">
+    </div>
+
+    <a class="mb-4" asp-controller="User" asp-action="ForgotPassword"> Forgot Password ?</a>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" required>
+      <label class="form-check-label" for="exampleCheck1"> I declare that i agree User agreement and privacy
+        policy</label>
+    </div>
+
+    <div class="form-text pb-3"> Don't Have and account <a asp-controller="User" asp-action="Register"> Register</a>
+      with us </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+
+
+    <p class="text-danger pt-3"> @ViewBag.errorMessage </p>
+    <p class="text-success pt-3"> @TempData["successMessage"] </p>
+
+
+  </form>
+
+</div>

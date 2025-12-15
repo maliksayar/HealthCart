@@ -1,0 +1,47 @@
+@model HealthCart.Models.DomainModels.Product
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<div class="container pt-2">
+    <h3>Edit Product</h3>
+</div>
+
+<div class="container pt-2">
+   @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @action = Url.Action("EditProduct", "Admin", new { ProductId = Model.ProductId }) }))
+
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ProductId)
+
+        <div class="mb-3 d-flex" style="gap: 10px;">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Enter Product Name" })
+            @Html.TextBoxFor(m => m.Brand, new { @class = "form-control", placeholder = "Enter Brand Name" })
+        </div>
+
+        <div class="mb-3">
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", placeholder = "Enter Product Description" })
+        </div>
+
+        <div class="mb-3 d-flex" style="gap: 10px;">
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control", placeholder = "Price", type = "number" })
+            @Html.TextBoxFor(m => m.Discount, new { @class = "form-control", placeholder = "Discount %", type = "number" })
+            @Html.TextBoxFor(m => m.Stock, new { @class = "form-control", placeholder = "Stock", type = "number" })
+        </div>
+
+        <div class="mb-3 d-flex" style="gap: 10px;">
+            @Html.TextBoxFor(m => m.Size, new { @class = "form-control", placeholder = "Enter Sizes (comma-separated)" })
+            @Html.TextBoxFor(m => m.ReasonForDiscount, new { @class = "form-control", placeholder = "Enter reason For discount" })
+            @Html.TextBoxFor(m => m.Color, new { @class = "form-control", placeholder = "Enter Colors (comma-separated)" })
+        </div>
+
+        <div class="mb-3 d-flex" style="gap: 10px;">
+            @Html.DropDownListFor(m => m.Category, (SelectList)ViewBag.CategoryList, "Select Category", new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.SubCategory, new { @class = "form-control", placeholder = "Sub Category" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Product</button>
+
+        <p class="text-danger pt-3">@ViewBag.ErrorMessage</p>
+    }
+</div>

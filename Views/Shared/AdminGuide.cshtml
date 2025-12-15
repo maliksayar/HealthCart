@@ -1,0 +1,64 @@
+
+  @* Views/Shared/AdminGuide.cshtml *@
+  
+   <hr class="my-5" />
+
+<div class="container mb-5">
+
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <h4><i class="bi bi-info-circle-fill text-primary me-2"></i> Admin Panel Guide</h4>
+            <p class="text-muted">This section provides helpful tips and guidelines to efficiently manage the eCommerce platform.</p>
+        </div>
+
+        <!-- Products Management -->
+        <div class="col-md-6 mb-4">
+            <div class="p-4 border rounded shadow-sm h-100 bg-light">
+                <h5><i class="bi bi-box-seam-fill text-info me-2"></i> Product & Discount Management</h5>
+                <ul class="mt-2 p-3">
+                    <li><strong>inventory Management:</strong> Use the <span class="badge bg-primary text-light">Add product to inventory</span> button in product database to add new items. </li>
+                    <li><strong>Apply Discounts:</strong> Edit products from the Products Database and specify discount percentage.</li>
+                    <li><strong>Price Handling:</strong> Final price = Price - (Price × Discount%). Ensure it's competitive.</li>
+                    <li><strong>Images:</strong> Use high-resolution square images (min 500x500 px) for best display.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Orders & Payments -->
+        <div class="col-md-6 mb-4">
+            <div class="p-4 border rounded shadow-sm h-100 bg-light">
+                <h5><i class="bi bi-bag-check-fill text-success me-2"></i> Orders & Payments</h5>
+                <ul class="mt-2 p-3">
+                    <li><strong>Order Status:</strong> Keep track of pending and dispatched orders.</li>
+                    <li><strong>Payments:</strong> Orders can be paid via <code>RazorPay</code> or <code>Cash on Delivery</code>.</li>
+                    <li><strong>Revenue:</strong> Both <code>Paid</code>  and <code> COD </code>orders count toward total revenue.</li>
+                    <li><strong>Dispatching:</strong> Use the <i class="bi bi-truck text-warning"></i> button from orders database to dispatch orders once ready.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- User Data & Policy -->
+        <div class="col-md-12 mt-2">
+            <div class="p-4 border rounded shadow-sm bg-light">
+                <h5><i class="bi bi-shield-lock-fill text-dark me-2"></i> Data Privacy & Admin Responsibility</h5>
+                <ul class="mt-2 p-3">
+                    <li><strong>Respect Privacy:</strong> Do <u>not share</u> or expose user data (email, phone, address) outside the platform.</li>
+                    <li><strong>Admin Access:</strong> Ensure only authorized staff access this panel.</li>
+                    <li><strong>Policy Adherence:</strong> Changes to user data or orders must follow company policy.</li>
+                    <li><strong>Security Tips:</strong>
+                        <ul>
+                            <li>Use strong passwords and rotate them regularly.</li>
+                            <li>Log out when not in use.</li>
+                            <li>Report suspicious behavior immediately.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="alert alert-warning mt-3">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <strong>Note:</strong> All admin actions are logged for transparency and compliance.
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

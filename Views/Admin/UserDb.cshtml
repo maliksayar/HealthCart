@@ -1,0 +1,134 @@
+@model HealthCart.Models.ViewModels.UserViewModel
+@{
+    ViewData["Title"] = "Users Database";
+}
+
+
+
+
+
+<div class="container pt-4">
+
+    <!-- Back Button -->
+    <a href="@Url.Action("Index", "Admin")" class="btn btn-outline-secondary mb-4 shadow-sm">
+        <i class="bi bi-arrow-left-circle me-2"></i> Back to Dashboard
+    </a>
+
+
+
+
+@if (TempData["Message"] != null)
+{
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            @TempData["Message"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+}
+
+
+@if (TempData["ErrorMessage"] != null)
+{
+        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+}
+
+
+    <h3 class="mb-3"><i class="bi bi-people-fill text-primary me-2"></i> Users Database</h3>
+
+    <p class="text-danger"> Note : If u want to add store keeper remember that he/she is registerd as user on this
+        platform</p>
+
+    <form method="post" asp-controller="admin" asp-action="AddRemoveStoreKeeper" class="d-flex align-items-center gap-2 mb-2">
+
+
+        <input type="email" name="Email" placeholder="Enter Email Id of store keeper"  required
+            style="width: 400px; border : none ; border-bottom: 1px solid black; margin-right: 10px;"   />
+
+        <button type="submit" class="btn btn-outline-primary">
+            <i class="bi bi-person-plus-fill me-2"></i> Add / Remove Store Keeper
+        </button>
+    </form>
+
+
+    <div class="row mb-4">
+        <div class="col-md-12 d-flex flex-wrap gap-3">
+
+
+            <a class="btn btn-outline-success shadow-sm d-flex align-items-center gap-2 mr-2 mb-2"
+                asp-controller="admin" asp-action="createProduct">
+                <i class="bi bi-plus-square-fill mr-2"></i> Add Product to Inventory
+            </a>
+
+            <a class="btn btn-outline-warning shadow-sm  d-flex align-items-center gap-2 mr-2 mb-2"
+                asp-controller="admin" asp-action="OrderList">
+                <i class="bi bi-bag-fill mr-2"></i> Orders Database
+            </a>
+
+
+            <a class="btn btn-outline-primary shadow-sm d-flex align-items-center gap-2 mr-2 mb-2"
+                asp-controller="admin" asp-action="ProductList">
+                <i class="bi bi-box-seam-fill mr-2"></i> Products Database
+            </a>
+        </div>
+
+    </div>
+
+
+
+
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+    else if (Model.Users == null || !Model.Users.Any())
+    {
+        <div class="alert alert-warning">No users found.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover shadow-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Role</th>
+                        <th>Date Registered</th>
+                        <th>Orders</th>
+                        <th>Cart Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Users.Count; i++)
+                    {
+                        var user = Model.Users[i];
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@user.Username</td>
+                            <td>@user.Email</td>
+                            <td>@(string.IsNullOrEmpty(user.Phone) ? "-" : user.Phone)</td>
+                            <td>
+                                <span
+                                    class="badge bg-@(user.Role != HealthCart.Types.Role.Admin ? "success" : "dark") text-light">
+                                    @user.Role
+                                </span>
+                            </td>
+                            <td>@user.DateCreated.ToString("dd MMM yyyy")</td>
+                            <td>@user.Orders?.Count()</td>
+                            <td>@(user.Cart?.CartValue.ToString("C") ?? "N/A")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

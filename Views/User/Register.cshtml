@@ -1,0 +1,67 @@
+﻿﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+<div class="container pt-5 ">
+
+
+
+    <h3> Register Page</h3>
+
+
+
+    <form method="post">
+
+
+        <div class="mb-3">
+            <label for="Username" class="form-label">Username</label>
+            <input type="text" class="form-control" name="Username">
+        </div>
+
+        <div class="mb-3">
+            <label for="Email" class="form-label">Email address</label>
+            <input type="email" class="form-control" aria-describedby="emailHelp" name="Email">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="Password" class="form-label">Password</label>
+            <input type="password" class="form-control" name="Password">
+        </div>
+
+        <div class="mb-3">
+            <label for="Role" class="form-label">Role</label>
+            <select class="form-select" name="Role" required>
+                <option value="" selected disabled>Select a role</option>
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+            </select>
+        </div>
+
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" required>
+            <label class="form-check-label" for="exampleCheck1"> I declare that i agree User agreement and privacy
+                policy</label>
+        </div>
+
+        <div class="form-text pb-3"> Already Have an account Kindly <a asp-controller="User" asp-action="Login"> Login</a>
+            here </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+
+        <p class="text-danger pt-3"> @ViewBag.errorMessage </p>
+
+        <p class="text-success"> @ViewBag.successMessage </p>
+
+    </form>
+
+
+
+</div>
