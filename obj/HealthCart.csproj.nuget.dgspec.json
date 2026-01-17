@@ -1,28 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Passcom\\Desktop\\HealthCart\\healthCart\\HealthCart.csproj": {}
+    "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\HealthCart.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Passcom\\Desktop\\HealthCart\\healthCart\\HealthCart.csproj": {
+    "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\HealthCart.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Passcom\\Desktop\\HealthCart\\healthCart\\HealthCart.csproj",
+        "projectUniqueName": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\HealthCart.csproj",
         "projectName": "HealthCart",
-        "projectPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\healthCart\\HealthCart.csproj",
+        "projectPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\HealthCart.csproj",
         "packagesPath": "C:\\Users\\Passcom\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\healthCart\\obj\\",
+        "outputPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Passcom\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Passcom\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
