@@ -1,0 +1,250 @@
+@model HealthCart.Models.ViewModels.ProductViewModel
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+
+@* <div class="hero-wrap hero-bread" style="background-image: url('@Url.Content($"~/images/{ViewBag.category}.jpg")');"> *@
+
+<div class="hero-wrap hero-bread" style="background-image: url('/images/background-bg.jpg")');">
+
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Products > </a></span>
+                    <span>@ViewBag.category</span>
+                </p>
+                <h1 class="mb-0 bread">@ViewBag.category</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section bg-light" style="padding-top: 50px;">
+    <div class="container">
+        @* <h3 class="pb-3 text-center"> <span style="text-transform: capitalize;">@ViewBag.category </span>  Products </h3> *@
+
+        <div class="row">
+            <div class="col-md-8 col-lg-10 order-md-last">
+
+                <div class="row">
+
+                   @if (Model.Products != null && Model.Products.Any())
+{
+    foreach (var product in Model.Products)
+    {
+        <div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
+            <div class="product">
+                <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId" class="img-prod">
+                    <img class="img-fluid" src="@product.ImageUrl" alt="Product Image">
+                    <span class="status">@product.Discount.ToString("0") % off</span>
+                    <div class="overlay"></div>
+                </a>
+                <div class="text py-3 px-3">
+                    <h3>
+                        <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId">@product.Name</a>
+                    </h3>
+                    <div class="d-flex">
+                        <div class="pricing">
+                            <p class="price">
+                                <span class="mr-2 price-dc">₹@product.Price.ToString("0")</span>
+                                <span class="price-sale">
+                                    ₹@(Math.Round(product.Price - (product.Price * product.Discount / 100), 2).ToString("0.00"))
+                                </span>
+                            </p>
+                        </div>
+                        <div class="rating">
+                            <p class="text-right">
+                                @{
+                                    var rating = (int)(product?.Rating ?? 0);
+                                    for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= rating)
+                                        {
+                                            <a href="#"><span class="ion-ios-star"></span></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                        }
+                                    }
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        @if (!string.IsNullOrEmpty(product?.ReasonForDiscount))
+                        {
+                            <span class="text-danger">@product.ReasonForDiscount !</span>
+                        }
+                    </div>
+
+                    @* <p class="bottom-area d-flex px-3">
+                        <a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId" class="add-to-cart text-center py-2 mr-1">
+                            <span>Add to cart <i class="ion-ios-add ml-1"></i></span>
+                        </a>
+                         </p> *@
+           <p class="bottom-area d-flex px-3">
+    <a asp-controller="Product" asp-action="AddToCart" 
+       asp-route-ProductId="@product.ProductId" 
+       class="add-to-cart text-center py-2 mr-1">
+        <span>Add to cart <i class="ion-ios-add ml-1"></i></span>
+    </a>
+
+    @* {{-- ✅ Yeh naya Buy Now button --}} *@
+    <a asp-controller="Order" asp-action="BuyNow" 
+       asp-route-ProductId="@product.ProductId" 
+       class="buy-now text-center py-2 ml-1">
+        <span>Buy Now <i class="ion-ios-flash ml-1"></i></span>
+    </a>
+</p>
+                        @* <p class="text-center">
+                        <a asp-controller="Order" asp-action="CheckOut" asp-route-ProductId="@product.ProductId" class="btn btn-primary py-3 px-4">
+                            <span>Buy Now <i class="ion-ios-add ml-1"></i></span>
+                        </a>
+                    </p> *@
+                   
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="col-12 text-center">
+        <h4>No products found.</h4>
+    </div>
+}
+
+
+                </div>
+
+
+
+                @if(Model.Products.Count > 50){
+
+                <div class="row mt-5">
+                    <div class="col text-center">
+                        <div class="block-27">
+                            <ul>
+                                <li><a href="#">&lt;</a></li>
+                                <li class="active"><span>1</span></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&gt;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                }
+
+
+
+            </div>
+
+
+
+
+           <div class="col-md-4 col-lg-2 sidebar">
+
+    <!-- All Products -->
+    <div class="sidebar-box-2">
+        <h2 class="heading mb-3">
+            <a asp-action="Index" asp-route-category="All">All Products</a>
+        </h2>
+    </div>
+
+    <!-- Skin Care -->
+    <div class="sidebar-box-2">
+        <h2 class="heading mb-4">Skin Care</h2>
+        <ul>
+            <li><a asp-action="Index" asp-route-category="SkinCare" asp-route-SubCategory="Creams">Creams</a></li>
+            <li><a asp-action="Index" asp-route-category="SkinCare" asp-route-SubCategory="Face Wash">Face Wash</a></li>
+            <li><a asp-action="Index" asp-route-category="SkinCare" asp-route-SubCategory="Lotions">Lotions</a></li>
+        </ul>
+    </div>
+
+    <!-- Baby Care -->
+    <div class="sidebar-box-2">
+        <h2 class="heading mb-4">Baby Care</h2>
+        <ul>
+            <li><a asp-action="Index" asp-route-category="babyCare" asp-route-SubCategory="Diapers">Diapers</a></li>
+            <li><a asp-action="Index" asp-route-category="babyCare" asp-route-SubCategory="Baby Lotion">Baby Lotion</a></li>
+            <li><a asp-action="Index" asp-route-category="babyCare" asp-route-SubCategory="Baby Oil">Baby Oil</a></li>
+        </ul>
+    </div>
+
+    <!-- First Aid -->
+    <div class="sidebar-box-2">
+        <h2 class="heading mb-4">First Aid</h2>
+        <ul>
+            <li><a asp-action="Index" asp-route-category="FirstAid" asp-route-SubCategory="Bandages">Bandages</a></li>
+            <li><a asp-action="Index" asp-route-category="FirstAid" asp-route-SubCategory="Antiseptic">Antiseptic</a></li>
+            <li><a asp-action="Index" asp-route-category="FirstAid" asp-route-SubCategory="Pain Relief">Pain Relief</a></li>
+        </ul>
+    </div>
+
+    <!-- OTC Medicines -->
+    <div class="sidebar-box-2">
+        <h2 class="heading mb-4">OTC Medicines</h2>
+        <ul>
+            <li><a asp-action="Index" asp-route-category="OtcMedicines" asp-route-SubCategory="Fever">Fever</a></li>
+            <li><a asp-action="Index" asp-route-category="OtcMedicines" asp-route-SubCategory="Cold & Flu">Cold & Flu</a></li>
+            <li><a asp-action="Index" asp-route-category="OtcMedicines" asp-route-SubCategory="Painkillers">Painkillers</a></li>
+        </ul>
+    </div>
+
+    <!-- Eye Care -->
+    <div class="sidebar-box-2">
+        <h2 class="heading mb-4">Eye Care</h2>
+        <ul>
+            <li><a asp-action="Index" asp-route-category="EyeCare" asp-route-SubCategory="Eye Drops">Eye Drops</a></li>
+            <li><a asp-action="Index" asp-route-category="EyeCare" asp-route-SubCategory="Lens Solution">Lens Solution</a></li>
+        </ul>
+    </div>
+
+    <!-- Prescription -->
+    <div class="sidebar-box-2">
+        <h2 class="heading mb-4">Prescription</h2>
+        <ul>
+            <li><a asp-action="Index" asp-route-category="Prescription" asp-route-SubCategory="Antibiotics">Antibiotics</a></li>
+            <li><a asp-action="Index" asp-route-category="Prescription" asp-route-SubCategory="Heart">Heart Medicines</a></li>
+            <li><a asp-action="Index" asp-route-category="Prescription" asp-route-SubCategory="Diabetes">Diabetes</a></li>
+        </ul>
+    </div>
+
+    <!-- Wellness -->
+    <div class="sidebar-box-2">
+        <h2 class="heading mb-4">Wellness</h2>
+        <ul>
+            <li><a asp-action="Index" asp-route-category="Wellness" asp-route-SubCategory="Vitamins">Vitamins</a></li>
+            <li><a asp-action="Index" asp-route-category="Wellness" asp-route-SubCategory="Supplements">Supplements</a></li>
+        </ul>
+    </div>
+
+    <!-- Personal Care -->
+    <div class="sidebar-box-2">
+        <h2 class="heading mb-4">Personal Care</h2>
+        <ul>
+            <li><a asp-action="Index" asp-route-category="PersonalCare" asp-route-SubCategory="Hair Care">Hair Care</a></li>
+            <li><a asp-action="Index" asp-route-category="PersonalCare" asp-route-SubCategory="Oral Care">Oral Care</a></li>
+        </ul>
+    </div>
+
+    <!-- Others -->
+    <div class="sidebar-box-2">
+        <h2 class="heading mb-4">Others</h2>
+        <ul>
+            <li><a asp-action="Index" asp-route-category="Others">View All</a></li>
+        </ul>
+    </div>
+
+</div>
+        </div>
+    </div>
+</section>

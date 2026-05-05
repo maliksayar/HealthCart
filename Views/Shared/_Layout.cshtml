@@ -1,243 +1,418 @@
-﻿<!DOCTYPE html>
+﻿@using HealthCart.Types
+@using Microsoft.EntityFrameworkCore
+@inject HealthCart.Data.SqlDbContext dbContext
+
+@{
+    var userId = Context.Session.GetString("UserId");
+
+    int cartCount = 0;
+
+    User? user = null;
+
+
+
+
+    if (!string.IsNullOrEmpty(userId) && Guid.TryParse(userId, out var parsedUserId))
+    {
+        user = await dbContext.Users.FirstOrDefaultAsync(u => u.UserId == parsedUserId);
+        cartCount = await dbContext.Carts
+        .Where(c => c.UserId == parsedUserId)
+        .SumAsync(c => c.CartItems.Count);
+    }
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HealthCart</title>
+    <title>@ViewData["Title"] | HealthCart</title>
 
-    <title>HealthCart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- slider stylesheet -->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- font awesome style -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/animate.css">
 
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
 
-    <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
-    
+    <link rel="stylesheet" href="~/css/aos.css">
 
-    <!-- fonts style -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700|Roboto:400,700&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="~/css/ionicons.min.css">
 
-    <!-- Custom styles for this template -->
-    <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
-    <!-- responsive style -->
-    <link href="~/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/css/jquery.timepicker.css">
 
 
-    @* <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" /> *@
+    <link rel="stylesheet" href="~/css/flaticon.css">
+    <link rel="stylesheet" href="~/css/icomoon.css">
 
+
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+
+
+
+    <style>
+        .dropdown-item:hover {
+            background-color: #ffa45c !important;
+            color: white !important;
+            transition: 0.2s ease-in-out;
+        }
+    </style>
 
 </head>
 
-<body>
+<body class="goto-here">
 
 
-
-    <header class="header_section">
-
-
-
-
-        <div style="background-color: rgba(1, 10, 10, 0.552);">
-
-            <div class="container ">
-
-
-                <div class="top_contact-container">
-
-
-                    <div class="tel_container">
-                        <a href="">
-                            <img src="images/telephone-symbol-button.png" alt=""> Call : +01 1234567890
-                        </a>
-                    </div>
-
-
-
-                    <div class="social-container">
-                        <a href="">
-                            <img src="images/fb.png" alt="" class="s-1">
-                        </a>
-                        <a href="">
-                            <img src="images/twitter.png" alt="" class="s-2">
-                        </a>
-                        <a href="">
-                            <img src="images/instagram.png" alt="" class="s-3">
-                        </a>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-
-
-
-
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
-                <a class="navbar-brand" href="/home">
-                    <img src="images/logo.png" alt="">
-                    <span>
-                        HealthCart
-                    </span>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div class="d-flex  flex-column flex-lg-row align-items-center w-100 justify-content-between">
-                        <ul class="navbar-nav  ">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/home/About"> About </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="medicine.html"> Medicine </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="buy.html"> Online Buy </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="news.html"> News </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact us</a>
-                            </li>
-                        </ul>
-                        <form class="form-inline ">
-                            <input type="search" placeholder="Search">
-                            <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
-                        </form>
-                        <div class="login_btn-contanier ml-0 ml-lg-5">
-                            <a href="/user/register">
-                                <img src="images/user.png" alt="">
-                                <span>
-                                    Register
-                                </span>
-                            </a>
+    <div class="py-1 bg-black">
+        <div class="container">
+            <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+                <div class="col-lg-12 d-block">
+                    <div class="row d-flex">
+                        <div class="col-md pr-4 d-flex topper align-items-center">
+                            <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
+                                    class="icon-phone2"></span></div>
+                            <span class="text">+9160 0612 5886</span>
+                        </div>
+                        <div class="col-md pr-4 d-flex topper align-items-center">
+                            <div class="icon mr-2 d-flex justify-content-center align-items-center"><span
+                                    class="icon-paper-plane"></span></div>
+                            <span class="text">
+                                <a href="mailto:info@maliksyr999@gmail.com.com"
+                                    style="color: inherit; text-decoration: none;">
+                                    info@maliksyr111@gmail.com
+                                </a>
+                            </span>
+                        </div>
+                        <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+                            <span class="text">3-7 Business days delivery &amp; Free Returns</span>
                         </div>
                     </div>
                 </div>
-
-            </nav>
+            </div>
         </div>
-    </header>
-    <!-- end header section -->
-
-
-
-
-
-
-
-
-    <div style="min-height: 90vh;">
-
-        @RenderBody()
-
     </div>
 
 
 
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
 
- <!-- info section -->
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="info_contact">
-            <h4>
-              Contact
-            </h4>
-            <div class="box">
-              <div class="img-box">
-                <img src="images/telephone-symbol-button.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h6>
-                  +01 123567894
-                </h6>
-              </div>
+
+
+            @if (user == null)
+            {
+                <a class="navbar-brand" asp-controller="home" asp-action="index">HealthCart</a>
+            }
+          
+             else
+            {
+                <a class="navbar-brand" asp-controller="home" asp-action="userIndex">HealthCart</a>
+
+            }
+
+
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+
+                    @if (user == null)
+                    {
+                        <li class="nav-item active"><a asp-controller="home" asp-action="index" class="nav-link"
+                                style="font-size: 12px; font-weight: 600;">Home</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item active"><a asp-controller="home" asp-action="UserIndex" class="nav-link"
+                                style="font-size: 12px; font-weight: 600;">Home</a>
+                        </li>
+
+                    }
+
+                     <li class="nav-item dropdown">
+                         <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            style="font-size: 12px; font-weight: 600;">
+                            Shop
+                        </a>
+
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item  " style="font-size: 12px; font-weight: 600;"
+                                asp-controller="product" asp-action="index" asp-route-category="all">All Medicines</a>
+                            <a class="dropdown-item " style="font-size: 12px; font-weight: 600;"
+                                asp-controller="product" asp-action="index" asp-route-category="skincare">SkinCare</a>
+                            <a class="dropdown-item " style="font-size: 12px; font-weight: 600;"
+                                asp-controller="product" asp-action="index" asp-route-category="babycare">babyCare</a>
+                            <a class="dropdown-item " style="font-size: 12px; font-weight: 600;"
+                                asp-controller="product" asp-action="index" asp-route-category="FirstAid">FirstAid</a>
+                                 <a class="dropdown-item " style="font-size: 12px; font-weight: 600;"
+                                asp-controller="product" asp-action="index"
+                                asp-route-category="OtcMedcines">OtcMedicines</a>
+                                 <a class="dropdown-item " style="font-size: 12px; font-weight: 600;"
+                                asp-controller="product" asp-action="index" asp-route-category="EyeCare">EyeCare</a>
+                                 <a class="dropdown-item " style="font-size: 12px; font-weight: 600;"
+                                asp-controller="product" asp-action="index" asp-route-category="Prescription">Prescription</a>
+                                 <a class="dropdown-item " style="font-size: 12px; font-weight: 600;"
+                                asp-controller="product" asp-action="index" asp-route-category="Wellness">Wellness</a>
+                                 <a class="dropdown-item " style="font-size: 12px; font-weight: 600;"
+                                asp-controller="product" asp-action="index" asp-route-category="PersonalCare">PersonalCare</a>
+                                 <a class="dropdown-item " style="font-size: 12px; font-weight: 600;"
+                                asp-controller="product" asp-action="index" asp-route-category="Others">Others</a>
+                           
+                    </li>
+
+
+
+                    <li class="nav-item"><a asp-controller="home" style="font-size: 12px; font-weight: 600;"
+                            asp-action="about" class="nav-link ">About Us</a></li>
+                    @* <li class="nav-item">
+                        <a href="/files/Catalog.pdf" class="nav-link" style="font-size: 12px; font-weight: 600;"
+                            download> Catalog </a>
+                    </li> *@
+                    <li class="nav-item"><a style="font-size: 12px; font-weight: 600;" asp-controller="home"
+                            asp-action="contact" class="nav-link ">Contact</a></li>
+
+                    <li class="nav-item">
+                        @* <a href="#" class="nav-link" data-toggle="modal" data-target="#loginModal">
+                            <span class="icon-user"></span> Login
+                        </a> *@
+
+                        @if (user?.Role==Role.Admin)
+                        {
+                            <!-- User not logged in -->
+                            <a  href="@Url.Action("Index", "Admin")" class="nav-link "
+                                style="font-size: 12px; font-weight: 600;">
+                                <span class="icon-user"></span> Admin
+                            </a>
+                        }
+
+                        @if (user == null)
+                        {
+                            <!-- User not logged in -->
+                            <a asp-controller="User" asp-action="Login" class="nav-link "
+                                style="font-size: 12px; font-weight: 600;">
+                                <span class="icon-user"></span> Login
+                            </a>
+                        }
+                        else
+                        {
+                            <!-- User is logged in -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="font-size: 12px; font-weight: 600;" href="#"
+                                id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <span class="icon-user fon_increase" style="font-size: 14px;"></span> @user.Username
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="userDropdown">
+                                <a asp-controller="User" asp-action="Logout" class="dropdown-item  "
+                                    style="font-size: 14px; font-weight: 600;">Logout</a>
+                            </div>
+                        </li>
+                    }
+
+                    </li>
+
+
+
+                    <li class="nav-item cta cta-colored">
+                        <a asp-controller="User" asp-action="Cart" class="nav-link"
+                            style="font-size: 12px; font-weight: 600;">
+                            <span class="icon-shopping_cart" style="font-size: 14px;"></span> @if(cartCount > 0) {
+                            <span>(@cartCount)</span>
+                                                        }
+                        </a>
+                    </li>
+
+                </ul>
             </div>
-            <div class="box">
-              <div class="img-box">
-                <img src="images/email.png" alt="">
-              </div>
-              <div class="detail-box">
-                <h6>
-                  demo@gmail
-                </h6>
-              </div>
+
+
+
+            
+        </div>
+    </nav>
+
+
+
+
+
+    @* <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-3">
-          <div class="info_menu">
-            <h4>
-              Menu
-            </h4>
-            <ul class="navbar-nav  ">
-              <li class="nav-item active">
-                <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/home/about"> About </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="medicine.html"> Medicine </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="buy.html"> Online Buy </a>
-              </li>
-            </ul>
-          </div>
+    </div> *@
+
+
+
+
+    @RenderBody()
+
+
+
+
+
+
+    <section class="ftco-section-parallax">
+        <div class="parallax-img d-flex align-items-center">
+            <div class="container">
+                <div class="row d-flex justify-content-center py-5">
+                    <div class="col-md-7 text-center heading-section ftco-animate">
+                        <h2>Subcribe to our Newsletter</h2>
+                        <div class="row d-flex justify-content-center mt-5">
+                            <div class="col-md-8">
+                                <form method="post" class="subscribe-form" asp-controller="User" asp-action="subscribe">
+                                    <div class="form-group d-flex">
+                                        <input type="text" class="form-control" name="Email"
+                                            placeholder="Enter email address" required>
+                                        <input type="submit" value="Subscribe" class="submit px-3">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-          <div class="info_news">
-            <h4>
-              newsletter
-            </h4>
-            <form action="">
-              <input type="text" placeholder="Enter Your email">
-              <div class="d-flex justify-content-center justify-content-end mt-3">
-                <button>
-                  Subscribe
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- end info section -->
-
-
-
-    <!-- footer section -->
-    <section class="container-fluid footer_section">
-        <p>
-            &copy; 2025 HealthCart. All Rights Reserved .
-        </p>
     </section>
-    <!-- footer section -->
 
 
-  <script src="~/js/jquery.min.js"></script>
+
+    <footer class="ftco-footer bg-light ftco-section">
+        <div class="container">
+            <div class="row">
+                <div class="mouse">
+                    <a href="#" class="mouse-icon">
+                        <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+                    </a>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2"><b>HealthCart</b></h2>
+                        <p>HealthCart brings you the finest collection of clothing and accessories, blending
+                            style with comfort. Discover the perfect outfit for every occasion with our premium quality
+                            products.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="https://www.youtube.com" target="_blank"><span
+                                        class="icon-youtube"></span></a></li>
+                            <li class="ftco-animate"><a href="https://www.facebook.com" target="_blank"><span
+                                        class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="https://www.instagram.com" target="_blank"><span
+                                        class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Menu</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="/product?category=all" class="py-2 d-block">Shop</a></li>
+                            <li><a href="/home/about" class="py-2 d-block">About</a></li>
+                            @* <li><a href="/files/Catalog.pdf" class="py-2 d-block" download="">Catalog</a></li> *@
+                            <li><a href="/home/contact" class="py-2 d-block">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Help</h2>
+                        <div class="d-flex">
+                            <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+                                <li><a href="/home/shippingInfo" class="py-2 d-block">Shipping Information</a></li>
+                                <li><a href="/home/returnsAndExchange" class="py-2 d-block">Returns &amp; Exchange</a>
+                                </li>
+                                <li><a href="/home/TermsConditions" class="py-2 d-block">Terms &amp; Conditions</a></li>
+                                <li><a href="/home/PrivacyPolicy" class="py-2 d-block">Privacy Policy</a></li>
+                            </ul>
+                            @* <ul class="list-unstyled">
+                                <li><a href="/home/Faq" class="py-2 d-block">FAQs</a></li>
+                                <li><a href="/home/About" class="py-2 d-block">Why Choose Us</a></li>
+                            </ul> *@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li>
+                                    <span class="icon icon-map-marker"></span>
+                                    <span class="text"> Aishmuqam Anantnag </span>
+                                </li>
+
+
+
+                                <li><a href="#">
+                                        <span class="icon icon-phone"></span>
+                                        <span class="text">+9160 0612 5886 </span></a></li>
+
+
+                                <li><a href="#">
+                                        <span class="icon icon-envelope"></span>
+                                        <span class="text">info@maliksyr111@gmail.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+
+                        <p>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </footer>
+
+
+
+
+
+
+    <script src="~/js/jquery.min.js"></script>
     <script src="~/js/jquery-migrate-3.0.1.min.js"></script>
     <script src="~/js/popper.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
@@ -254,8 +429,8 @@
     <script src="~/js/main.js"></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
-    
 </body>
 
 </html>

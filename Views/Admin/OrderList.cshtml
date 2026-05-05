@@ -141,70 +141,122 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach (var order in Model.Orders)
-                    {
-                        <tr>
-                            @* <td>@order.OrderId.ToString().Substring(0, 8)...</td> *@
-                            <td>@(order.Address?.FirstName) @(order.Address?.LastName) <br>
-
-                                @order.Address?.Street , @order.Address?.City <br>
-                                @order.Address?.State<br>
-                                @order.Address?.Pincode , @order.Address?.Country
-
-
-                            </td>
-                            <td>
-                                <span class="badge bg-info"> <span class="text-light"> @order.OrderStatus</span> </span>
-                            </td>
-                            <td>
-                                @if (order.PaymentStatus == HealthCart.Types.PaymentStatus.RazorPay)
-                                {
-                                    <span class="badge bg-success">
-                                        <span class="text-light"><i class="bi bi-check-circle-fill"></i> Paid </span>
-                                    </span>
-                                }
-                                else if (order.PaymentStatus == HealthCart.Types.PaymentStatus.CashOnDelivery)
-                                {
-                                    <span class="badge bg-warning">
-                                        <span class="text-light"> <i class="bi  bi-hourglass-split"></i> COD</span>
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-secondary">
-                                        <i class="bi bi-x-circle-fill"></i> Pending
-                                    </span>
-                                }
-                            </td>
-                            <td class="fw-bold text-success">₹@order.TotalPrice</td>
-                            <td>@order.DateCreated?.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")</td>
-                            <td>
-                                @* <a href="@Url.Action("ViewOrder", "Admin", new { orderId = order.OrderId })"
-                                    class="btn btn-sm btn-primary">
-                                    <i class="bi bi-eye-fill"></i>
-                                </a> *@
-                                @* <a href="@Url.Action("DeleteOrder", "Admin", new { orderId = order.OrderId })"
-                                    class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Are you sure you want to delete this order?');">
-                                    <i class="bi bi-trash-fill"></i>
-                                </a> *@
-
-                                <a href="@Url.Action("DispatchOrder", "Admin", new { orderId = order.OrderId })"
-                                    class="btn btn-sm btn-success ms-1"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="Dispatch the order"
-                                    onclick="return confirm('Are you sure you want to dispatch this order?');">
-                                    <i class="bi bi-truck"></i>
-                                </a>
-
-                            </td>
-                        </tr>
-                    }
-                </tbody>
+                @* <tbody>
+                   <div class="table-responsive" style="overflow-x: auto;">
+    <table class="table table-bordered table-hover align-middle" 
+           style="table-layout: fixed; width: 100%;">
+        <thead class="table-dark">
+            <tr>
+                <th style="width: 35%;">Address</th>
+                <th style="width: 10%;">Status</th>
+                <th style="width: 10%;">Payment</th>
+                <th style="width: 10%;">Total</th>
+                <th style="width: 20%;">Date Created</th>
+                <th style="width: 15%;">Actions</th>
+            </tr>
+        </thead> *@
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td style="word-wrap: break-word;">
+                        @(order.Address?.FirstName) @(order.Address?.LastName) <br/>
+                        @order.Address?.Street , @order.Address?.City <br/>
+                        @order.Address?.State <br/>
+                        @order.Address?.Pincode , @order.Address?.Country
+                    </td>
+                  <td class="text-center">
+    @if (order.OrderStatus == HealthCart.Types.OrderStatus.Pending)
+    {
+        <span class="badge p-2 fw-bold fs-6" style="background-color:#6c757d; color:white;">
+            <i class="bi bi-clock-fill"></i> Pending
+        </span>
+    }
+    else if (order.OrderStatus == HealthCart.Types.OrderStatus.Verified)
+    {
+        <span class="badge p-2 fw-bold fs-6" style="background-color:#0dcaf0; color:white;">
+            <i class="bi bi-patch-check-fill"></i> Verified
+        </span>
+    }
+    else if (order.OrderStatus == HealthCart.Types.OrderStatus.InTransit)
+    {
+        <span class="badge p-2 fw-bold fs-6" style="background-color:#ffc107; color:white;">
+            <i class="bi bi-truck"></i> In Transit
+        </span>
+    }
+    else if (order.OrderStatus == HealthCart.Types.OrderStatus.Delivered)
+    {
+        <span class="badge p-2 fw-bold fs-6" style="background-color:#198754; color:white;">
+            <i class="bi bi-check-circle-fill"></i> Delivered
+        </span>
+    }
+    else if (order.OrderStatus == HealthCart.Types.OrderStatus.Cancelled)
+    {
+        <span class="badge p-2 fw-bold fs-6" style="background-color:#dc3545; color:white;">
+            <i class="bi bi-x-circle-fill"></i> Cancelled
+        </span>
+    }
+</td>
+                    <td class="text-center">
+                        @if (order.PaymentStatus == HealthCart.Types.PaymentStatus.RazorPay)
+                        {
+                            <span class="badge bg-success">
+                                <i class="bi bi-check-circle-fill"></i> Paid
+                            </span>
+                        }
+                        else if (order.PaymentStatus == HealthCart.Types.PaymentStatus.CashOnDelivery)
+                        {
+                            <span class="badge bg-warning">
+                                <i class="bi bi-hourglass-split"></i> COD
+                            </span>
+                        }
+                    </td>
+                    <td class="fw-bold text-success text-center ">
+                        ₹@order.TotalPrice
+                    </td>
+                    <td>@order.DateCreated?.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")</td>
+                   <td class="text-center">
+   @if (order.OrderStatus == HealthCart.Types.OrderStatus.Verified)
+    {
+        <a href="@Url.Action("Dispatch", "Admin", new { OrderId = order.OrderId })"
+            class="btn btn-sm btn-warning w-100 text-white fw-bold"
+            onclick="return confirm('Dispatch this order?');">
+            <i class="bi bi-truck"></i> Dispatch
+        </a>
+    }
+    else if (order.OrderStatus == HealthCart.Types.OrderStatus.InTransit)
+    {
+        <a href="@Url.Action("MarkDelivered", "Admin", new { OrderId = order.OrderId })"
+            class="btn btn-sm btn-success w-100 text-white fw-bold"
+            onclick="return confirm('Mark as delivered?');">
+            <i class="bi bi-check-circle"></i> Delivered
+        </a>
+    }
+    else if (order.OrderStatus == HealthCart.Types.OrderStatus.Delivered)
+    {
+        <span class="badge bg-success text-white fw-bold p-2 fs-6">
+            <i class="bi bi-check-circle-fill"></i> Done
+        </span>
+    }
+    else if (order.OrderStatus == HealthCart.Types.OrderStatus.Cancelled)
+    {
+        <span class="badge bg-danger text-white fw-bold p-2 fs-6">
+            <i class="bi bi-x-circle-fill"></i> Cancelled
+        </span>
+    }
+    else
+    {
+        <small class="text-muted fw-bold">Awaiting verify</small>
+    }
+</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+                @* </tbody>
             </table>
-        </div>
+        </div> *@
     }
     else
     {

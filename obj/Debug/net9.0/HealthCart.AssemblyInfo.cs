@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HealthCart")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f63b9f90eb5ab84b6dd0b6463207abd215656c2b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+798c2b63cbd6d062cc63e53ad58cb242a9678883")]
 [assembly: System.Reflection.AssemblyProductAttribute("HealthCart")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HealthCart")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

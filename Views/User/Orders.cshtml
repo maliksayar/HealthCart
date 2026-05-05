@@ -1,0 +1,150 @@
+﻿@using HealthCart.Types
+@model HealthCart.Models.ViewModels.OrderViewModel
+
+@{
+    ViewData["title"] = "Orders";
+}
+
+
+
+<div class="container my-4">
+
+
+
+
+
+    <div class="mb-3">
+        <a asp-action="Orders" asp-route-OrderFilter="Recent" class="btn btn-outline-primary btn-sm">Recent</a>
+        <a asp-action="Orders" asp-route-OrderFilter="Intransit" class="btn btn-outline-info btn-sm">In Transit</a>
+        <a asp-action="Orders" asp-route-OrderFilter="Cancelled" class="btn btn-outline-danger btn-sm">Cancelled</a>
+    </div>
+
+
+
+
+
+    <p class="my-3 h4">@ViewBag.OrderFilter Orders</p>
+
+    @if (Model != null && Model.Orders != null && Model.Orders.Any())
+    {
+        foreach (var order in Model.Orders)
+        {
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between">
+                        <span><strong>Order #:</strong> @order.OrderId.ToString().Substring(0,
+                                                3)@order.OrderId.ToString().Substring(order.OrderId.ToString().Length - 3)</span>
+                            <span><strong>Date:</strong> @(order.DateCreated.HasValue ?
+                                                order.DateCreated.Value.ToUniversalTime().AddHours(10).ToString("d MMMM yyyy") : "N/A")</span>
+                                <span>
+                                    <strong>Status:</strong>
+                                    @if (order.OrderStatus == OrderStatus.Pending)
+                                    {
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    }
+                                    else if (order.OrderStatus == OrderStatus.Verified)
+                                    {
+                                        <span class="badge bg-success">Verified</span>
+                                    }
+                                    else if (order.OrderStatus == OrderStatus.InTransit)
+                                    {
+                                        <span class="badge bg-info">In Transit</span>
+                                    }
+                                    else if (order.OrderStatus == OrderStatus.Cancelled)
+                                    {
+                                        <span class="badge bg-danger">Cancelled</span>
+                                    }
+                                </span>
+                                <span><strong>Total:</strong> @order.TotalPrice.ToString("C")</span>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @if (order.OrderItems != null && order.OrderItems.Any())
+                            {
+                                <table class="table align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Qty</th>
+                                            <th scope="col">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in order.OrderItems)
+                                        {
+                                            <tr>
+                                                <td>@item?.Product?.Name ( @item?.Quantity )</td>
+                                                <td>
+                                                    <img src="@item?.Product?.ImageUrl" alt="@item?.Product?.Name" class="img-thumbnail"
+                                                         style="max-width: 60px;" />
+                                                </td>
+                                                <td>@item?.Product?.Price.ToString("C")</td>
+                                                <td>@item?.Quantity</td>
+                                                <td>@(item?.Product?.Price * item?.Quantity) ₹</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info">No items in this order.</div>
+                            }
+                        </div>
+
+
+                        <div class="card-footer">
+
+                            @if (order.OrderStatus != OrderStatus.Cancelled)
+                            {
+
+                                <div class="d-flex justify-content-between">
+                                    <span><strong>Estimated Delivery Date:</strong></span>
+                                    @* <span><strong>Payment Method:</strong> @order.PaymentMethod</span> *@
+                                </div>
+                                <address>
+                                    @(order.ShippingDate.HasValue ? order.ShippingDate.Value.ToUniversalTime().AddHours(10).ToString("d MMMM yyyy") : "N/A")
+
+                                </address>
+                                <p class="text-muted">
+                                    Please note: The estimated delivery date is an approximation and actual delivery may take less or more
+                                    time than shown.
+                                </p>
+                            }
+
+                            @if (order.OrderStatus == OrderStatus.Pending)
+                            {
+                                <a class="btn btn-outline-primary" asp-controller="Order" asp-action="SendEmail"
+                                   asp-route-OrderId="@order.OrderId"> Verify order through Email </a>
+
+                                <a class="btn btn-black" asp-controller="Order" asp-action="cancel" asp-route-OrderId="@order.OrderId">
+                                    Cancel Order </a>
+                                }
+
+                                @if (order.OrderStatus == OrderStatus.Verified && order.PaymentStatus == PaymentStatus.RazorPay)
+                                {
+                                    <a class="btn btn-success" asp-controller="Order" asp-action="PayWithRazorPay" asp-route-OrderId="@order.OrderId">
+                                     Pay Now (RazorPay)
+                                       </a>
+                                }
+
+
+                                @if (order.OrderStatus == OrderStatus.InTransit)
+                                {
+                                    <a class="btn btn-black " asp-controller="Order" asp-action="cancel" asp-route-OrderId="@order.OrderId">
+                                        Check Status </a>
+                                    }
+
+
+                                </div>
+                            </div>
+                        }
+                    }
+    else
+                    {
+                        <div class="alert alert-warning">No orders found.</div>
+                    }
+                </div>

@@ -3,8 +3,8 @@ using Razorpay.Api;
 
 public class RazorPayService
 {
-    private readonly string key = "rzp_test_RgG9AwfnysizZu";
-    private readonly string secret = "1CaqfrrZdfeKKOIdPypjADfr";
+    private readonly string key = "rzp_test_Shf0DOhaG0kmvy";
+    private readonly string secret = "DzN7vCP7M5Z3kv3DdfLXebdk";
 
     public Order? CreateOrder(int amount, string currency , Guid orderId)
     {

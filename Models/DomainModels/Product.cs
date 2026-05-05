@@ -15,15 +15,13 @@ public class Product
     public string? ImageUrl { get; set; }
     public required decimal Price { get; set; }
     public required decimal Discount { get; set; }
-    public required string ReasonForDiscount { get; set; }
+    public string? ReasonForDiscount { get; set; }
     public required int Stock { get; set; }
     public int Rating { get; set; } = 0;
     public int? Sold { get; set; } = 0;
     public required ProductCategory Category { get; set; } = ProductCategory.All;
     public required string SubCategory { get; set; }
     public required string Brand { get; set; }
-    public required string Color { get; set; }
-    public required string Size { get; set; }
 
     public ICollection<Review> Reviews { get; set; } = [];
 

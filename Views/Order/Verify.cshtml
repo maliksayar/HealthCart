@@ -1,0 +1,172 @@
+@using HealthCart.Types
+@model HealthCart.Models.ViewModels.HybridViewModel
+
+@{
+    ViewData["Title"] = "Checkout & Verification";
+}
+
+<div class="container my-5">
+    <div class="card shadow-lg border-0">
+
+       
+
+        <div class="card-body p-5">
+
+               @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success">
+                    <i class="bi bi-envelope-check me-2"></i> @TempData["Message"]
+                </div>
+            }
+            else if(TempData["ErrorMessage"] != null){
+                   <div class="alert alert-danger">
+                    <i class="bi bi-envelope-check me-2"></i> @TempData["ErrorMessage"]
+                </div>
+            }
+            <h3 class="mb-4"><i class="bi bi-credit-card-fill me-2 text-primary"></i> Checkout & Order Verification</h3>
+
+            <div class="mb-4">
+                <h5><i class="bi bi-receipt-cutoff me-2 text-secondary"></i> Order Summary</h5>
+                <p><strong>Order ID:</strong> <span class="badge bg-light text-dark" id="orderId">@Model?.Order?.OrderId</span></p>
+
+                <ul class="list-group">
+                    @foreach (var item in Model?.OrderItems)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>@item?.Product?.Name</strong>
+                                <div class="text-muted small">Qty: @item?.Quantity</div>
+                            </div>
+                            <span class="text-success fw-bold">
+                               $   @(
+                                    string.Format("{0:0.00}", 
+                                        item?.Quantity * (item?.Product?.Price - (item?.Product?.Price * (item?.Product?.Discount ?? 0) / 100))
+                                    )
+                                )
+                            </span>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="mb-4">
+                <h5><i class="bi bi-cash-coin me-2 text-success"></i> Payment Details</h5>
+                <p><strong>Shipping Cost:</strong> ₹ 5.00</p>
+                <p class="fs-5"><strong>Total Amount:</strong> ₹ <span id="amount">@((Model?.Order?.TotalPrice ?? 0) + 5.00m)</span></p>
+            </div>
+
+            <div class="mb-4">
+                <h5><i class="bi bi-geo-alt-fill me-2 text-danger"></i> Shipping Address</h5>
+                <address class="border rounded p-3 bg-light">
+                    <strong>@Model?.Address?.FirstName @Model?.Address?.LastName</strong><br />
+                    @Model?.Address?.Street<br />
+                    @Model?.Address?.City, @Model?.Address?.State - @Model?.Address?.Pincode<br />
+                    @Model?.Address?.Country<br />
+                    <i class="bi bi-telephone"></i> @Model?.Address?.Phone
+                </address>
+            </div>
+
+          
+
+            <div class="mt-4">
+                @if (Model?.Order?.OrderStatus == OrderStatus.Pending && TempData["EmailMessage"] == null)
+                {
+                    <a asp-controller="Order" asp-action="SendEmail" asp-route-OrderId="@Model?.Order?.OrderId"
+                        class="btn btn-warning btn-sm">
+                        <i class="bi bi-envelope-fill me-2"></i> Verify Order via Email
+                    </a>
+                }
+
+                @if (Model?.Order?.OrderStatus == OrderStatus.Verified)
+                {
+                    <button class="btn btn-primary btn-sm" type="button" onclick="payNow()">
+                        <i class="bi bi-credit-card-2-front-fill me-2"></i> Pay Now
+                    </button>
+                }
+
+                @if (Model?.Order?.OrderStatus == OrderStatus.Cancelled)
+                {
+                    <a asp-controller="User" asp-action="Orders" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-arrow-left-circle me-2"></i> Back to Your Orders
+                    </a>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+
+
+<script>
+    async function payNow() {
+        console.log("Button Clicked");
+
+        const amount = Math.round(parseFloat(document.getElementById('amount').innerText.trim()) * 100);
+
+      
+        const orderId = document.getElementById('orderId').innerText.trim();
+  console.log(amount)
+  console.log(orderId)
+
+
+        if (!amount || amount <= 0 || !orderId) {
+            alert("Invalid amount or missing order ID");
+            return;
+        }
+
+        try {
+            const response = await fetch('/paymentApi/create/paymentIntent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ amount: amount, currency: 'RUPEE', orderId: orderId })
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error("Payment API Error:", errorText);
+                alert("Failed to create order");
+                return;
+            }
+
+            const order = await response.json();
+
+            const options = {
+                key: 'rzp_test_RgG9AwfnysizZu',
+                amount: order.amount,
+                currency: order.currency,
+                name: '@Model?.Address?.FirstName',
+                description: 'Payment Transaction',
+                order_id: order.orderId,
+                prefill: {
+                    name: '@Model?.Address?.FirstName @Model?.Address?.LastName',
+                    email: '@Model?.Order?.Buyer?.Email',
+                    contact: '@Model?.Address?.Phone'
+                },
+                handler: function (response) {
+                    console.log("Payment Success:", response);
+                    const redirectOrderId = document.getElementById('orderId').innerText.trim();
+                    const redirectUrl = `http://127.0.0.1:5036/Order/PaymentSuccess?OrderId=${redirectOrderId}`;
+                    window.location.href = redirectUrl;
+                },
+                theme: {
+                    color: '#F37254'
+                }
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+        } catch (err) {
+            console.error("Unexpected error:", err);
+            alert("An error occurred. Check console.");
+        }
+    }
+</script>

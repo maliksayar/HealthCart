@@ -64,28 +64,20 @@ namespace HealthCart.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Details(Guid ProductId)
-        {
-            try
-            {
+  public async Task<IActionResult> Details(Guid id)
+{
+    var product = await dbContext.Products
+        .Include(p => p.Reviews)
+            .ThenInclude(r => r.User)   // VERY IMPORTANT
+        .FirstOrDefaultAsync(p => p.ProductId == id);
 
-                var product = await dbContext.Products.FirstOrDefaultAsync(p => p.ProductId == ProductId && p.IsActive);
+    if (product == null)
+        return NotFound();
 
-                var viewModel = new ProductViewModel
-                {
-                    Product = product,
-                };
+    return View(product);
+}
 
-                // ViewBag.SizeList = new SelectList(Enum.GetValues(typeof(ProductSize)));
-                return View(viewModel);
-            }
-            catch (System.Exception ex)
-            {
-                ViewBag.ErrorMessage = ex.Message;
-                return View("Error");
 
-            }
-        }
 
 
         // check add to cart for differnet color and sizes

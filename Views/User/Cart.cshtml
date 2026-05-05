@@ -1,0 +1,156 @@
+@model HealthCart.Models.ViewModels.CartViewModel
+@{
+    ViewData["Title"] = "Cart";
+}
+
+
+
+<section class="pt-5 ftco-cart">
+
+    @if (string.IsNullOrEmpty(ViewBag.CartEmpty))
+    {
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ftco-animate">
+
+
+                    <div class="mb-3">
+
+                        <a asp-controller="Product" asp-action="Index" asp-route-Category="Bestsellers"
+                            class="btn btn-outline-primary m-2">View Bestsellers</a>
+                        <a asp-controller="Product" asp-action="Index" asp-route-Category="Trending"
+                            class="btn btn-outline-success m-2">Trending Now</a>
+                        <a asp-controller="User" asp-action="Orders" asp-route-OrderFilter="Recent"
+                            class="btn btn-outline-primary m-2">View recent Orders</a>
+
+                    </div>
+
+                    <div class="cart-list">
+                        <table class="table">
+                            <thead class="thead-primary">
+                                <tr class="text-center">
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var cartItem in Model.CartItems)
+                                {
+                                    <tr class="text-center">
+                                        <td class="product-remove"><a asp-controller="Product" asp-action="RemoveFromCart"
+                                                asp-route-ProductId="@cartItem?.Product?.ProductId"><span
+                                                    class="ion-ios-close"></span></a></td>
+
+                                        <td class="image-prod">
+                                            <a asp-controller="Product" asp-action="Details"
+                                                asp-route-ProductId="@cartItem?.Product?.ProductId">
+                                                <img src="@cartItem?.Product?.ImageUrl" width="120" /></a>
+                                        </td>
+
+                                        <td class="product-name">
+                                            <h3>@cartItem?.Product?.Name</h3>
+                                            @* <p>@cartItem?.Product.</p> *@
+                                        </td>
+
+                                        <td class="price">₹ @cartItem?.Product?.Price</td>
+
+                                        <td class="quantity">
+                                            <div class="input-group mb-3">
+                                                <input type="number" name="quantity" class="quantity form-control input-number"
+                                                    value="@cartItem?.Quantity" min="1" max="100" readonly>
+                                            </div>
+                                        </td>
+
+                                        <td class="total">
+                                            <p style="margin-bottom: 0; text-decoration: line-through;" class="text-secondary">
+                                                ₹ @(cartItem?.Product?.Price * cartItem?.Quantity) </p>
+                                            <span>
+                                                ₹ @{
+                                                var price = cartItem?.Product?.Price ?? 0;
+                                                var discount = cartItem?.Product?.Discount ?? 0;
+                                                var discountedPrice = price - (price * discount / 100);
+                                                var totalDiscounted = discountedPrice * (cartItem?.Quantity ?? 1);
+                                            }
+                                            @totalDiscounted.ToString("0.00")
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+                                <!-- END TR-->
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-center">
+            <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
+                <div class="cart-total mb-3">
+                    <h3>Cart Totals</h3>
+                    <p class="d-flex">
+                        <span>Subtotal</span>
+                        <span>₹ @Model?.Cart?.CartValue</span>
+                    </p>
+                    <p class="d-flex">
+                        <span>Delivery</span>
+                        <span>₹ 5.00</span>
+                    </p>
+
+                    <hr>
+                    <p class="d-flex total-price">
+                        <span>Total</span>
+                        <span>₹ @(Model?.Cart?.CartValue + 5)</span>
+                    </p>
+                </div>
+                <p class="text-center"><a asp-controller="Order" asp-action="CheckOut"
+                        asp-route-cartId="@Model?.Cart?.CartId" class="btn btn-primary py-3 px-4">Proceed to
+                        Checkout</a>
+                </p>
+            </div>
+        </div>
+
+
+
+    </div>
+        }
+
+
+
+        else
+    {
+        <div class="container" style="min-height: 70vh;">
+            <div class="row">
+                <div class="col-md-12 ftco-animate">
+
+
+                    <div class="mt-5 text-center">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png" alt="Empty Cart"
+                            style="width:120px; opacity:0.7;" />
+                        <h4 class="mt-4">Your cart is empty!</h4>
+                        <p>Looks like you haven't added anything yet. Check out our bestsellers and trending products!</p>
+                        <a asp-controller="Product" asp-action="Index" asp-route-Category="Bestsellers"
+                            class="btn btn-outline-primary m-2">View Bestsellers</a>
+                        <a asp-controller="Product" asp-action="Index" asp-route-Category="Trending"
+                            class="btn btn-outline-success m-2">Trending Now</a>
+                        <a asp-controller="User" asp-action="Orders" class="btn btn-outline-primary m-2">View recent
+                            Orders</a>
+                        <div class="mt-4">
+                            <span>Need help? <a href="/home/contact" class="text-info">Contact our support</a></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</section>

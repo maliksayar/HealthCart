@@ -11,6 +11,10 @@ namespace HealthCart.Types
         Prescription,
         Wellness,
         PersonalCare,
+        Tablets,
+        Syrups,
+
+        Devices,
         Others
     }
 }

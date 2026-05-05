@@ -1,0 +1,245 @@
+@using HealthCart.Types
+
+@model HealthCart.Models.ViewModels.HybridViewModel
+
+
+@{
+    ViewData["Title"] = "CheckOut";
+}
+
+
+@* <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span></p>
+                <h1 class="mb-0 bread">Checkout</h1>
+            </div>
+        </div>
+    </div>
+</div> *@
+
+
+<div class="container pb-3">
+ 
+    <h3 class="text-center ">Checkout </h3>
+
+</div>
+
+<section class="ftco-section" style="padding: 0px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 ftco-animate">
+
+
+                <form method="post" asp-controller="User" asp-action="CreateAddress"
+                      asp-route-CartId="@Model?.Cart?.CartId" class="billing-form">
+
+                    <h3 class="mb-4 billing-heading">Billing Details</h3>
+                    <div class="row align-items-end">
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstname">First Name</label>
+                                <input type="text" class="form-control" placeholder="First Name" name="FirstName"
+                                       value="@Model?.Address?.FirstName">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Last Name" name="LastName"
+                                       value="@Model?.Address?.LastName">
+                            </div>
+                        </div>
+
+                        <div class="w-100"></div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Country">Country</label>
+                                <div class="select-wrap">
+                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                    <select name="Country" id="" class="form-control">
+                                        <option value="@Model?.Address?.Country">@Model?.Address?.Country</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="Japan">Japan</option>
+                                        <option value="India">India</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="w-100"></div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Street">Street Address</label>
+                                <input type="text" class="form-control" placeholder="House number and street name"
+                                       name="Street" value="@Model?.Address?.Street">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="State">State</label>
+                                <input type="text" class="form-control" placeholder="State " name="State"
+                                       value="@Model?.Address?.State">
+                            </div>
+                        </div>
+
+                        <div class="w-100"></div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="City">Town / City</label>
+                                <input type="text" class="form-control" placeholder="Town / City" name="City"
+                                       value="@Model?.Address?.City">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="postcodezip">Postcode / ZIP *</label>
+                                <input type="text" class="form-control" placeholder="Postal / ZIP" name="Pincode"
+                                       value="@Model?.Address?.Pincode">
+                            </div>
+                        </div>
+
+
+                        <div class="w-100"></div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" class="form-control" placeholder="Phone" name="Phone"
+                                       value="@Model?.Address?.Phone">
+                            </div>
+                        </div>
+
+
+                       
+
+                        <div class="w-100"></div>
+
+                        <div class="p-2"> <button class="btn btn-black py-3 px-4 " type="submit"> Add Address </button>
+                        </div>
+
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="p-2">
+                                <p class="text-danger">@TempData["ErrorMessage"]</p>
+                            </div>
+                        }
+
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="p-2">
+                                <p class="text-success">@TempData["SuccessMessage"]</p>
+                            </div>
+                        }
+
+                        <div class="col-md-12">
+                            <div class="form-group mt-4">
+                                <div class="radio">
+                                    @* <label class="mr-3"><input type="radio" name="optradio"> Create an Account?
+                                    </label> *@
+                                    @* <label><input type="radio" name="optradio"> Ship to different address</label> *@
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form><!-- END -->
+
+
+
+                <div class="row mt-5 pt-3 d-flex">
+                    <div class="col-md-6 d-flex">
+                        <div class="cart-detail cart-total bg-light p-3 p-md-4">
+                            <h3 class="billing-heading mb-4">Cart Total</h3>
+                            <p class="d-flex">
+                                <span>Subtotal</span>
+                                <span>₹ @Model?.Cart?.CartValue</span>
+                            </p>
+                            <p class="d-flex">
+                                <span>Delivery</span>
+                                <span>₹5.00</span>
+                            </p>
+                        
+                            <hr>
+                            <p class="d-flex total-price">
+                                <span>Total</span>
+                                <span>₹ @(Model?.Cart?.CartValue + 5)</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    
+
+                   
+                    <div class="col-md-6">
+
+
+                        <form method="post" asp-controller="Order" asp-action="Create" class="billing-form">
+    
+                           
+                            <input type="hidden" name="CartId" value="@Model?.Cart?.CartId" />
+
+                            <div class="cart-detail bg-light p-3 p-md-4">
+                                <h3 class="billing-heading mb-4">Payment Method</h3>
+
+       
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="radio">
+                                            <label><input type="radio" name="paymentOption" class="mr-2" required
+                                                              value="@PaymentStatus.RazorPay"> Razor Pay
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="radio">
+                                            <label><input type="radio" name="paymentOption" class="mr-2" required
+                                                              value="@PaymentStatus.CashOnDelivery"> Cash On Delivery
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                    
+                           
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" class="mr-2" required> I have read
+                                                and accept the
+                                                terms and conditions</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary py-3 px-4"> Place an order</button>
+                            
+                                </div>
+                            </form>
+
+                        </div>
+
+           
+
+
+                    </div>
+                </div> <!-- .col-md-8 -->
+            </div>
+        </div>
+    </section> <!-- .section -->

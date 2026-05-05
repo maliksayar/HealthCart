@@ -1,0 +1,179 @@
+@model HealthCart.Models.DomainModels.Product
+
+@{
+    ViewData["Title"] = "Medicine Details";
+}
+
+@if (Model == null)
+{
+    <div class="container mt-5">
+        <div class="alert alert-danger">
+            Product not found.
+        </div>
+    </div>
+    return;
+}
+
+@{
+    decimal finalPrice = Model.Price - (Model.Price * Model.Discount / 100);
+}
+
+<section class="container mt-5 mb-5">
+
+    <div class="row">
+
+        <!-- IMAGE -->
+        <div class="col-md-5">
+            <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/images/no-image.png" : Model.ImageUrl)"
+                 class="img-fluid rounded shadow"
+                 alt="@Model.Name" />
+        </div>
+
+        <!-- DETAILS -->
+        <div class="col-md-7">
+
+            <h2>@Model.Name</h2>
+
+            <p class="text-muted">
+                <strong>Brand:</strong> @Model.Brand <br />
+                <strong>Category:</strong> @Model.Category <br />
+                <strong>SubCategory:</strong> @Model.SubCategory
+            </p>
+
+            <!-- RATING -->
+            <div class="mb-3">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    if (i <= Model.Rating)
+                    {
+                        <span class="text-warning">&#9733;</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary">&#9734;</span>
+                    }
+                }
+                <span class="ml-2">(@(Model.Sold ?? 0) Sold)</span>
+            </div>
+
+            <!-- DISCOUNT -->
+            @if (!string.IsNullOrWhiteSpace(Model.ReasonForDiscount))
+            {
+                <span class="badge badge-success mb-2">
+                    @Model.ReasonForDiscount
+                </span>
+            }
+
+            <!-- PRICE -->
+            <div class="mb-3">
+                @if (Model.Discount > 0)
+                {
+                    <h4>
+                        <span class="text-muted" style="text-decoration:line-through;">
+                            ₹@Model.Price
+                        </span>
+                        <span class="text-danger ml-2">
+                            ₹@finalPrice
+                        </span>
+                    </h4>
+                }
+                else
+                {
+                    <h4>₹@Model.Price</h4>
+                }
+            </div>
+
+            <!-- STOCK -->
+            @if (Model.Stock > 0)
+            {
+                <p class="text-success">
+                    In Stock (@Model.Stock available)
+                </p>
+            }
+            else
+            {
+                <p class="text-danger">Out of Stock</p>
+            }
+
+            <!-- DESCRIPTION -->
+            <p>@Model.Description</p>
+
+            <!-- ADD TO CART -->
+            @if (Model.Stock > 0)
+            {
+                <form asp-controller="Product"
+                      asp-action="AddToCart"
+                      asp-route-productId="@Model.ProductId"
+                      method="post">
+
+                    <input type="number"
+                           name="quantity"
+                           value="1"
+                           min="1"
+                           max="@Model.Stock"
+                           class="form-control mb-3"
+                           style="width:150px;" />
+
+                    <button type="submit"
+                            class="btn btn-success">
+                        Add to Cart
+                    </button>
+                </form>
+            }
+
+        </div>
+    </div>
+
+    <hr class="mt-5" />
+
+    <hr class="mt-5" />
+
+<h4>Customer Reviews</h4>
+
+@if (Model.Reviews != null && Model.Reviews.Any())
+{
+    foreach (var review in Model.Reviews)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+
+                <!-- Username -->
+                <h6>
+                    @(review.User != null ? review.User.Username : "Anonymous")
+                </h6>
+
+                <!-- Stars -->
+                <div>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= review.Stars)
+                        {
+                            <span class="text-warning">&#9733;</span>
+                        }
+                        else
+                        {
+                            <span class="text-secondary">&#9734;</span>
+                        }
+                    }
+                </div>
+
+                <!-- Review Text -->
+                <p class="mt-2">@review.ReviewText</p>
+
+                <small class="text-muted">
+                    @review.CreatedAt.ToString("dd MMM yyyy")
+                </small>
+
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-info">
+        No reviews yet.
+    </div>
+}
+
+
+</section>

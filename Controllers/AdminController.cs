@@ -16,12 +16,14 @@ namespace HealthCart.Controllers
         private readonly SqlDbContext dbContext;
 
         private readonly ICloudinaryService cloudinary;
+        private readonly IMailService mailService;
 
-        public AdminController(SqlDbContext dbContext, ITokenService tokenService, ICloudinaryService cloudinary)
+        public AdminController(SqlDbContext dbContext, ITokenService tokenService, ICloudinaryService cloudinary, IMailService mailService)
         {
             this.tokenService = tokenService;
             this.dbContext = dbContext;
             this.cloudinary = cloudinary;
+            this.mailService = mailService;
         }
 
 
@@ -108,7 +110,7 @@ namespace HealthCart.Controllers
                 }
 
 
-              
+
                 ViewBag.CategoryList = new SelectList(Enum.GetValues(typeof(ProductCategory)));
 
 
@@ -234,7 +236,7 @@ namespace HealthCart.Controllers
             else
             {
                 product.IsActive = true;
-                product.IsDeleted = false; 
+                product.IsDeleted = false;
             }
 
 
@@ -329,7 +331,104 @@ namespace HealthCart.Controllers
 
         }
 
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult> Dispatch(Guid OrderId)
+        {
+            try
+            {
+                Guid? userId = HttpContext.Items["UserId"] as Guid?;
+                var user = await dbContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
 
+                if (user?.Role == Role.User)
+                    return RedirectToAction("Login", "User");
+
+                var order = await dbContext.Orders
+                    .Include(o => o.Buyer)
+                    .Include(o => o.Address)
+                    .FirstOrDefaultAsync(o => o.OrderId == OrderId);
+
+                if (order == null)
+                {
+                    TempData["ErrorMessage"] = "Order not found!";
+                    return RedirectToAction("OrderList");
+                }
+
+                order.OrderStatus = OrderStatus.InTransit;
+                await dbContext.SaveChangesAsync();
+                // SaveChangesAsync ke baad yeh add karo
+                // if (!string.IsNullOrEmpty(order.Buyer?.Email))
+                // {
+                //     await mailService.SendEmailAsync(
+                //         order.Buyer.Email,
+                //         "Your Order Has Been Dispatched!",
+                //         htmlBody, true);
+                // }
+
+                // ✅ User ko dispatch email bhejo
+                var htmlBody = $@"
+        <html><body style='font-family:Arial; padding:20px;'>
+            <h2 style='color:#f0a500;'>Your Order is On The Way!</h2>
+            <p>Dear <strong>{order.Buyer?.Username}</strong>,</p>
+            <p>Your order <strong>{order.OrderId}</strong> has been dispatched.</p>
+            <p><strong>Delivery Address:</strong><br/>
+               {order.Address?.Street}, {order.Address?.City},
+               {order.Address?.State}, {order.Address?.Pincode}
+            </p>
+            <p>Thank you for shopping with HealthCart!</p>
+        </body></html>";
+           if (!string.IsNullOrEmpty(order.Buyer?.Email))
+                {
+                    await mailService.SendEmailAsync(
+                        order.Buyer.Email,
+                        "Your Order Has Been Dispatched!",
+                        htmlBody, true);
+                }
+
+                TempData["SuccessMessage"] = "Order dispatched successfully!";
+                return RedirectToAction("OrderList");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("OrderList");
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult> MarkDelivered(Guid OrderId)
+        {
+            try
+            {
+                Guid? userId = HttpContext.Items["UserId"] as Guid?;
+                var user = await dbContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+
+                if (user?.Role == Role.User)
+                    return RedirectToAction("Login", "User");
+
+                var order = await dbContext.Orders
+                    .Include(o => o.Buyer)
+                    .FirstOrDefaultAsync(o => o.OrderId == OrderId);
+
+                if (order == null)
+                {
+                    TempData["ErrorMessage"] = "Order not found!";
+                    return RedirectToAction("OrderList");
+                }
+
+                order.OrderStatus = OrderStatus.Delivered;
+                await dbContext.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Order marked as delivered!";
+                return RedirectToAction("OrderList");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("OrderList");
+            }
+        }
 
         [Authorize]
 

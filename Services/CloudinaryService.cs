@@ -38,7 +38,7 @@ public class CloudinaryService : ICloudinaryService
             UseFilename = true,
             UniqueFilename = false,
             Overwrite = true,
-            Folder = "Australasia Apparels"
+            Folder = "HealthCart"
             // Transformation = new Transformation().Width(150).Height(150).Crop("fill")
         };
 

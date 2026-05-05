@@ -137,8 +137,6 @@ namespace HealthCart.Controllers
                     {
                         return Redirect(returnUrl);
                     }
-
-
                     else
                     {
 
@@ -387,7 +385,7 @@ namespace HealthCart.Controllers
                 <p>Dear user,</p>
                 <p>We received a request to reset your password. Please click the link below to reset it:</p>
                 <p>
-                    <a href='https://127.0.0.1:5036/user/verifyPasswordReset?token={resetToken}'>
+                    <a href='http://127.0.0.1:5036/User/VerifyPasswordReset?token={resetToken}'>
                         Reset Your Password
                     </a>
                 </p>
@@ -482,3 +480,8 @@ namespace HealthCart.Controllers
     }
 
 }
+
+
+
+
+

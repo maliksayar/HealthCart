@@ -7483,11 +7483,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\HealthCart.csproj",
+      "projectUniqueName": "C:\\Users\\Passcom\\Desktop\\HealthCart\\healthkart\\HealthCart.csproj",
       "projectName": "HealthCart",
-      "projectPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\HealthCart.csproj",
+      "projectPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\healthkart\\HealthCart.csproj",
       "packagesPath": "C:\\Users\\Passcom\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\obj\\",
+      "outputPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\healthkart\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Passcom\\AppData\\Roaming\\NuGet\\NuGet.Config"

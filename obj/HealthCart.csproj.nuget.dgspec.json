@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\HealthCart.csproj": {}
+    "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\HealthCart.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\HealthCart.csproj": {
+    "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\HealthCart.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\HealthCart.csproj",
+        "projectUniqueName": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\HealthCart.csproj",
         "projectName": "HealthCart",
-        "projectPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\HealthCart.csproj",
+        "projectPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\HealthCart.csproj",
         "packagesPath": "C:\\Users\\Passcom\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\obj\\",
+        "outputPath": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Passcom\\AppData\\Roaming\\NuGet\\NuGet.Config"

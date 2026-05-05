@@ -1,67 +1,117 @@
-﻿﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿﻿@{
     ViewData["Title"] = "Register";
 }
 
+<style>
+    body {
+        background: linear-gradient(135deg, #6ffefc, #58dcf0);
+        min-height: 100vh;
+    }
 
+    .register-card {
+        max-width: 420px;
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        background: #fff;
+        padding: 30px;
+    }
 
-<div class="container pt-5 ">
+    .form-control, .form-select {
+        border-radius: 10px;
+        padding: 10px;
+    }
 
+    .btn-primary {
+        border-radius: 10px;
+        padding: 10px;
+        font-weight: 600;
+        background-color: #71eff8;
+        border: none;
+    }
 
+    .btn-primary:hover {
+        background-color: #0bd2f0;
+    }
 
-    <h3> Register Page</h3>
+    .register-title {
+        font-weight: bold;
+        color: #02e8f9;
+    }
 
+    .link-style {
+        text-decoration: none;
+        color: #06e3fb;
+        font-weight: 500;
+    }
 
+    .link-style:hover {
+        text-decoration: underline;
+    }
+</style>
 
-    <form method="post">
+<div class="container d-flex justify-content-center align-items-center vh-100">
 
+    <div class="register-card">
 
-        <div class="mb-3">
-            <label for="Username" class="form-label">Username</label>
-            <input type="text" class="form-control" name="Username">
-        </div>
+        <h3 class="text-center mb-4 register-title">Create Account</h3>
 
-        <div class="mb-3">
-            <label for="Email" class="form-label">Email address</label>
-            <input type="email" class="form-control" aria-describedby="emailHelp" name="Email">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
+        <form method="post">
 
+            <!-- Username -->
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" placeholder="Enter username" name="Username" required>
+            </div>
 
-        <div class="mb-3">
-            <label for="Password" class="form-label">Password</label>
-            <input type="password" class="form-control" name="Password">
-        </div>
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" placeholder="Enter your email" name="Email" required>
+                <div class="form-text">We'll never share your email.</div>
+            </div>
 
-        <div class="mb-3">
-            <label for="Role" class="form-label">Role</label>
-            <select class="form-select" name="Role" required>
-                <option value="" selected disabled>Select a role</option>
-                <option value="Admin">Admin</option>
-                <option value="User">User</option>
-            </select>
-        </div>
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" placeholder="Create password" name="Password" required>
+            </div>
 
+            <!-- Role -->
+            @* <div class="mb-3">
+                <label class="form-label">Select Role</label>
+                <select class="form-select" name="Role" required>
+                    <option value="" disabled selected>Choose role</option>
+                    <option value="Admin">Admin</option>
+                    <option value="User">User</option>
+                </select>
+            </div> *@
 
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" required>
-            <label class="form-check-label" for="exampleCheck1"> I declare that i agree User agreement and privacy
-                policy</label>
-        </div>
+            <!-- Checkbox -->
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" required>
+                <label class="form-check-label">
+                    I agree to terms & privacy policy
+                </label>
+            </div>
 
-        <div class="form-text pb-3"> Already Have an account Kindly <a asp-controller="User" asp-action="Login"> Login</a>
-            here </div>
+            <!-- Button -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Register</button>
+            <!-- Login -->
+            <div class="text-center mt-3">
+                <span>Already have an account?</span>
+                <a asp-controller="User" asp-action="Login" class="link-style">Login</a>
+            </div>
 
-        <p class="text-danger pt-3"> @ViewBag.errorMessage </p>
+            <!-- Messages -->
+            <p class="text-danger text-center mt-2">@ViewBag.errorMessage</p>
+            <p class="text-success text-center">@ViewBag.successMessage</p>
 
-        <p class="text-success"> @ViewBag.successMessage </p>
+        </form>
 
-    </form>
-
-
+    </div>
 
 </div>

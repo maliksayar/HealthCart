@@ -68,47 +68,182 @@ namespace HealthCart.Controllers
             }
 
         }
-
         [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> Create(PaymentStatus paymentOption)
+        [HttpGet]
+        public async Task<IActionResult> BuyNow(Guid ProductId)
         {
-
             try
             {
                 Guid? userId = HttpContext.Items["UserId"] as Guid?;
 
                 if (userId == null)
+                    return RedirectToAction("Login", "User");
+
+                // Product find karo
+                var product = await dbContext.Products.FindAsync(ProductId);
+                if (product == null)
                 {
-                    return RedirectToAction("Login", "User"); // Or handle as appropriate
+                    ViewBag.ErrorMessage = "Product not found!";
+                    return View("Error");
                 }
 
-                var address = await dbContext.Addresses.FirstOrDefaultAsync(u => u.UserId == userId);
+                // User ka existing cart dhundo
+                var cart = await dbContext.Carts
+                    .Include(c => c.CartItems)
+                    .FirstOrDefaultAsync(c => c.UserId == userId);
+
+                // Agar cart nahi hai toh naya banao
+                if (cart == null)
+                {
+                    cart = new Cart
+                    {
+                        UserId = (Guid)userId,
+                        CartValue = 0
+                    };
+                    await dbContext.Carts.AddAsync(cart);
+                    await dbContext.SaveChangesAsync();
+                }
+
+                // Check karo product pehle se cart mein hai ya nahi
+                var existingItem = cart.CartItems
+                    .FirstOrDefault(ci => ci.ProductId == ProductId);
+
+                if (existingItem != null)
+                {
+                    // Pehle se hai toh quantity badhaao
+                    existingItem.Quantity += 1;
+                }
+                else
+                {
+                    // Naya item add karo
+                    var cartItem = new CartItem
+                    {
+                        CartId = cart.CartId,
+                        ProductId = ProductId,
+                        Quantity = 1
+                    };
+                    await dbContext.CartItems.AddAsync(cartItem);
+                }
+
+                // Cart ki total value update karo
+                // Discounted price calculate karo
+                decimal discountedPrice = product.Price - (product.Price * (decimal)product.Discount / 100);
+                cart.CartValue += discountedPrice;
+
+                await dbContext.SaveChangesAsync();
+
+                // Seedha checkout par bhejo CartId ke saath
+                return RedirectToAction("CheckOut", new { CartId = cart.CartId });
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Error");
+            }
+        }
+
+        // [Authorize]
+        // [HttpPost]
+        // public async Task<IActionResult> Create(PaymentStatus paymentOption)
+        // {
+
+        //     try
+        //     {
+        //         Guid? userId = HttpContext.Items["UserId"] as Guid?;
+
+        //         if (userId == null)
+        //         {
+        //             return RedirectToAction("Login", "User"); // Or handle as appropriate
+        //         }
+
+        //         var address = await dbContext.Addresses.FirstOrDefaultAsync(u => u.UserId == userId);
+
+        //         if (address == null)
+        //         {
+        //             ViewBag.AddressErrorMessage = "Kindly Fill in Address or select any Address from the list";
+        //             return View("CheckOut");
+        //         }
+
+        //         var cart = await dbContext.Carts
+        //         .Include(c => c.CartItems)
+        //         .ThenInclude(cp => cp.Product)
+        //         .FirstOrDefaultAsync(c => c.UserId == userId);
+
+        //         if (cart == null || cart.CartValue == 0)
+        //         {
+        //             return RedirectToAction("Cart", "User");
+
+        //         }
+
+        //         // Convert CartProducts to OrderProducts
+        //         var orderItems = cart.CartItems.Select(cp => new OrderItem
+        //         {
+        //             ProductId = cp.ProductId,
+        //             Quantity = cp.Quantity,
+
+
+
+        //         }).ToList();
+
+        //         var order = new Order
+        //         {
+        //             OrderStatus = OrderStatus.Pending,
+        //             PaymentStatus = paymentOption,
+        //             AddressId = address.AddressId,
+        //             TotalPrice = cart.CartValue,
+        //             UserId = (Guid)userId,
+        //             OrderItems = orderItems
+        //         };
+
+        //         var createOrder = await dbContext.Orders.AddAsync(order);
+
+        //         dbContext.CartItems.RemoveRange(cart.CartItems);
+        //         cart.CartValue = 0;
+        //         await dbContext.SaveChangesAsync();
+
+        //         return RedirectToAction("Verify", new { order.OrderId });
+        //     }
+        //     catch (System.Exception ex)
+        //     {
+
+        //         ViewBag.ErrorMessage = ex.Message;
+        //         return View("Error");
+        //     }
+        // }
+        
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Create(PaymentStatus paymentOption, Guid CartId)
+        {
+            try
+            {
+                Guid? userId = HttpContext.Items["UserId"] as Guid?;
+
+                if (userId == null)
+                    return RedirectToAction("Login", "User");
+
+                var address = await dbContext.Addresses
+                    .FirstOrDefaultAsync(u => u.UserId == userId);
 
                 if (address == null)
                 {
-                    ViewBag.AddressErrorMessage = "Kindly Fill in Address or select any Address from the list";
-                    return View("CheckOut");
+                    TempData["ErrorMessage"] = "Pehle address fill karein!";
+                    return RedirectToAction("CheckOut", new { CartId });
                 }
 
+                // ✅ CartId se cart dhundho
                 var cart = await dbContext.Carts
-                .Include(c => c.CartItems)
-                .ThenInclude(cp => cp.Product)
-                .FirstOrDefaultAsync(c => c.UserId == userId);
+                    .Include(c => c.CartItems)
+                    .ThenInclude(cp => cp.Product)
+                    .FirstOrDefaultAsync(c => c.CartId == CartId && c.UserId == userId);
 
                 if (cart == null || cart.CartValue == 0)
-                {
                     return RedirectToAction("Cart", "User");
 
-                }
-
-                // Convert CartProducts to OrderProducts
                 var orderItems = cart.CartItems.Select(cp => new OrderItem
                 {
                     ProductId = cp.ProductId,
                     Quantity = cp.Quantity,
-                  
-
                 }).ToList();
 
                 var order = new Order
@@ -121,7 +256,7 @@ namespace HealthCart.Controllers
                     OrderItems = orderItems
                 };
 
-                var createOrder = await dbContext.Orders.AddAsync(order);
+                await dbContext.Orders.AddAsync(order);
 
                 dbContext.CartItems.RemoveRange(cart.CartItems);
                 cart.CartValue = 0;
@@ -129,9 +264,8 @@ namespace HealthCart.Controllers
 
                 return RedirectToAction("Verify", new { order.OrderId });
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-
                 ViewBag.ErrorMessage = ex.Message;
                 return View("Error");
             }
@@ -284,13 +418,13 @@ namespace HealthCart.Controllers
     </table>
 
     <div class='summary'>
-      <p><strong>Amount:</strong> $ {order?.TotalPrice:F2}</p>
-      <p><strong>Shipping:</strong> $ 5.00 </p>
-      <p><strong>Total Amount:</strong> $ {order?.TotalPrice + 5}</p>
+      <p><strong>Amount:</strong> ₹ {order?.TotalPrice:F2}</p>
+      <p><strong>Shipping:</strong> ₹ 5.00 </p>
+      <p><strong>Total Amount:</strong> ₹ {order?.TotalPrice + 5}</p>
     </div>
 
     <div style='text-align:center; margin-top: 30px;'>
-      <a href='https://australasia-apparels.shop/order/verifiedByEmail?OrderId={OrderId}' class='btn'>Verify My Order</a>
+      <a href='http://127.0.0.1:5036/order/verifiedByEmail?OrderId={OrderId}' class='btn'>Verify My Order</a>
     </div>
 
     <p class='footer'>If you didn’t place this order, you can safely ignore this email.</p>
@@ -395,7 +529,7 @@ namespace HealthCart.Controllers
             <p>We received a request to cancel your order with the ID <strong>{order?.OrderId}</strong>.</p>
             <p>If you initiated this cancellation, please confirm it by clicking the button below:</p>
             <p style='margin: 20px 0;'>
-                <a href='https://australasia-apparels.shop/Order/ConfirmCancellation?OrderId={order?.OrderId}' 
+                <a href='http://127.0.0.1:5036/Order/ConfirmCancellation?OrderId={order?.OrderId}' 
                    style='display: inline-block; padding: 10px 20px; background-color: #d9534f; 
                           color: white; text-decoration: none; border-radius: 5px;'>
                     Confirm Cancellation
@@ -455,5 +589,5 @@ namespace HealthCart.Controllers
 
     }
 
-   
+
 }

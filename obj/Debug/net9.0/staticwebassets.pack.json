@@ -1,407 +1,635 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\HealthCart.bundle.scp.css",
-      "PackagePath": "staticwebassets\\HealthCart.5o3p0p9xxh.bundle.scp.css"
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\HealthCart.bundle.scp.css",
+      "PackagePath": "staticwebassets\\HealthCart.gpzg28uyzv.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\css\\bootstrap.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\ajax-loader.gif",
+      "PackagePath": "staticwebassets\\css\\ajax-loader.gif"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\animate.css",
+      "PackagePath": "staticwebassets\\css\\animate.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\aos.css",
+      "PackagePath": "staticwebassets\\css\\aos.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\bootstrap-datepicker.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap-datepicker.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\css\\bootstrap.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\css\\responsive.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\flaticon.css",
+      "PackagePath": "staticwebassets\\css\\flaticon.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\icomoon.css",
+      "PackagePath": "staticwebassets\\css\\icomoon.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\ionicons.min.css",
+      "PackagePath": "staticwebassets\\css\\ionicons.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\jquery.timepicker.css",
+      "PackagePath": "staticwebassets\\css\\jquery.timepicker.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\magnific-popup.css",
+      "PackagePath": "staticwebassets\\css\\magnific-popup.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\open-iconic-bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\open-iconic-bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\owl.carousel.min.css",
+      "PackagePath": "staticwebassets\\css\\owl.carousel.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\owl.theme.default.min.css",
+      "PackagePath": "staticwebassets\\css\\owl.theme.default.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\responsive.css",
       "PackagePath": "staticwebassets\\css\\responsive.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\css\\site.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\css\\style.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\style.css",
       "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\css\\style.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\style.css.map",
       "PackagePath": "staticwebassets\\css\\style.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\css\\style.scss",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\css\\style.scss",
       "PackagePath": "staticwebassets\\css\\style.scss"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\about-medicine.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\flaticon\\backup.txt",
+      "PackagePath": "staticwebassets\\fonts\\flaticon\\backup.txt"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\flaticon\\font\\flaticon.css",
+      "PackagePath": "staticwebassets\\fonts\\flaticon\\font\\flaticon.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\flaticon\\font\\flaticon.eot",
+      "PackagePath": "staticwebassets\\fonts\\flaticon\\font\\flaticon.eot"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\flaticon\\font\\flaticon.html",
+      "PackagePath": "staticwebassets\\fonts\\flaticon\\font\\flaticon.html"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\flaticon\\font\\flaticon.otf",
+      "PackagePath": "staticwebassets\\fonts\\flaticon\\font\\flaticon.otf"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\flaticon\\font\\flaticon.svg",
+      "PackagePath": "staticwebassets\\fonts\\flaticon\\font\\flaticon.svg"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\flaticon\\font\\flaticon.ttf",
+      "PackagePath": "staticwebassets\\fonts\\flaticon\\font\\flaticon.ttf"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\flaticon\\font\\flaticon.woff",
+      "PackagePath": "staticwebassets\\fonts\\flaticon\\font\\flaticon.woff"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\flaticon\\license\\license.pdf",
+      "PackagePath": "staticwebassets\\fonts\\flaticon\\license\\license.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\icomoon\\icomoon.eot",
+      "PackagePath": "staticwebassets\\fonts\\icomoon\\icomoon.eot"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\icomoon\\icomoon.svg",
+      "PackagePath": "staticwebassets\\fonts\\icomoon\\icomoon.svg"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\icomoon\\icomoon.ttf",
+      "PackagePath": "staticwebassets\\fonts\\icomoon\\icomoon.ttf"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\icomoon\\icomoon.woff",
+      "PackagePath": "staticwebassets\\fonts\\icomoon\\icomoon.woff"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\ionicons\\css\\_ionicons.scss",
+      "PackagePath": "staticwebassets\\fonts\\ionicons\\css\\_ionicons.scss"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\ionicons\\css\\ionicons.min.css",
+      "PackagePath": "staticwebassets\\fonts\\ionicons\\css\\ionicons.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\ionicons\\fonts\\ionicons.eot",
+      "PackagePath": "staticwebassets\\fonts\\ionicons\\fonts\\ionicons.eot"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\ionicons\\fonts\\ionicons.svg",
+      "PackagePath": "staticwebassets\\fonts\\ionicons\\fonts\\ionicons.svg"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\ionicons\\fonts\\ionicons.ttf",
+      "PackagePath": "staticwebassets\\fonts\\ionicons\\fonts\\ionicons.ttf"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\ionicons\\fonts\\ionicons.woff",
+      "PackagePath": "staticwebassets\\fonts\\ionicons\\fonts\\ionicons.woff"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\ionicons\\fonts\\ionicons.woff2",
+      "PackagePath": "staticwebassets\\fonts\\ionicons\\fonts\\ionicons.woff2"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\open-iconic\\open-iconic.eot",
+      "PackagePath": "staticwebassets\\fonts\\open-iconic\\open-iconic.eot"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\open-iconic\\open-iconic.otf",
+      "PackagePath": "staticwebassets\\fonts\\open-iconic\\open-iconic.otf"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\open-iconic\\open-iconic.svg",
+      "PackagePath": "staticwebassets\\fonts\\open-iconic\\open-iconic.svg"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\open-iconic\\open-iconic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\open-iconic\\open-iconic.ttf"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\fonts\\open-iconic\\open-iconic.woff",
+      "PackagePath": "staticwebassets\\fonts\\open-iconic\\open-iconic.woff"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\about-medicine.png",
       "PackagePath": "staticwebassets\\images\\about-medicine.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\client.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\background-bg.jpg",
+      "PackagePath": "staticwebassets\\images\\background-bg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\client.png",
       "PackagePath": "staticwebassets\\images\\client.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\contact-bg.jpg",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\contact-bg.jpg",
       "PackagePath": "staticwebassets\\images\\contact-bg.jpg"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\email.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\email.png",
       "PackagePath": "staticwebassets\\images\\email.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\envelope-blue.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\envelope-blue.png",
       "PackagePath": "staticwebassets\\images\\envelope-blue.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\fb.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\fb.png",
       "PackagePath": "staticwebassets\\images\\fb.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\hero-bg.jpg",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\hero-bg.jpg",
       "PackagePath": "staticwebassets\\images\\hero-bg.jpg"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\instagram.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\instagram.png",
       "PackagePath": "staticwebassets\\images\\instagram.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\left-arrow-blue.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\left-arrow-blue.png",
       "PackagePath": "staticwebassets\\images\\left-arrow-blue.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\left-arrow.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\left-arrow.png",
       "PackagePath": "staticwebassets\\images\\left-arrow.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\location-blue.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\location-blue.png",
       "PackagePath": "staticwebassets\\images\\location-blue.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\logo.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\logo.png",
       "PackagePath": "staticwebassets\\images\\logo.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\medicine.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\medicine.png",
       "PackagePath": "staticwebassets\\images\\medicine.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\medicines.jpg",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\medicines.jpg",
       "PackagePath": "staticwebassets\\images\\medicines.jpg"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\menu.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\menu.png",
       "PackagePath": "staticwebassets\\images\\menu.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\next.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\next.png",
       "PackagePath": "staticwebassets\\images\\next.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\p-1.jpg",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\p-1.jpg",
       "PackagePath": "staticwebassets\\images\\p-1.jpg"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\p-2.jpg",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\p-2.jpg",
       "PackagePath": "staticwebassets\\images\\p-2.jpg"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\p-3.jpg",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\p-3.jpg",
       "PackagePath": "staticwebassets\\images\\p-3.jpg"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\p-4.jpg",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\p-4.jpg",
       "PackagePath": "staticwebassets\\images\\p-4.jpg"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\p-5.jpg",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\p-5.jpg",
       "PackagePath": "staticwebassets\\images\\p-5.jpg"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\p-6.jpg",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\p-6.jpg",
       "PackagePath": "staticwebassets\\images\\p-6.jpg"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\prev.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\personal-care.jpg",
+      "PackagePath": "staticwebassets\\images\\personal-care.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\prev.png",
       "PackagePath": "staticwebassets\\images\\prev.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\quote.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\quote.png",
       "PackagePath": "staticwebassets\\images\\quote.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\right-arrow-blue.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\right-arrow-blue.png",
       "PackagePath": "staticwebassets\\images\\right-arrow-blue.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\right-arrow.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\right-arrow.png",
       "PackagePath": "staticwebassets\\images\\right-arrow.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\search-icon.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\search-icon.png",
       "PackagePath": "staticwebassets\\images\\search-icon.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\telephone-symbol-button.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\telephone-symbol-button.png",
       "PackagePath": "staticwebassets\\images\\telephone-symbol-button.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\twitter.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\twitter.png",
       "PackagePath": "staticwebassets\\images\\twitter.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\images\\user.png",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\images\\user.png",
       "PackagePath": "staticwebassets\\images\\user.png"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\js\\bootstrap.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\aos.js",
+      "PackagePath": "staticwebassets\\js\\aos.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\bootstrap-datepicker.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap-datepicker.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\js\\bootstrap.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\js\\jquery-3.4.1.min.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\google-map.js",
+      "PackagePath": "staticwebassets\\js\\google-map.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\jquery-3.2.1.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery-3.2.1.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\jquery-3.4.1.min.js",
       "PackagePath": "staticwebassets\\js\\jquery-3.4.1.min.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\js\\site.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\jquery-migrate-3.0.1.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery-migrate-3.0.1.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\jquery.animateNumber.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.animateNumber.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\jquery.easing.1.3.js",
+      "PackagePath": "staticwebassets\\js\\jquery.easing.1.3.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\jquery.magnific-popup.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.magnific-popup.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\jquery.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\jquery.stellar.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.stellar.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\jquery.waypoints.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.waypoints.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\js\\owl.carousel.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\popper.min.js",
+      "PackagePath": "staticwebassets\\js\\popper.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\range.js",
+      "PackagePath": "staticwebassets\\js\\range.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\scrollax.min.js",
+      "PackagePath": "staticwebassets\\js\\scrollax.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.js"
     },
     {
-      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthCart\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
+      "Id": "C:\\Users\\Passcom\\Desktop\\HealthCart\\HealthKart\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
     },
     {
