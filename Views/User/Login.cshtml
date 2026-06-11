@@ -1,107 +1,206 @@
-﻿﻿@{
+@{
     ViewData["Title"] = "Login";
 }
 
 <style>
-    body {
-        background: linear-gradient(135deg, #6ffefc, #58dcf0);
-        min-height: 100vh;
+    body, html {
+        background: linear-gradient(135deg, var(--hc-dark) 0%, var(--hc-navy) 60%, rgba(0, 201, 167, 0.2) 100%) !important;
+        min-height: 100vh !important;
+        margin-bottom: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 15px;
     }
 
-    .login-card {
-        max-width: 420px;
+    #ftco-navbar, .py-1.bg-black, .ftco-section-parallax, .hc-footer, footer {
+        display: none !important;
+    }
+
+    .auth-container {
+        position: relative;
         width: 100%;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        background: #fff;
-        padding: 30px;
+        max-width: 450px;
+        z-index: 10;
+        margin: 40px auto;
     }
 
-    .form-control {
-        border-radius: 10px;
-        padding: 10px;
+    .auth-bg-glow {
+        position: absolute;
+        top: -20%;
+        right: -20%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(0, 201, 167, 0.15) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 1;
     }
 
-    .btn-primary {
-        border-radius: 10px;
-        padding: 10px;
+    .auth-card {
+        background: rgba(11, 22, 41, 0.85) !important;
+        border: 1px solid var(--hc-border) !important;
+        border-radius: var(--hc-radius-lg) !important;
+        box-shadow: var(--hc-shadow-lg), var(--hc-shadow-teal) !important;
+        padding: 45px 40px !important;
+        backdrop-filter: blur(16px);
+        animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 5;
+        position: relative;
+    }
+
+    @@keyframes slideUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .auth-logo-text {
+        font-size: 1.8rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--hc-teal), #00FFCC);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.5px;
+    }
+
+    .auth-input {
+        background: rgba(5, 15, 26, 0.6) !important;
+        border: 2px solid var(--hc-border) !important;
+        border-radius: var(--hc-radius-md) !important;
+        color: var(--hc-white) !important;
+        padding: 12px 16px !important;
+        transition: all 0.3s ease !important;
+        width: 100%;
+        outline: none;
+    }
+
+    .auth-input:focus {
+        border-color: var(--hc-teal) !important;
+        background: var(--hc-surface) !important;
+        box-shadow: var(--hc-shadow-teal) !important;
+    }
+
+    .auth-label {
         font-weight: 600;
-        background-color: #71eff8;
-        border: none;
+        color: var(--hc-text) !important;
+        font-size: 0.88rem;
+        margin-bottom: 6px;
+        display: block;
     }
 
-    .btn-primary:hover {
-        background-color: #0bd2f0;
+    .auth-btn {
+        background: linear-gradient(135deg, var(--hc-teal), var(--hc-teal-d)) !important;
+        border: none !important;
+        border-radius: var(--hc-radius-xl) !important;
+        color: var(--hc-white) !important;
+        font-weight: 700 !important;
+        padding: 14px !important;
+        width: 100%;
+        box-shadow: var(--hc-shadow-teal) !important;
+        transition: all 0.3s ease !important;
+        cursor: pointer;
     }
 
-    .login-title {
-        font-weight: bold;
-        color: #02e8f9;
+    .auth-btn:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 25px rgba(0, 201, 167, 0.4) !important;
     }
 
-    .link-style {
+    .auth-link {
+        color: var(--hc-teal) !important;
+        font-weight: 600;
         text-decoration: none;
-        color: #06e3fb;
-        font-weight: 500;
     }
 
-    .link-style:hover {
+    .auth-link:hover {
+        color: var(--hc-teal-d) !important;
         text-decoration: underline;
+    }
+
+    .trust-badges {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 25px;
+    }
+
+    .trust-badge {
+        font-size: 11px;
+        color: var(--hc-muted);
+        font-weight: 600;
     }
 </style>
 
-<div class="container d-flex justify-content-center align-items-center vh-100">
+<div class="auth-container">
+    <div class="auth-bg-glow"></div>
+    <div class="auth-card">
 
-    <div class="login-card">
-
-        <h3 class="text-center mb-4 login-title">Login</h3>
+        <!-- Logo -->
+        <div class="text-center mb-4">
+            <span class="auth-logo-text">HealthCart</span>
+            <h3 class="mt-3" style="font-weight: 800; color: var(--hc-white);">Welcome Back</h3>
+            <p style="color: var(--hc-muted); font-size: 0.9rem;">Sign in to check your medical details</p>
+        </div>
 
         <form method="post">
-
             <!-- Email -->
-            <div class="mb-3">
-                <label class="form-label">Email address</label>
-                <input type="email" class="form-control" placeholder="Enter your email" name="Email" required>
+            <div class="form-group mb-4">
+                <label class="auth-label">Email Address</label>
+                <input type="email" class="auth-input" placeholder="you@example.com" name="Email" required id="login-email">
             </div>
 
             <!-- Password -->
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" placeholder="Enter password" name="Password" required>
+            <div class="form-group mb-4">
+                <label class="auth-label">Password</label>
+                <input type="password" class="auth-input" placeholder="Enter password" name="Password" required id="login-password">
             </div>
 
-            <!-- Forgot -->
-            <div class="d-flex justify-content-between mb-3">
-                <a asp-controller="User" asp-action="ForgotPassword" class="link-style">
+            <!-- Options -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe" style="font-size:0.85rem; color:var(--hc-muted);">
+                        Remember Me
+                    </label>
+                </div>
+                <a asp-controller="User" asp-action="ForgotPassword" class="auth-link" style="font-size:0.85rem;">
                     Forgot Password?
                 </a>
             </div>
 
-            <!-- Checkbox -->
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" required>
-                <label class="form-check-label">
-                    I agree to terms & privacy policy
-                </label>
-            </div>
+            <!-- Submit -->
+            <button type="submit" class="auth-btn" id="login-submit">
+                Sign In <i class="bi bi-arrow-right ml-1"></i>
+            </button>
 
-            <!-- Button -->
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary">Login</button>
-            </div>
+            <!-- Separator -->
+            <div class="text-center my-3 text-muted" style="font-size: 12px;">or</div>
 
             <!-- Register -->
-            <div class="text-center mt-3">
-                <span>Don't have an account?</span>
-                <a asp-controller="User" asp-action="Register" class="link-style">Register</a>
+            <div class="text-center">
+                <span style="color:var(--hc-muted); font-size:0.9rem;">New to HealthCart?</span>
+                <a asp-controller="User" asp-action="Register" class="auth-link ml-1">Create account</a>
             </div>
 
-            <!-- Messages -->
-            <p class="text-danger text-center mt-2">@ViewBag.errorMessage</p>
-            <p class="text-success text-center">@TempData["successMessage"]</p>
-
+            <!-- Errors/Alerts -->
+            @if (!string.IsNullOrEmpty(ViewBag.errorMessage as string))
+            {
+                <div class="alert alert-danger mt-3 py-2 text-center" style="border-radius: var(--hc-radius-sm); font-size: .85rem;">
+                    <i class="bi bi-exclamation-triangle-fill mr-1"></i> @ViewBag.errorMessage
+                </div>
+            }
+            @if (TempData["successMessage"] != null)
+            {
+                <div class="alert alert-success mt-3 py-2 text-center" style="border-radius: var(--hc-radius-sm); font-size: .85rem;">
+                    <i class="bi bi-check-circle-fill mr-1"></i> @TempData["successMessage"]
+                </div>
+            }
         </form>
 
-    </div>
+        <!-- Trust footer -->
+        <div class="trust-badges text-center">
+            <span class="trust-badge">🔒 SSL Encrypted</span>
+            <span class="trust-badge">🏥 Certified Pharmacy</span>
+        </div>
 
+    </div>
 </div>

@@ -1,535 +1,422 @@
-﻿@using HealthCart.Types
+@using HealthCart.Types
 @model HealthCart.Models.ViewModels.ProductViewModel
 
 @{
-	ViewData["Title"] = "Home";
+	ViewData["Title"] = "Your Digital Wellness Partner";
 }
-
 
 @if (TempData["Message"] != null)
 {
-    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="border-radius: var(--hc-radius-md); margin: 20px auto; max-width: 800px; background: rgba(0, 201, 167, 0.15); border: 1px solid var(--hc-teal); color: var(--hc-teal);">
         @TempData["Message"]
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-</button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" style="color: var(--hc-teal);">&times;</span>
+        </button>
     </div>
 }
 
-
-@* hero section  *@
-<section id="home-section" class="hero">
-	<div class="home-slider js-fullheight owl-carousel">
-		<div class="slider-item js-fullheight">
-			<div class="overlay"></div>
-			<div class="container-fluid p-0">
-				<div class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end"
-					data-scrollax-parent="true">
-
-
-					<div class="one-third order-md-last img js-fullheight"
-						style="background-image:url(/images/contact-bg.jpg);">
-					</div>
-
-
-					<div class="one-forth d-flex js-fullheight align-items-center ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
-						<div class="text">
-							
-							<span class="subheading">HealthCart - Your Trusted Pharmacy</span>
-							<div class="horizontal">
-								<h3 class="vr" style="background-image: url(~/images/divider.jpg);">Serving You Since 2022
-								</h3>
-										<h1 class="mb-4 mt-3">Your Health <br><span>Our Priority</span></h1>
-								<p>HealthCart brings you authentic medicines and healthcare products with fast delivery and expert guidance for your wellness needs.</p>
-
-								<p><a asp-controller="Product" asp-action="Index" asp-route-Category ="Prescription" class="btn btn-primary px-5 py-3 mt-3">Shop Medicines</a></p>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-			</div>
-		</div>
-
-		<div class="slider-item js-fullheight">
-			<div class="overlay"></div>
-			<div class="container-fluid p-0">
-				<div class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end"
-					data-scrollax-parent="true">
-
-					<div class="one-third order-md-last img js-fullheight"
-						style="background-image:url(/images/hero-bg.jpg);">
-					</div>
-					
-					<div class="one-forth d-flex js-fullheight align-items-center ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
-
-
-						
-						<div class="text">
-							<span class="subheading"> HealthCart - Your Trusted Pharmacy</span>
-							<div class="horizontal">
-								<h3 class="vr" style="background-image: url(~/images/medicines.jpg);">Best Online Healthcare Store</h3>
-								<h1 class="mb-4 mt-3">Quality <span>Healthcare</span> Products</h1>
-								<p>Discover a wide range of healthcare products, wellness supplements, and personal care items. Shop now and prioritize your health with HealthCart!</p>
-
-								<p><a asp-controller="Product" asp-action="Index" asp-route-Category="Wellness" class="btn btn-primary px-5 py-3 mt-3">Explore Wellness</a></p>
-
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- Premium Hero Section -->
+<section class="hero-wrap d-flex align-items-center" style="background: linear-gradient(135deg, var(--hc-dark) 0%, var(--hc-navy) 100%); min-height: 85vh; position: relative; overflow: hidden; padding: 60px 0;">
+    <div style="position: absolute; top: -10%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0, 201, 167, 0.15) 0%, transparent 70%); pointer-events: none;"></div>
+    <div style="position: absolute; bottom: -10%; left: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%); pointer-events: none;"></div>
+    
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-12">
+                <div class="hero-text-block">
+                    <span class="badge mb-3 px-3 py-2" style="background: rgba(0, 201, 167, 0.1); color: var(--hc-teal); border-radius: var(--hc-radius-sm); font-weight: 700; font-size: 13px; letter-spacing: 0.5px;">
+                        🏥 YOUR TRUSTED DIGITAL PHARMACY
+                    </span>
+                    <h1 class="display-3 mb-4" style="font-weight: 900; line-height: 1.1; letter-spacing: -1px;">
+                        Your Health,<br><span style="background: linear-gradient(135deg, var(--hc-teal) 0%, #00FFCC 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Our Priority.</span>
+                    </h1>
+                    <p class="lead mb-5" style="color: var(--hc-muted); font-size: 1.15rem; line-height: 1.7;">
+                        HealthCart brings you authentic medicines, wellness supplements, and healthcare products with super fast delivery, expert support, and machine learning risk assessments.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a asp-controller="Product" asp-action="Index" asp-route-Category="Prescription" class="btn btn-primary btn-lg mr-3 mb-3">
+                            <i class="bi bi-shop-window mr-2"></i>Shop Medicines
+                        </a>
+                        <a href="#ai-predictions" class="btn btn-outline-primary btn-lg mb-3">
+                            <i class="bi bi-cpu mr-2"></i>AI Risk Prediction
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Category Pills Panel -->
+            <div class="col-lg-6 col-md-12 mt-5 mt-lg-0">
+                <div class="hc-glass-card p-4" style="border-radius: var(--hc-radius-lg); background: rgba(17, 31, 53, 0.45);">
+                    <h5 class="mb-4" style="font-weight: 700; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: var(--hc-teal); font-size: 20px;">⚡</span> Quick Browse Categories
+                    </h5>
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <a asp-controller="product" asp-action="index" asp-route-category="Prescription" class="d-flex align-items-center p-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--hc-border); border-radius: var(--hc-radius-md); color: var(--hc-text); text-decoration:none; transition: all 0.3s ease;">
+                                <span class="mr-3" style="font-size:24px;">💊</span>
+                                <div>
+                                    <div style="font-weight: 600; font-size:14px;">Prescription</div>
+                                    <small class="text-muted" style="font-size:11px;">Authentic Rx</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <a asp-controller="product" asp-action="index" asp-route-category="Wellness" class="d-flex align-items-center p-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--hc-border); border-radius: var(--hc-radius-md); color: var(--hc-text); text-decoration:none; transition: all 0.3s ease;">
+                                <span class="mr-3" style="font-size:24px;">🌿</span>
+                                <div>
+                                    <div style="font-weight: 600; font-size:14px;">Wellness</div>
+                                    <small class="text-muted" style="font-size:11px;">Vitamins & supplements</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <a asp-controller="product" asp-action="index" asp-route-category="OtcMedcines" class="d-flex align-items-center p-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--hc-border); border-radius: var(--hc-radius-md); color: var(--hc-text); text-decoration:none; transition: all 0.3s ease;">
+                                <span class="mr-3" style="font-size:24px;">🤒</span>
+                                <div>
+                                    <div style="font-weight: 600; font-size:14px;">OTC Care</div>
+                                    <small class="text-muted" style="font-size:11px;">Everyday relief</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <a asp-controller="product" asp-action="index" asp-route-category="skincare" class="d-flex align-items-center p-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--hc-border); border-radius: var(--hc-radius-md); color: var(--hc-text); text-decoration:none; transition: all 0.3s ease;">
+                                <span class="mr-3" style="font-size:24px;">🧴</span>
+                                <div>
+                                    <div style="font-weight: 600; font-size:14px;">Skin Care</div>
+                                    <small class="text-muted" style="font-size:11px;">Dermalogically tested</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a asp-controller="product" asp-action="index" asp-route-category="all" style="font-size:13px; font-weight:700; color: var(--hc-teal);">
+                            View All Categories <i class="bi bi-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-
-@* Best Sellers  *@
-<section class="ftco-section bg-light pt-3">
-	<div class="container">
-		<div class="row justify-content-center mb-3 pb-3">
-			<div class="col-md-12 heading-section text-center ftco-animate">
-			<h2 class="mb-4">Best Selling Products</h2>
-				<p>Discover our most trusted products—customer favorites that deliver quality, reliability, and value. From essential medicines to wellness supplements, these are the products our customers rely on every day!</p>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="container">
-		<div class="row">
-
-			@foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.All || p.Category == ProductCategory.Wellness).Take(7).Skip(4))
-			{
-				<div class="col-sm col-md-6 col-lg-3 ftco-animate">
-					<div class="product">
-						<a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId"
-							class="img-prod"><img class="img-fluid" src="@product.ImageUrl" alt="Colorlib Template">
-							     <span class="status">@product.Discount.ToString("0") % off</span>
-							<div class="overlay"></div>
-						</a>
-						<div class="text py-3 px-3">
-							<h3><a asp-controller="Product" asp-action="Details"
-									asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
-							<div class="d-flex">
-
-								<div class="pricing">
-									 <p class="price">
-                                            <span class="mr-2 price-dc">$ @product.Price.ToString("0")</span>
-                                            <span class="price-sale">$ @(Math.Round(product.Price - (product.Price * product.Discount / 100), 2).ToString())</span>
-                                    </p>
-								</div>
-								<div class="rating">
-									<p class="text-right">
-										 @{
-                                                    var rating = (int)(product?.Rating ?? 0);
-                                                    for (int i = 1; i <= 5; i++)
-                                                    {
-                                                        if (i <= rating)
-                                                        {
-                                                            <a href="#"><span class="ion-ios-star"></span></a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
-                                                        }
-                                                    }
-                                                }
-									</p>
-								</div>
-							</div>
-
-							<div>
-								   @if(!string.IsNullOrEmpty(product?.ReasonForDiscount)){
-                                        <span class="text-danger">@product.ReasonForDiscount !</span>
-                                    }
-							</div>
-
-
-							<p class="bottom-area d-flex px-3">
-								<a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product?.ProductId"
-									class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
-											class="ion-ios-add ml-1"></i></span></a>
-								@* <a href="#" class="buy-now text-center py-2">Buy now<span><i
-											class="ion-ios-cart ml-1"></i></span></a> *@
-							</p>
-						</div>
-					</div>
-				</div>
-			}
-
-		</div>
-	</div>
+<!-- Values & Security Trust Badges -->
+<section class="hc-stats-section py-5" style="border-top: 1px solid var(--hc-border); border-bottom: 1px solid var(--hc-border);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                <div class="d-flex align-items-center">
+                    <div class="mr-3" style="font-size: 32px; color: var(--hc-teal);"><i class="bi bi-shield-check"></i></div>
+                    <div>
+                        <h6 class="mb-1 text-light" style="font-weight: 700;">100% Authentic</h6>
+                        <small style="color: var(--hc-muted);">Sourced directly from manufacturers</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                <div class="d-flex align-items-center">
+                    <div class="mr-3" style="font-size: 32px; color: var(--hc-teal);"><i class="bi bi-truck"></i></div>
+                    <div>
+                        <h6 class="mb-1 text-light" style="font-weight: 700;">Fast Logistics</h6>
+                        <small style="color: var(--hc-muted);">3-7 business days doorstep delivery</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4 mb-sm-0">
+                <div class="d-flex align-items-center">
+                    <div class="mr-3" style="font-size: 32px; color: var(--hc-teal);"><i class="bi bi-patch-check"></i></div>
+                    <div>
+                        <h6 class="mb-1 text-light" style="font-weight: 700;">Verified Pharmacy</h6>
+                        <small style="color: var(--hc-muted);">Licensed pharmacists supervision</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="d-flex align-items-center">
+                    <div class="mr-3" style="font-size: 32px; color: var(--hc-teal);"><i class="bi bi-arrow-counterclockwise"></i></div>
+                    <div>
+                        <h6 class="mb-1 text-light" style="font-weight: 700;">Easy Returns</h6>
+                        <small style="color: var(--hc-muted);">Hassle-free return policy</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
+<!-- Product Display Section (Categorized Grid tabs) -->
+<section class="py-5" style="background: var(--hc-dark);">
+    <div class="container">
+        
+        <!-- Category 1: Best Sellers -->
+        <div class="mb-5">
+            <div class="row align-items-end mb-4">
+                <div class="col-md-8">
+                    <span class="badge mb-2 px-2 py-1" style="background: rgba(59, 130, 246, 0.15); color: var(--hc-blue); border-radius: 4px;">TOP FAVOURITES</span>
+                    <h2 class="h3" style="font-weight: 800;">Best Selling Products</h2>
+                </div>
+                <div class="col-md-4 text-md-right">
+                    <a asp-controller="product" asp-action="index" asp-route-category="all" style="color: var(--hc-teal); font-weight:600;">View Shop Catalog <i class="bi bi-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.All || p.Category == ProductCategory.Wellness).Take(4))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="product">
+                            <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId" class="img-prod">
+                                <img src="@product.ImageUrl" class="img-fluid" alt="@product.Name">
+                                @if(product.Discount > 0) {
+                                    <span class="status">@product.Discount.ToString("0")% OFF</span>
+                                }
+                            </a>
+                            <div class="text">
+                                <h3><a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
+                                <div class="d-flex align-items-center justify-content-between mt-2">
+                                    <div class="pricing">
+                                        <p class="price mb-0">
+                                            @if(product.Discount > 0) {
+                                                <span class="price-dc">₹ @product.Price.ToString("0")</span>
+                                                <span class="price-sale">₹ @(Math.Round(product.Price - (product.Price * product.Discount / 100), 2).ToString())</span>
+                                            } else {
+                                                <span class="price-sale">₹ @product.Price.ToString("0")</span>
+                                            }
+                                        </p>
+                                    </div>
+                                    <div style="font-size:12px; color: var(--hc-teal);">
+                                        @for (int i = 1; i <= 5; i++) {
+                                            if (i <= (int)(product.Rating)) {
+                                                <i class="bi bi-star-fill"></i>
+                                            } else {
+                                                <i class="bi bi-star"></i>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                @if(!string.IsNullOrEmpty(product.ReasonForDiscount)) {
+                                    <div class="mt-2 text-danger" style="font-size: 11px; font-weight: 600;">
+                                        ⚠ @product.ReasonForDiscount
+                                    </div>
+                                }
+                                <div class="mt-3">
+                                    <a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId" class="btn btn-primary btn-block btn-sm">
+                                        <i class="bi bi-cart-plus mr-1"></i> Add to Cart
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
 
+        <!-- Call to action promotion banners (Side-by-side grid) -->
+        <div class="row my-5">
+            <div class="col-md-6 mb-4">
+                <div class="hc-glass-card d-flex align-items-center p-5" style="min-height: 250px; background: linear-gradient(135deg, rgba(0, 201, 167, 0.08) 0%, rgba(17, 31, 53, 0.6) 100%);">
+                    <div>
+                        <span class="badge mb-2 px-2 py-1 text-light" style="background:#00C9A7;">VITAMINS</span>
+                        <h3 class="mb-3" style="font-weight: 800;">Immune Boosters & Wellness</h3>
+                        <p class="mb-4 text-muted">Strengthen your body defense systems with our clinically checked range of nutritional health supplements.</p>
+                        <a asp-controller="Product" asp-action="Index" asp-route-category="Wellness" class="btn btn-outline-primary btn-sm">Browse Wellness</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="hc-glass-card d-flex align-items-center p-5" style="min-height: 250px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(17, 31, 53, 0.6) 100%);">
+                    <div>
+                        <span class="badge mb-2 px-2 py-1 text-light" style="background:#3B82F6;">DAILY HYGIENE</span>
+                        <h3 class="mb-3" style="font-weight: 800;">Personal Care Essentials</h3>
+                        <p class="mb-4 text-muted">Grooming, oral care, dermatological face treatments and hygiene items to stay clean and fresh daily.</p>
+                        <a asp-controller="Product" asp-action="Index" asp-route-category="PersonalCare" class="btn btn-outline-primary btn-sm">Shop Personal Care</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-@* wellness and personal care *@
+        <!-- Category 2: Prescription Medicines -->
+        <div class="mb-5">
+            <div class="row align-items-end mb-4">
+                <div class="col-md-8">
+                    <span class="badge mb-2 px-2 py-1" style="background: rgba(16, 185, 129, 0.15); color: #10B981; border-radius: 4px;">RX PRESCRIPTION</span>
+                    <h2 class="h3" style="font-weight: 800;">Authentic Prescription Medicines</h2>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.Prescription).Take(4))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="product">
+                            <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId" class="img-prod">
+                                <img src="@product.ImageUrl" class="img-fluid" alt="@product.Name">
+                                @if(product.Discount > 0) {
+                                    <span class="status">@product.Discount.ToString("0")% OFF</span>
+                                }
+                            </a>
+                            <div class="text">
+                                <h3><a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
+                                <div class="d-flex align-items-center justify-content-between mt-2">
+                                    <div class="pricing">
+                                        <p class="price mb-0">
+                                            @if(product.Discount > 0) {
+                                                <span class="price-dc">₹ @product.Price.ToString("0")</span>
+                                                <span class="price-sale">₹ @(Math.Round(product.Price - (product.Price * product.Discount / 100), 2).ToString())</span>
+                                            } else {
+                                                <span class="price-sale">₹ @product.Price.ToString("0")</span>
+                                            }
+                                        </p>
+                                    </div>
+                                    <div style="font-size:12px; color: var(--hc-teal);">
+                                        @for (int i = 1; i <= 5; i++) {
+                                            if (i <= (int)(product.Rating)) {
+                                                <i class="bi bi-star-fill"></i>
+                                            } else {
+                                                <i class="bi bi-star"></i>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId" class="btn btn-primary btn-block btn-sm">
+                                        <i class="bi bi-cart-plus mr-1"></i> Add to Cart
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
 
-<section class="ftco-section ftco-choose ftco-no-pb ftco-no-pt">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8 d-flex align-items-stretch">
-				<div class="img" style="background-image: url('@Url.Content("~/images/p-6.jpg")');"></div>
-			</div>
-			<div class="col-md-4 py-md-5 ftco-animate">
-				<div class="text py-3 py-md-5">
-					<h2 class="mb-4">Wellness & Vitamin Supplements</h2>
-					<p class="text-dark">Boost your immunity and enhance your wellbeing with our premium collection of vitamins, minerals, and health supplements designed to support your active lifestyle.</p>
+        <!-- Category 3: OTC Medicines & Devices -->
+        <div>
+            <div class="row align-items-end mb-4">
+                <div class="col-md-8">
+                    <span class="badge mb-2 px-2 py-1" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B; border-radius: 4px;">OVER THE COUNTER</span>
+                    <h2 class="h3" style="font-weight: 800;">OTC Medicines & Devices</h2>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.OtcMedicines || p.Category == ProductCategory.Devices).Take(4))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="product">
+                            <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId" class="img-prod">
+                                <img src="@product.ImageUrl" class="img-fluid" alt="@product.Name">
+                                @if(product.Discount > 0) {
+                                    <span class="status">@product.Discount.ToString("0")% OFF</span>
+                                }
+                            </a>
+                            <div class="text">
+                                <h3><a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
+                                <div class="d-flex align-items-center justify-content-between mt-2">
+                                    <div class="pricing">
+                                        <p class="price mb-0">
+                                            @if(product.Discount > 0) {
+                                                <span class="price-dc">₹ @product.Price.ToString("0")</span>
+                                                <span class="price-sale">₹ @(Math.Round(product.Price - (product.Price * product.Discount / 100), 2).ToString())</span>
+                                            } else {
+                                                <span class="price-sale">₹ @product.Price.ToString("0")</span>
+                                            }
+                                        </p>
+                                    </div>
+                                    <div style="font-size:12px; color: var(--hc-teal);">
+                                        @for (int i = 1; i <= 5; i++) {
+                                            if (i <= (int)(product.Rating)) {
+                                                <i class="bi bi-star-fill"></i>
+                                            } else {
+                                                <i class="bi bi-star"></i>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId" class="btn btn-primary btn-block btn-sm">
+                                        <i class="bi bi-cart-plus mr-1"></i> Add to Cart
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
 
-					<a asp-controller="Product" asp-action="Index" asp-route-category="Wellness"
-						class="btn btn-white px-4 py-3">Shop Wellness</a>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-5 order-md-last d-flex align-items-stretch">
-				<div class="img img-2" style="background-image: url('@Url.Content("~/images/personal-care.jpg")');"></div>
-			</div>
-			<div class="col-md-7 py-3 py-md-5 ftco-animate">
-				<div class="text text-2 py-md-5">
-					<h2 class="mb-4">Personal Care & Hygiene Products</h2>
-					<p class="text-dark">Explore our extensive range of personal care essentials—from skincare to oral hygiene—featuring trusted brands that keep you feeling fresh and confident every day.</p>
-
-					<a asp-controller="Product" asp-action="Index" asp-route-category="PersonalCare"
-						class="btn btn-primary px-4 py-3">Shop Personal Care</a>
-				</div>
-			</div>
-		</div>
-	</div>
+    </div>
 </section>
 
+<!-- AI Health Risk Assessment Panel -->
+<section class="ai-section" id="ai-predictions">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <span class="badge mb-3 px-3 py-2" style="background: rgba(0, 201, 167, 0.1); color: var(--hc-teal); border-radius: var(--hc-radius-sm); font-weight:700; font-size:12px;">
+                    🤖 MACHINE LEARNING DIAGNOSTICS
+                </span>
+                <h2 class="display-4 mb-3" style="font-weight:900;">AI Health Assessments</h2>
+                <p class="lead" style="color: var(--hc-muted);">Check your potential clinical risks instantly using predictive models trained on health datasets. Totally free, secure, and private.</p>
+            </div>
+        </div>
 
+        <div class="row justify-content-center">
+            
+            <!-- Cardiovascular model card -->
+            <div class="col-lg-5 col-md-6 mb-4">
+                <div class="ai-card">
+                    <div class="ai-icon-wrapper">
+                        <i class="bi bi-heart-pulse-fill"></i>
+                    </div>
+                    <span class="badge mb-2 px-2 py-1 text-light" style="background: var(--hc-blue); border-radius: 4px; font-size: 10px;">PREDICTIVE AI</span>
+                    <h4 class="mb-3 text-light" style="font-weight: 700;">Heart Disease Prediction</h4>
+                    <p class="text-muted mb-4" style="font-size: 14px; line-height: 1.6;">
+                        Analyzes patient physical metrics (blood pressure, cholesterol, max heart rate, age) to instantly compute cardiovascular hazard margins.
+                    </p>
+                    <div class="pt-2">
+                        <button class="btn btn-outline-primary btn-block" disabled style="opacity: 0.6; cursor: not-allowed;">
+                            <i class="bi bi-lock mr-2"></i>Under Implementation
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-@* for Prescription  *@
+            <!-- Diabetes model card -->
+            <div class="col-lg-5 col-md-6 mb-4">
+                <div class="ai-card">
+                    <div class="ai-icon-wrapper">
+                        <i class="bi bi-activity"></i>
+                    </div>
+                    <span class="badge mb-2 px-2 py-1 text-light" style="background: var(--hc-blue); border-radius: 4px; font-size: 10px;">PREDICTIVE AI</span>
+                    <h4 class="mb-3 text-light" style="font-weight: 700;">Diabetes Risk Index</h4>
+                    <p class="text-muted mb-4" style="font-size: 14px; line-height: 1.6;">
+                        Evaluates diagnostic variables (insulin levels, glucose concentration, age, body mass index) to forecast diabetes type tendencies.
+                    </p>
+                    <div class="pt-2">
+                        <button class="btn btn-outline-primary btn-block" disabled style="opacity: 0.6; cursor: not-allowed;">
+                            <i class="bi bi-lock mr-2"></i>Under Implementation
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-<section class="ftco-section bg-light pt-3 pb-2">
-	<div class="container">
-		<div class="row justify-content-center mb-3 pb-3">
-			<div class="col-md-12 heading-section text-center ftco-animate">
-				<h2 class="mb-4">Prescription Medicines</h2>
-				<p class="text-dark">Authentic prescription medications from verified manufacturers, ensuring your health and safety with every order.</p>
+        </div>
 
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			@foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.Prescription).Take(4))
-			{
-				<div class="col-sm col-md-6 col-lg-3 ftco-animate">
-					<div class="product">
-						<a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId"
-							class="img-prod"><img class="img-fluid" src="@product.ImageUrl" alt="Colorlib Template">
-							     <span class="status">@product.Discount.ToString("0") % off</span>
+        <!-- ML Workflow Steps -->
+        <div class="row mt-5 pt-4 text-center">
+            <div class="col-md-4 mb-4">
+                <div style="font-size: 32px; color: var(--hc-teal);"><i class="bi bi-input-cursor-text"></i></div>
+                <h5 class="mt-3 text-light" style="font-weight:600;">1. Input Metrics</h5>
+                <p class="text-muted" style="font-size:13px;">Provide secure blood chemistry & profile records</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div style="font-size: 32px; color: var(--hc-teal);"><i class="bi bi-cpu"></i></div>
+                <h5 class="mt-3 text-light" style="font-weight:600;">2. Deep Learning</h5>
+                <p class="text-muted" style="font-size:13px;">Trained models calculate pattern probability scores</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div style="font-size: 32px; color: var(--hc-teal);"><i class="bi bi-file-earmark-medical"></i></div>
+                <h5 class="mt-3 text-light" style="font-weight:600;">3. Risk Report</h5>
+                <p class="text-muted" style="font-size:13px;">Obtain comprehensive analytics and consult steps</p>
+            </div>
+        </div>
 
-
-							<div class="overlay"></div>
-						</a>
-						<div class="text py-3 px-3">
-							<h3><a asp-controller="Product" asp-action="Details"
-									asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
-							<div class="d-flex">
-								
-								<div class="pricing">
-								<p class="price">
-                                            <span class="mr-2 price-dc">$ @product.Price.ToString("0")</span>
-                                            <span class="price-sale">$ @(Math.Round(product.Price - (product.Price * product.Discount / 100), 2).ToString())</span>
-                                    </p>
-								</div>
-
-
-								<div class="rating">
-								 <p class="text-right">
-                 		       @{
-                                                    var rating = (int)(product?.Rating ?? 0);
-                                                    for (int i = 1; i <= 5; i++)
-                                                    {
-                                                        if (i <= rating)
-                                                        {
-                                                            <a href="#"><span class="ion-ios-star"></span></a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
-                                                        }
-                                                    }
-                                                }
-              				     </p>
-
-									
-								</div>
-
-							</div>
-
-							<div>
-								   @if(!string.IsNullOrEmpty(product?.ReasonForDiscount)){
-                                        <span class="text-danger">@product.ReasonForDiscount !</span>
-                                    }
-							</div>
-
-
-
-							<p class="bottom-area d-flex px-3">
-								
-								<a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product?.ProductId"
-									class="add-to-cart text-center py-2 mr-1">
-									<span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-
-
-								@* <a href="#" class="buy-now text-center py-2">Buy now<span><i
-											class="ion-ios-cart ml-1"></i></span></a> *@
-							</p>
-						</div>
-					</div>
-				</div>
-			}
-
-
-
-		</div>
-	</div>
-</section>
-
-@* for otc medicines  *@
-<section class="ftco-section bg-light pt-2 pb-2">
-	<div class="container">
-		<div class="row justify-content-center mb-3 pb-3">
-			<div class="col-md-12 heading-section text-center ftco-animate">
-			<h2 class="mb-4">OTC Medicines</h2>
-<p class="text-dark">
-    Over-the-counter medicines for everyday relief—trusted solutions for common health concerns like cold, fever, pain, and allergies, available without prescription.
-</p>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-
-			@foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.OtcMedicines).Take(5).Skip(1))
-			{
-				<div class="col-sm col-md-6 col-lg-3 ftco-animate">
-					<div class="product">
-						<a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId"
-							class="img-prod"><img class="img-fluid" src="@product.ImageUrl" alt="Colorlib Template">
-							     <span class="status">@product.Discount.ToString("0") % off</span>
-								  
-							<div class="overlay"></div>
-						</a>
-						<div class="text py-3 px-3">
-							<h3><a asp-controller="Product" asp-action="Details"
-									asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
-							<div class="d-flex">
-								<div class="pricing">
-									 <p class="price">
-                                            <span class="mr-2 price-dc">$ @product.Price.ToString("0")</span>
-                                            <span class="price-sale">$ @(Math.Round(product.Price - (product.Price * product.Discount / 100), 2).ToString())</span>
-                                    </p>
-								</div>
-
-								<div class="rating">
-									<p class="text-right">
-									 @{
-                                                    var rating = (int)(product?.Rating ?? 0);
-                                                    for (int i = 1; i <= 5; i++)
-                                                    {
-                                                        if (i <= rating)
-                                                        {
-                                                            <a href="#"><span class="ion-ios-star"></span></a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
-                                                        }
-                                                    }
-                                                }
-									</p>
-								</div>
-							</div>
-
-							<div>
-								   @if(!string.IsNullOrEmpty(product?.ReasonForDiscount)){
-                                        <span class="text-danger">@product.ReasonForDiscount !</span>
-                                    }
-							</div>
-
-
-							<p class="bottom-area d-flex px-3">
-								<a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product?.ProductId"
-									class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
-											class="ion-ios-add ml-1"></i></span></a>
-								@* <a href="#" class="buy-now text-center py-2">Buy now<span><i
-											class="ion-ios-cart ml-1"></i></span></a> *@
-							</p>
-						</div>
-					</div>
-				</div>
-			}
-		</div>
-	</div>
-</section>
-
-
-@* for devices *@
-<section class="ftco-section bg-light pt-2 pb-2">
-	<div class="container">
-		<div class="row justify-content-center mb-3 pb-3">
-			<div class="col-md-12 heading-section text-center ftco-animate">
-				<h2 class="mb-4">Medical Devices</h2>
-<p class="text-dark">
-    Reliable medical devices for everyday health monitoring—blood pressure monitors, glucometers, thermometers, and other essential tools trusted for accurate and safe use.
-</p>
-
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-
-			@foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.Devices).Take(4))
-			{
-				<div class="col-sm col-md-6 col-lg-3 ftco-animate">
-					<div class="product">
-						<a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId"
-							class="img-prod"><img class="img-fluid" src="@product.ImageUrl" alt="Colorlib Template">
-							     <span class="status">@product.Discount.ToString("0") % off</span>
-
-							<div class="overlay"></div>
-						</a>
-						<div class="text py-3 px-3">
-							<h3><a asp-controller="Product" asp-action="Details"
-									asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
-							<div class="d-flex">
-								<div class="pricing">
-										 <p class="price">
-                                            <span class="mr-2 price-dc">$ @product.Price.ToString("0")</span>
-                                            <span class="price-sale">$ @(Math.Round(product.Price - (product.Price * product.Discount / 100), 2).ToString())</span>
-                                    </p>
-								</div>
-								<div class="rating">
-									<p class="text-right">
-									 @{
-                                                    var rating = (int)(product?.Rating ?? 0);
-                                                    for (int i = 1; i <= 5; i++)
-                                                    {
-                                                        if (i <= rating)
-                                                        {
-                                                            <a href="#"><span class="ion-ios-star"></span></a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
-                                                        }
-                                                    }
-                                                }
-									</p>
-								</div>
-							</div>
-
-
-							<div>
-								   @if(!string.IsNullOrEmpty(product?.ReasonForDiscount)){
-                                        <span class="text-danger">@product.ReasonForDiscount !</span>
-                                    }
-							</div>
-
-
-							<p class="bottom-area d-flex px-3">
-								<a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product?.ProductId"
-									class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
-											class="ion-ios-add ml-1"></i></span></a>
-								@* <a href="#" class="buy-now text-center py-2">Buy now<span><i
-											class="ion-ios-cart ml-1"></i></span></a> *@
-							</p>
-						</div>
-					</div>
-				</div>
-			}
-
-		</div>
-	</div>
-</section>
-
-
-@* for babycare  *@
-<section class="ftco-section bg-light pt-2 pb-2">
-	<div class="container">
-		<div class="row justify-content-center mb-3 pb-3">
-			<div class="col-md-12 heading-section text-center ftco-animate">
-				<h2 class="mb-4">Baby Care</h2>
-<p class="text-dark">
-    Gentle and safe baby care essentials—skincare, feeding, diapers, and hygiene products designed to keep your little one healthy, happy, and protected.
-</p>
-
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-
-
-			@foreach (var product in Model.Products.Where(p => p.Category == ProductCategory.babyCare).Take(4))
-			{
-				<div class="col-sm col-md-6 col-lg-3 ftco-animate">
-					<div class="product">
-						<a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId"
-							class="img-prod"><img class="img-fluid" src="@product.ImageUrl" alt="Colorlib Template">
-							     <span class="status">@product.Discount.ToString("0") % off</span>
-							    
-							<div class="overlay"></div>
-						</a>
-						<div class="text py-3 px-3">
-							<h3><a asp-controller="Product" asp-action="Details"
-									asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
-							<div class="d-flex">
-								<div class="pricing">
-									 <p class="price">
-                                            <span class="mr-2 price-dc">$ @product.Price.ToString("0")</span>
-                                            <span class="price-sale">$ @(Math.Round(product.Price - (product.Price * product.Discount / 100), 2).ToString())</span>
-                                    </p>
-								</div>
-								<div class="rating">
-									<p class="text-right">
-										 @{
-                                                    var rating = (int)(product?.Rating ?? 0);
-                                                    for (int i = 1; i <= 5; i++)
-                                                    {
-                                                        if (i <= rating)
-                                                        {
-                                                            <a href="#"><span class="ion-ios-star"></span></a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
-                                                        }
-                                                    }
-                                                }
-									</p>
-								</div>
-							</div>
-
-
-							<div>
-								   @if(!string.IsNullOrEmpty(product?.ReasonForDiscount)){
-                                        <span class="text-danger">@product.ReasonForDiscount !</span>
-                                    }
-							</div>
-							<p class="bottom-area d-flex px-3">
-								<a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product?.ProductId"
-									class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
-											class="ion-ios-add ml-1"></i></span></a>
-								@* <a href="#" class="buy-now text-center py-2">Buy now<span><i
-											class="ion-ios-cart ml-1"></i></span></a> *@
-							</p>
-						</div>
-					</div>
-				</div>
-			}
-		</div>
-	</div>
+    </div>
 </section>

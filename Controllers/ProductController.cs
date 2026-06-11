@@ -24,12 +24,19 @@ namespace HealthCart.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult> Index(ProductCategory category, string SubCategory)
+        public async Task<ActionResult> Index(ProductCategory category, string SubCategory, string search)
         {
             try
             {
                 // Base query for active products
                 IQueryable<Product> query = dbContext.Products.Where(p => p.IsActive);
+
+                // Apply search filter if provided
+                if (!string.IsNullOrEmpty(search))
+                {
+                    query = query.Where(p => p.Name.Contains(search) || p.Description.Contains(search) || p.Brand.Contains(search));
+                    ViewBag.SearchTerm = search;
+                }
 
                 // Apply category filter (skip if "All")
                 if (category != ProductCategory.All)
@@ -64,18 +71,18 @@ namespace HealthCart.Controllers
         }
 
         [HttpGet]
-  public async Task<IActionResult> Details(Guid id)
-{
-    var product = await dbContext.Products
-        .Include(p => p.Reviews)
-            .ThenInclude(r => r.User)   // VERY IMPORTANT
-        .FirstOrDefaultAsync(p => p.ProductId == id);
+        public async Task<IActionResult> Details(Guid ProductId)
+        {
+            var product = await dbContext.Products
+                .Include(p => p.Reviews)
+                    .ThenInclude(r => r.User)
+                .FirstOrDefaultAsync(p => p.ProductId == ProductId);
 
-    if (product == null)
-        return NotFound();
+            if (product == null)
+                return NotFound();
 
-    return View(product);
-}
+            return View(product);
+        }
 
 
 

@@ -1,245 +1,161 @@
 @using HealthCart.Types
-
 @model HealthCart.Models.ViewModels.HybridViewModel
 
-
 @{
-    ViewData["Title"] = "CheckOut";
+    ViewData["Title"] = "Secure Checkout";
 }
 
-
-@* <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
-    <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-            <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span></p>
-                <h1 class="mb-0 bread">Checkout</h1>
-            </div>
-        </div>
+<!-- Page Header -->
+<div class="py-4" style="background: linear-gradient(135deg, var(--hc-dark) 0%, var(--hc-navy) 100%); border-bottom: 1px solid var(--hc-border);">
+    <div class="container text-center">
+        <h1 class="h3 mb-2" style="font-weight: 800; color: var(--hc-white);"><i class="bi bi-shield-lock-fill mr-2 text-info"></i>Secure Checkout</h1>
+        <p class="mb-0 text-muted" style="font-size:13px;">Complete your transaction securely. Your details are safe with us.</p>
     </div>
-</div> *@
-
-
-<div class="container pb-3">
- 
-    <h3 class="text-center ">Checkout </h3>
-
 </div>
 
-<section class="ftco-section" style="padding: 0px;">
+<section class="py-5" style="background: var(--hc-dark); min-height: 80vh;">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-8 ftco-animate">
-
-
-                <form method="post" asp-controller="User" asp-action="CreateAddress"
-                      asp-route-CartId="@Model?.Cart?.CartId" class="billing-form">
-
-                    <h3 class="mb-4 billing-heading">Billing Details</h3>
-                    <div class="row align-items-end">
-
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="firstname">First Name</label>
-                                <input type="text" class="form-control" placeholder="First Name" name="FirstName"
-                                       value="@Model?.Address?.FirstName">
+        <div class="row">
+            
+            <!-- Shipping/Billing details (Left Column) -->
+            <div class="col-lg-7 mb-4">
+                <div class="hc-glass-card p-4">
+                    <h4 class="mb-4 text-light" style="font-weight: 800;"><i class="bi bi-geo-alt-fill text-info mr-2"></i>Shipping Address</h4>
+                    
+                    <form method="post" asp-controller="User" asp-action="CreateAddress" asp-route-CartId="@Model?.Cart?.CartId">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="auth-label">First Name</label>
+                                <input type="text" class="form-control" placeholder="John" name="FirstName" value="@Model?.Address?.FirstName" required />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="auth-label">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Doe" name="LastName" value="@Model?.Address?.LastName" required />
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="lastname">Last Name</label>
-                                <input type="text" class="form-control" placeholder="Last Name" name="LastName"
-                                       value="@Model?.Address?.LastName">
+                        <div class="mb-3">
+                            <label class="auth-label">Country</label>
+                            <select name="Country" class="form-control" required>
+                                <option value="@Model?.Address?.Country">@Model?.Address?.Country</option>
+                                <option value="India">India</option>
+                                <option value="Australia">Australia</option>
+                                <option value="Japan">Japan</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="auth-label">Street Address</label>
+                            <input type="text" class="form-control" placeholder="House number, street name" name="Street" value="@Model?.Address?.Street" required />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="auth-label">Town / City</label>
+                                <input type="text" class="form-control" placeholder="City" name="City" value="@Model?.Address?.City" required />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="auth-label">State</label>
+                                <input type="text" class="form-control" placeholder="State" name="State" value="@Model?.Address?.State" required />
                             </div>
                         </div>
 
-                        <div class="w-100"></div>
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="Country">Country</label>
-                                <div class="select-wrap">
-                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                    <select name="Country" id="" class="form-control">
-                                        <option value="@Model?.Address?.Country">@Model?.Address?.Country</option>
-                                        <option value="Australia">Australia</option>
-                                        <option value="Japan">Japan</option>
-                                        <option value="India">India</option>
-                                    </select>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label class="auth-label">Pincode / ZIP *</label>
+                                <input type="text" class="form-control" placeholder="Pincode" name="Pincode" value="@Model?.Address?.Pincode" required />
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="auth-label">Phone Number</label>
+                                <input type="text" class="form-control" placeholder="Phone" name="Phone" value="@Model?.Address?.Phone" required />
                             </div>
                         </div>
 
-
-                        <div class="w-100"></div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="Street">Street Address</label>
-                                <input type="text" class="form-control" placeholder="House number and street name"
-                                       name="Street" value="@Model?.Address?.Street">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="State">State</label>
-                                <input type="text" class="form-control" placeholder="State " name="State"
-                                       value="@Model?.Address?.State">
-                            </div>
-                        </div>
-
-                        <div class="w-100"></div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="City">Town / City</label>
-                                <input type="text" class="form-control" placeholder="Town / City" name="City"
-                                       value="@Model?.Address?.City">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="postcodezip">Postcode / ZIP *</label>
-                                <input type="text" class="form-control" placeholder="Postal / ZIP" name="Pincode"
-                                       value="@Model?.Address?.Pincode">
-                            </div>
-                        </div>
-
-
-                        <div class="w-100"></div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="text" class="form-control" placeholder="Phone" name="Phone"
-                                       value="@Model?.Address?.Phone">
-                            </div>
-                        </div>
-
-
-                       
-
-                        <div class="w-100"></div>
-
-                        <div class="p-2"> <button class="btn btn-black py-3 px-4 " type="submit"> Add Address </button>
-                        </div>
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-save mr-2"></i> Save / Update Address
+                        </button>
 
                         @if (TempData["ErrorMessage"] != null)
                         {
-                            <div class="p-2">
-                                <p class="text-danger">@TempData["ErrorMessage"]</p>
+                            <div class="alert alert-danger mt-3 py-2 text-center" style="border-radius: var(--hc-radius-sm);">
+                                @TempData["ErrorMessage"]
                             </div>
                         }
 
                         @if (TempData["SuccessMessage"] != null)
                         {
-                            <div class="p-2">
-                                <p class="text-success">@TempData["SuccessMessage"]</p>
+                            <div class="alert alert-success mt-3 py-2 text-center" style="border-radius: var(--hc-radius-sm);">
+                                @TempData["SuccessMessage"]
                             </div>
                         }
-
-                        <div class="col-md-12">
-                            <div class="form-group mt-4">
-                                <div class="radio">
-                                    @* <label class="mr-3"><input type="radio" name="optradio"> Create an Account?
-                                    </label> *@
-                                    @* <label><input type="radio" name="optradio"> Ship to different address</label> *@
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </form><!-- END -->
-
-
-
-                <div class="row mt-5 pt-3 d-flex">
-                    <div class="col-md-6 d-flex">
-                        <div class="cart-detail cart-total bg-light p-3 p-md-4">
-                            <h3 class="billing-heading mb-4">Cart Total</h3>
-                            <p class="d-flex">
-                                <span>Subtotal</span>
-                                <span>₹ @Model?.Cart?.CartValue</span>
-                            </p>
-                            <p class="d-flex">
-                                <span>Delivery</span>
-                                <span>₹5.00</span>
-                            </p>
-                        
-                            <hr>
-                            <p class="d-flex total-price">
-                                <span>Total</span>
-                                <span>₹ @(Model?.Cart?.CartValue + 5)</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    
-
-                   
-                    <div class="col-md-6">
-
-
-                        <form method="post" asp-controller="Order" asp-action="Create" class="billing-form">
-    
-                           
-                            <input type="hidden" name="CartId" value="@Model?.Cart?.CartId" />
-
-                            <div class="cart-detail bg-light p-3 p-md-4">
-                                <h3 class="billing-heading mb-4">Payment Method</h3>
-
-       
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="radio">
-                                            <label><input type="radio" name="paymentOption" class="mr-2" required
-                                                              value="@PaymentStatus.RazorPay"> Razor Pay
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="radio">
-                                            <label><input type="radio" name="paymentOption" class="mr-2" required
-                                                              value="@PaymentStatus.CashOnDelivery"> Cash On Delivery
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                    
-                           
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="" class="mr-2" required> I have read
-                                                and accept the
-                                                terms and conditions</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary py-3 px-4"> Place an order</button>
-                            
-                                </div>
-                            </form>
-
-                        </div>
-
-           
-
-
-                    </div>
-                </div> <!-- .col-md-8 -->
+                    </form>
+                </div>
             </div>
+
+            <!-- Price Breakdown & Payment choice (Right Column) -->
+            <div class="col-lg-5">
+                
+                <!-- Cart Totals card -->
+                <div class="hc-glass-card mb-4 p-4">
+                    <h5 class="mb-3 text-light" style="font-weight:700;"><i class="bi bi-receipt mr-2 text-info"></i>Bill Details</h5>
+                    
+                    <div class="d-flex justify-content-between mb-2" style="font-size:14px;">
+                        <span class="text-muted">Prescription Total</span>
+                        <span class="text-light font-weight-bold">₹ @Model?.Cart?.CartValue.ToString("0.00")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2" style="font-size:14px;">
+                        <span class="text-muted">Delivery Logistics</span>
+                        <span class="text-light font-weight-bold">₹ 5.00</span>
+                    </div>
+                    <hr style="border-color: var(--hc-border);" />
+                    <div class="d-flex justify-content-between">
+                        <span class="text-light font-weight-bold" style="font-size:15px;">To Pay</span>
+                        <span class="text-success font-weight-bold" style="font-size:18px;">₹ @((Model?.Cart?.CartValue + 5)?.ToString("0.00"))</span>
+                    </div>
+                </div>
+
+                <!-- Payment Form card -->
+                <div class="hc-glass-card p-4">
+                    <h5 class="mb-4 text-light" style="font-weight:700;"><i class="bi bi-wallet2 mr-2 text-info"></i>Payment Options</h5>
+                    
+                    <form method="post" asp-controller="Order" asp-action="Create">
+                        <input type="hidden" name="CartId" value="@Model?.Cart?.CartId" />
+
+                        <!-- Radio 1: Razorpay -->
+                        <div class="form-check p-3 mb-3 rounded" style="background: rgba(255,255,255,0.02); border: 1px solid var(--hc-border); transition: background 0.3s;">
+                            <input class="form-check-input ml-2" type="radio" name="paymentOption" id="payRazorpay" value="@PaymentStatus.RazorPay" required />
+                            <label class="form-check-label pl-4 text-light font-weight-bold" for="payRazorpay" style="font-size:14px;">
+                                <i class="bi bi-credit-card-2-front text-info mr-2"></i> Razorpay Payment
+                            </label>
+                            <small class="text-muted d-block pl-4 mt-1" style="font-size:11px;">Pay online instantly via card, UPI, or NetBanking</small>
+                        </div>
+
+                        <!-- Radio 2: Cash On Delivery -->
+                        <div class="form-check p-3 mb-4 rounded" style="background: rgba(255,255,255,0.02); border: 1px solid var(--hc-border); transition: background 0.3s;">
+                            <input class="form-check-input ml-2" type="radio" name="paymentOption" id="payCod" value="@PaymentStatus.CashOnDelivery" required />
+                            <label class="form-check-label pl-4 text-light font-weight-bold" for="payCod" style="font-size:14px;">
+                                <i class="bi bi-cash-stack text-info mr-2"></i> Cash On Delivery
+                            </label>
+                            <small class="text-muted d-block pl-4 mt-1" style="font-size:11px;">Pay physical cash when your drug shipment arrives</small>
+                        </div>
+
+                        <!-- Terms -->
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="termsCheck" required />
+                            <label class="form-check-label text-muted" for="termsCheck" style="font-size:12px; cursor:pointer;">
+                                I certify that the shipping details are accurate and accept the terms of shipment.
+                            </label>
+                        </div>
+
+                        <!-- Order CTA -->
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            <i class="bi bi-bag-check-fill mr-2"></i> Confirm Order
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
         </div>
-    </section> <!-- .section -->
+    </div>
+</section>

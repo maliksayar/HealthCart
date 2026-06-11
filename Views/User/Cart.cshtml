@@ -1,154 +1,163 @@
 @model HealthCart.Models.ViewModels.CartViewModel
 @{
-    ViewData["Title"] = "Cart";
+    ViewData["Title"] = "Shopping Cart";
 }
 
+<!-- Page Header -->
+<div class="py-4" style="background: linear-gradient(135deg, var(--hc-dark) 0%, var(--hc-navy) 100%); border-bottom: 1px solid var(--hc-border);">
+    <div class="container text-center text-md-left">
+        <h1 class="h3 mb-0" style="font-weight: 800; color: var(--hc-white);"><i class="bi bi-cart3 mr-2 text-info"></i>Your Shopping Cart</h1>
+        <p class="mb-0 text-muted" style="font-size:13px;">Review and manage your healthcare items before checkout</p>
+    </div>
+</div>
 
-
-<section class="pt-5 ftco-cart">
-
+<section class="py-5" style="background: var(--hc-dark);">
     @if (string.IsNullOrEmpty(ViewBag.CartEmpty))
     {
-
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 ftco-animate">
-
-
-                    <div class="mb-3">
-
-                        <a asp-controller="Product" asp-action="Index" asp-route-Category="Bestsellers"
-                            class="btn btn-outline-primary m-2">View Bestsellers</a>
-                        <a asp-controller="Product" asp-action="Index" asp-route-Category="Trending"
-                            class="btn btn-outline-success m-2">Trending Now</a>
-                        <a asp-controller="User" asp-action="Orders" asp-route-OrderFilter="Recent"
-                            class="btn btn-outline-primary m-2">View recent Orders</a>
-
-                    </div>
-
-                    <div class="cart-list">
-                        <table class="table">
-                            <thead class="thead-primary">
-                                <tr class="text-center">
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @foreach (var cartItem in Model.CartItems)
-                                {
-                                    <tr class="text-center">
-                                        <td class="product-remove"><a asp-controller="Product" asp-action="RemoveFromCart"
-                                                asp-route-ProductId="@cartItem?.Product?.ProductId"><span
-                                                    class="ion-ios-close"></span></a></td>
-
-                                        <td class="image-prod">
-                                            <a asp-controller="Product" asp-action="Details"
-                                                asp-route-ProductId="@cartItem?.Product?.ProductId">
-                                                <img src="@cartItem?.Product?.ImageUrl" width="120" /></a>
-                                        </td>
-
-                                        <td class="product-name">
-                                            <h3>@cartItem?.Product?.Name</h3>
-                                            @* <p>@cartItem?.Product.</p> *@
-                                        </td>
-
-                                        <td class="price">₹ @cartItem?.Product?.Price</td>
-
-                                        <td class="quantity">
-                                            <div class="input-group mb-3">
-                                                <input type="number" name="quantity" class="quantity form-control input-number"
-                                                    value="@cartItem?.Quantity" min="1" max="100" readonly>
-                                            </div>
-                                        </td>
-
-                                        <td class="total">
-                                            <p style="margin-bottom: 0; text-decoration: line-through;" class="text-secondary">
-                                                ₹ @(cartItem?.Product?.Price * cartItem?.Quantity) </p>
-                                            <span>
-                                                ₹ @{
-                                                var price = cartItem?.Product?.Price ?? 0;
-                                                var discount = cartItem?.Product?.Discount ?? 0;
-                                                var discountedPrice = price - (price * discount / 100);
-                                                var totalDiscounted = discountedPrice * (cartItem?.Quantity ?? 1);
-                                            }
-                                            @totalDiscounted.ToString("0.00")
-                                        </span>
-                                    </td>
-
-                                </tr>
-
-                                <!-- END TR-->
-
-                            }
-                        </tbody>
-                    </table>
-                </div>
+            <!-- Quick Link Buttons -->
+            <div class="mb-4 d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
+                <a asp-controller="Product" asp-action="Index" asp-route-Category="Wellness" class="btn btn-outline-primary btn-sm mr-2 mb-2">
+                    <i class="bi bi-star"></i> Wellness supplements
+                </a>
+                <a asp-controller="Product" asp-action="Index" asp-route-Category="Prescription" class="btn btn-outline-primary btn-sm mr-2 mb-2">
+                    <i class="bi bi-capsule"></i> Prescription Rx
+                </a>
+                <a asp-controller="User" asp-action="Orders" class="btn btn-outline-primary btn-sm mb-2">
+                    <i class="bi bi-journal-medical"></i> View Recent Orders
+                </a>
             </div>
-        </div>
 
-
-        <div class="row justify-content-center">
-            <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
-                    <h3>Cart Totals</h3>
-                    <p class="d-flex">
-                        <span>Subtotal</span>
-                        <span>₹ @Model?.Cart?.CartValue</span>
-                    </p>
-                    <p class="d-flex">
-                        <span>Delivery</span>
-                        <span>₹ 5.00</span>
-                    </p>
-
-                    <hr>
-                    <p class="d-flex total-price">
-                        <span>Total</span>
-                        <span>₹ @(Model?.Cart?.CartValue + 5)</span>
-                    </p>
-                </div>
-                <p class="text-center"><a asp-controller="Order" asp-action="CheckOut"
-                        asp-route-cartId="@Model?.Cart?.CartId" class="btn btn-primary py-3 px-4">Proceed to
-                        Checkout</a>
-                </p>
-            </div>
-        </div>
-
-
-
-    </div>
-        }
-
-
-
-        else
-    {
-        <div class="container" style="min-height: 70vh;">
             <div class="row">
-                <div class="col-md-12 ftco-animate">
-
-
-                    <div class="mt-5 text-center">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png" alt="Empty Cart"
-                            style="width:120px; opacity:0.7;" />
-                        <h4 class="mt-4">Your cart is empty!</h4>
-                        <p>Looks like you haven't added anything yet. Check out our bestsellers and trending products!</p>
-                        <a asp-controller="Product" asp-action="Index" asp-route-Category="Bestsellers"
-                            class="btn btn-outline-primary m-2">View Bestsellers</a>
-                        <a asp-controller="Product" asp-action="Index" asp-route-Category="Trending"
-                            class="btn btn-outline-success m-2">Trending Now</a>
-                        <a asp-controller="User" asp-action="Orders" class="btn btn-outline-primary m-2">View recent
-                            Orders</a>
-                        <div class="mt-4">
-                            <span>Need help? <a href="/home/contact" class="text-info">Contact our support</a></span>
+                <!-- Cart Items List (Left Column) -->
+                <div class="col-lg-8 col-md-12 mb-4">
+                    <div class="hc-glass-card p-0 overflow-hidden" style="border-radius: var(--hc-radius-lg);">
+                        <div class="table-responsive">
+                            <table class="table mb-0" style="color: var(--hc-text);">
+                                <thead style="background: rgba(255,255,255,0.02); border-bottom: 2px solid var(--hc-border);">
+                                    <tr>
+                                        <th scope="col" class="border-0 px-4 py-3" style="font-size:13px; font-weight:700;">Product</th>
+                                        <th scope="col" class="border-0 py-3 text-center" style="font-size:13px; font-weight:700; width:120px;">Price</th>
+                                        <th scope="col" class="border-0 py-3 text-center" style="font-size:13px; font-weight:700; width:120px;">Quantity</th>
+                                        <th scope="col" class="border-0 py-3 text-center" style="font-size:13px; font-weight:700; width:120px;">Subtotal</th>
+                                        <th scope="col" class="border-0 px-4 py-3 text-center" style="font-size:13px; font-weight:700; width:60px;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var cartItem in Model.CartItems)
+                                    {
+                                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;">
+                                            <!-- Product image & Name -->
+                                            <td class="align-middle px-4 py-3">
+                                                <div class="d-flex align-items-center">
+                                                    <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@cartItem?.Product?.ProductId" class="mr-3 p-1 rounded" style="background: rgba(255,255,255,0.02); border:1px solid var(--hc-border); width: 70px; height: 70px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                                                        <img src="@cartItem?.Product?.ImageUrl" alt="@cartItem?.Product?.Name" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                                    </a>
+                                                    <div>
+                                                        <h6 class="mb-0" style="font-weight:700;">
+                                                            <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@cartItem?.Product?.ProductId" style="color: var(--hc-white); text-decoration:none;">
+                                                                @cartItem?.Product?.Name
+                                                            </a>
+                                                        </h6>
+                                                        <small class="text-muted text-capitalize">@cartItem?.Product?.Brand</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            
+                                            <!-- Price -->
+                                            <td class="align-middle text-center font-weight-bold" style="font-size: 14px;">
+                                                ₹ @cartItem?.Product?.Price.ToString("0.00")
+                                            </td>
+                                            
+                                            <!-- Quantity read-only field -->
+                                            <td class="align-middle text-center">
+                                                <input type="number" class="form-control text-center mx-auto" style="width:70px; background: rgba(5,15,26,0.5) !important; border:1px solid var(--hc-border);" value="@cartItem?.Quantity" readonly />
+                                            </td>
+                                            
+                                            <!-- Subtotal discount calculations -->
+                                            <td class="align-middle text-center">
+                                                @{
+                                                    var price = cartItem?.Product?.Price ?? 0;
+                                                    var discount = cartItem?.Product?.Discount ?? 0;
+                                                    var discountedPrice = price - (price * discount / 100);
+                                                    var totalDiscounted = discountedPrice * (cartItem?.Quantity ?? 1);
+                                                }
+                                                <div class="font-weight-bold text-success" style="font-size:14px;">
+                                                    ₹ @totalDiscounted.ToString("0.00")
+                                                </div>
+                                                @if(discount > 0) {
+                                                    <small class="text-muted" style="text-decoration:line-through; font-size:11px;">
+                                                        ₹ @((price * (cartItem?.Quantity ?? 1)).ToString("0.00"))
+                                                    </small>
+                                                }
+                                            </td>
+                                            
+                                            <!-- Remove action icon -->
+                                            <td class="align-middle text-center px-4">
+                                                <a asp-controller="Product" asp-action="RemoveFromCart" asp-route-ProductId="@cartItem?.Product?.ProductId" class="btn btn-sm btn-outline-danger" style="border-radius: 50%; width: 32px; height: 32px; display: inline-flex; align-items:center; justify-content:center; padding:0;" title="Remove Item">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+                </div>
 
+                <!-- Checkout details box (Right Column) -->
+                <div class="col-lg-4 col-md-12">
+                    <div class="cart-summary sticky-top" style="top: 100px;">
+                        <h4 class="mb-4 text-light" style="font-weight: 800; border-bottom: 1px solid var(--hc-border); padding-bottom:10px;">Cart Summary</h4>
+                        
+                        <div class="d-flex justify-content-between mb-3" style="font-size: 14px;">
+                            <span class="text-muted">Subtotal</span>
+                            <span class="text-light font-weight-bold">₹ @Model?.Cart?.CartValue.ToString("0.00")</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3" style="font-size: 14px;">
+                            <span class="text-muted">Delivery Charge</span>
+                            <span class="text-light font-weight-bold">₹ 5.00</span>
+                        </div>
+                        
+                        <hr style="border-color: var(--hc-border);" />
+                        
+                        <div class="d-flex justify-content-between mb-4">
+                            <span class="text-light font-weight-bold" style="font-size:16px;">Total</span>
+                            <span class="text-success font-weight-bold" style="font-size: 20px;">₹ @((Model?.Cart?.CartValue + 5)?.ToString("0.00"))</span>
+                        </div>
+
+                        <a asp-controller="Order" asp-action="CheckOut" asp-route-cartId="@Model?.Cart?.CartId" class="btn btn-primary btn-block btn-lg">
+                            Proceed to Checkout <i class="bi bi-credit-card ml-2"></i>
+                        </a>
+
+                        <div class="mt-3 text-center">
+                            <small class="text-muted"><i class="bi bi-shield-lock mr-1"></i> Secure Checkout Guaranteed</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Empty Cart -->
+        <div class="container text-center py-5">
+            <div class="hc-glass-card mx-auto py-5 px-4" style="max-width: 600px;">
+                <div style="font-size: 64px; color: var(--hc-muted);"><i class="bi bi-cart-x"></i></div>
+                <h3 class="mt-4 font-weight-bold text-light">Your Shopping Cart is Empty</h3>
+                <p class="text-muted mb-4">Looks like you haven't added any medicines or supplements yet. Explore our top catalogs to get started!</p>
+                
+                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                    <a asp-controller="Product" asp-action="Index" asp-route-Category="Wellness" class="btn btn-primary mr-2 mb-2">
+                        Browse Wellness
+                    </a>
+                    <a asp-controller="Product" asp-action="Index" asp-route-Category="Prescription" class="btn btn-outline-primary mb-2">
+                        Browse Prescription
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <span class="text-muted">Need help with placing orders? <a href="/home/contact" style="color: var(--hc-teal);">Talk to Support</a></span>
                 </div>
             </div>
         </div>

@@ -1,92 +1,184 @@
-@media (max-width: 1120px) {
+/* ==========================================================================
+   HEALTHCART MIDNIGHT TEAL — RESPONSIVE STYLESHEET
+   ========================================================================== */
 
-
-    .custom_nav-container .form-inline input {
-        display: none;
-    }
-
-}
-
-@media (max-width: 992px) {
-    .login_btn-contanier {
-        margin: 15px 0;
-    }
-
-    .hero_area {
-        height: auto;
-    }
-
-    .slider_section.position-relative {
-        padding: 120px 0;
+/* --- Desktop Scaling (1400px and up) --- */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
     }
 }
 
-@media (max-width: 768px) {
-
-    .slider_section .carousel-control-prev,
-    .slider_section .carousel-control-next {
-        display: none;
+/* --- Laptop Screen Sizes (992px to 1200px) --- */
+@media (max-width: 1199.98px) {
+    .slider-text h1 {
+        font-size: 4rem !important;
     }
-
-    .slider_section .detail-box {
-        margin-top: 20px;
-        text-align: center;
+    .display-3 {
+        font-size: 3.5rem !important;
     }
+}
 
-    .discount_section .detail-box {
-        text-align: center;
-    }
-
-    .client_section .client_container {
-        width: 95%;
-    }
-
-    .contact_section {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
-    .contact_section .detail-box {
-        margin: 0 -15px;
-        margin-top: 25px;
-    }
-
-    .info_section {
-        text-align: center;
-    }
-
-    .info_section .row>div {
-        margin: 25px 0;
-    }
-
-    .info_section .info_contact .box {
+/* --- Tablets (Landscape & Portrait: max-width 991.98px) --- */
+@media (max-width: 991.98px) {
+    /* Topper bar adjustments */
+    .topper-contacts {
         justify-content: center;
+        width: 100%;
     }
-
-    .footer_section p {
-        width: auto;
+    .topper .text {
+        font-size: 12px;
     }
-}
-
-@media (max-width: 576px) {
-    .health_section .box {
-        width: auto;
-        margin-right: 5px;
+    
+    /* Navigation Bar Mobile Panel styling */
+    #ftco-navbar {
+        background: var(--hc-navy) !important;
+        padding: 10px 0 !important;
     }
-}
-
-@media (max-width: 480px) {}
-
-@media (max-width: 420px) {}
-
-@media (max-width: 360px) {
-    .top_contact-container {
+    #ftco-navbar .navbar-collapse {
+        background: rgba(5, 15, 26, 0.98);
+        border: 1px solid var(--hc-border);
+        border-radius: var(--hc-radius-md);
+        margin-top: 15px;
+        padding: 20px;
+        box-shadow: var(--hc-shadow-lg);
+    }
+    .navbar-nav .nav-link {
+        padding: 12px 10px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .navbar-nav .nav-link::after {
         display: none !important;
     }
+    .nav-item.cta-colored {
+        margin-top: 10px;
+        display: inline-block;
+        padding: 2px 15px !important;
+    }
+
+    /* Hero */
+    .hero-wrap {
+        min-height: 70vh !important;
+        padding: 40px 0;
+        text-align: center;
+    }
+    .hero-text-block {
+        margin-bottom: 40px;
+    }
+    .display-3 {
+        font-size: 3rem !important;
+    }
+    .hero-wrap .btn-lg {
+        padding: 10px 24px !important;
+        font-size: 15px;
+    }
+
+    /* Product Index Catalog Layout */
+    .hc-filter-card {
+        position: relative !important;
+        top: 0 !important;
+        margin-bottom: 30px;
+    }
+
+    /* Footers */
+    .hc-footer-top {
+        padding-bottom: 40px;
+    }
 }
 
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1170px;
+/* --- Mobile Breakpoint (max-width 767.98px) --- */
+@media (max-width: 767.98px) {
+    /* Hide top bar contact helper details for extra space */
+    .topper-contacts .pr-4:last-child {
+        display: none !important;
+    }
+
+    /* Display typography headers */
+    .display-3 {
+        font-size: 2.5rem !important;
+    }
+    
+    /* Form grids */
+    .hc-glass-card {
+        padding: 25px !important;
+    }
+
+    /* Table adjustments */
+    .admin-table th, .admin-table td {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+    
+    /* AI grid cards */
+    .ai-card {
+        padding: 30px 20px !important;
+    }
+
+    /* Confirm check layouts */
+    .cart-summary {
+        margin-top: 30px;
+    }
+}
+
+/* --- Small Phones Landscape & Portrait (max-width 575.98px) --- */
+@media (max-width: 575.98px) {
+    /* Hide top header entirely */
+    .topper {
+        display: none !important;
+    }
+
+    /* Main headings */
+    .display-3 {
+        font-size: 2.2rem !important;
+    }
+    .hero-text-block p {
+        font-size: 1rem !important;
+    }
+
+    /* Form stack */
+    .form-group {
+        margin-bottom: 15px !important;
+    }
+    
+    /* Responsive buttons expansion */
+    .btn-lg, .btn-primary, .btn-outline-primary {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Catalog table cards */
+    .admin-table-container {
+        border-radius: var(--hc-radius-sm);
+    }
+
+    /* Subscribe section */
+    .subscribe-form .form-group {
+        flex-direction: column !important;
+        gap: 12px;
+    }
+    .subscribe-form .form-control {
+        padding-right: 18px !important;
+        border-radius: var(--hc-radius-md) !important;
+    }
+    .subscribe-form .submit {
+        position: relative !important;
+        right: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        padding: 12px !important;
+        border-radius: var(--hc-radius-md) !important;
+    }
+}
+
+/* --- Very Small Phones (max-width 360px) --- */
+@media (max-width: 360px) {
+    .display-3 {
+        font-size: 1.9rem !important;
+    }
+    .navbar-brand {
+        font-size: 20px !important;
+    }
+    .hc-glass-card {
+        padding: 20px 15px !important;
     }
 }

@@ -1,250 +1,219 @@
 @model HealthCart.Models.ViewModels.ProductViewModel
 
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "Browse Products";
 }
 
-
-@* <div class="hero-wrap hero-bread" style="background-image: url('@Url.Content($"~/images/{ViewBag.category}.jpg")');"> *@
-
-<div class="hero-wrap hero-bread" style="background-image: url('/images/background-bg.jpg")');">
-
-    <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-            <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Products > </a></span>
-                    <span>@ViewBag.category</span>
-                </p>
-                <h1 class="mb-0 bread">@ViewBag.category</h1>
-            </div>
-        </div>
+<!-- Premium Breadcrumb Page Header -->
+<div class="py-5" style="background: linear-gradient(135deg, var(--hc-dark) 0%, var(--hc-navy) 100%); border-bottom: 1px solid var(--hc-border); position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -20%; right: -10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0, 201, 167, 0.1) 0%, transparent 70%); pointer-events: none;"></div>
+    <div class="container text-center py-3">
+        <span class="badge mb-2 px-3 py-1" style="background: rgba(0, 201, 167, 0.1); color: var(--hc-teal); border-radius: 4px;">HEALTHCART CATALOG</span>
+        <h1 class="display-4" style="font-weight: 800; text-transform: capitalize;">@ViewBag.category Medicines</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center bg-transparent mb-0" style="font-size: 13px;">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" style="color: var(--hc-muted);">Home</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Product" asp-action="Index" asp-route-category="all" style="color: var(--hc-muted);">Products</a></li>
+                <li class="breadcrumb-item active" style="color: var(--hc-teal); text-transform: capitalize;" aria-current="page">@ViewBag.category</li>
+            </ol>
+        </nav>
     </div>
 </div>
 
-<section class="ftco-section bg-light" style="padding-top: 50px;">
+<!-- Main Catalog Section -->
+<section class="py-5" style="background: var(--hc-dark);">
     <div class="container">
-        @* <h3 class="pb-3 text-center"> <span style="text-transform: capitalize;">@ViewBag.category </span>  Products </h3> *@
-
         <div class="row">
-            <div class="col-md-8 col-lg-10 order-md-last">
+            
+            <!-- Category Sidebar Filters -->
+            <aside class="col-lg-3 col-md-4 mb-4">
+                <div class="hc-filter-card">
+                    <h5 class="hc-filter-title text-light"><i class="bi bi-funnel mr-2 text-info"></i>Categories</h5>
+                    
+                    <ul class="nav flex-column mb-4">
+                        <li class="nav-item">
+                            <a class="hc-filter-link @(ViewBag.category == "All" || ViewBag.category == "all" ? "active" : "")" asp-action="Index" asp-route-category="All">
+                                <span>📦 All Medicines</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="hc-filter-link @(ViewBag.category == "Prescription" ? "active" : "")" asp-action="Index" asp-route-category="Prescription">
+                                <span>💊 Prescription</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="hc-filter-link @(ViewBag.category == "Wellness" ? "active" : "")" asp-action="Index" asp-route-category="Wellness">
+                                <span>🌿 Wellness</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="hc-filter-link @(ViewBag.category == "OtcMedicines" || ViewBag.category == "OtcMedcines" ? "active" : "")" asp-action="Index" asp-route-category="OtcMedcines">
+                                <span>🤒 OTC Medicines</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="hc-filter-link @(ViewBag.category == "SkinCare" || ViewBag.category == "skincare" ? "active" : "")" asp-action="Index" asp-route-category="skincare">
+                                <span>🧴 Skin Care</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="hc-filter-link @(ViewBag.category == "babyCare" || ViewBag.category == "babycare" ? "active" : "")" asp-action="Index" asp-route-category="babycare">
+                                <span>👶 Baby Care</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="hc-filter-link @(ViewBag.category == "FirstAid" ? "active" : "")" asp-action="Index" asp-route-category="FirstAid">
+                                <span>🩹 First Aid</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="hc-filter-link @(ViewBag.category == "EyeCare" ? "active" : "")" asp-action="Index" asp-route-category="EyeCare">
+                                <span>👁 Eye Care</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="hc-filter-link @(ViewBag.category == "PersonalCare" ? "active" : "")" asp-action="Index" asp-route-category="PersonalCare">
+                                <span>🧼 Personal Care</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="hc-filter-link @(ViewBag.category == "Others" ? "active" : "")" asp-action="Index" asp-route-category="Others">
+                                <span>💠 Others</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="p-3 rounded bg-black-20 text-center" style="background: rgba(0,0,0,0.15); border: 1px dashed var(--hc-border);">
+                        <i class="bi bi-clock-history text-info" style="font-size:20px;"></i>
+                        <h6 class="mt-2 text-light mb-1" style="font-size:13px; font-weight:700;">24/7 Delivery</h6>
+                        <small class="text-muted" style="font-size:11px;">Fast door shipping & pharmacy assistance</small>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Product Grid Area -->
+            <div class="col-lg-9 col-md-8">
+                
+                <!-- Search Bar Form -->
+                <div class="mb-4">
+                    <form method="get" action="@Url.Action("Index", "Product")" class="w-100">
+                        <input type="hidden" name="category" value="@ViewBag.category" />
+                        @if (!string.IsNullOrEmpty(Context.Request.Query["SubCategory"]))
+                        {
+                            <input type="hidden" name="SubCategory" value="@Context.Request.Query["SubCategory"]" />
+                        }
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control" placeholder="Search medicines by name, brand, or description..." value="@ViewBag.SearchTerm" style="background: rgba(17, 31, 53, 0.65) !important; border: 1px solid var(--hc-border) !important; border-top-left-radius: var(--hc-radius-md) !important; border-bottom-left-radius: var(--hc-radius-md) !important; border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important; color: var(--hc-text) !important;" />
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary" style="border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important; border-top-right-radius: var(--hc-radius-md) !important; border-bottom-right-radius: var(--hc-radius-md) !important; padding: 12px 25px !important; line-height: 1.5;">
+                                    <i class="bi bi-search mr-1"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+                    {
+                        <div class="mt-2" style="font-size: 13px; color: var(--hc-muted);">
+                            Showing results for: <span class="text-info font-weight-bold">"@ViewBag.SearchTerm"</span>
+                            <a href="@Url.Action("Index", "Product", new { category = ViewBag.category })" class="ml-2 text-danger" style="text-decoration: underline;">Clear Search</a>
+                        </div>
+                    }
+                </div>
+
+                <div class="row align-items-center mb-4">
+                    <div class="col-6">
+                        <h4 style="font-weight: 700; margin-bottom: 0;">Showing items for: <span class="text-info text-capitalize">@ViewBag.category</span></h4>
+                    </div>
+                    <div class="col-6 text-right text-muted" style="font-size: 13px;">
+                        Found <span class="text-light font-weight-bold">@(Model.Products?.Count ?? 0)</span> products
+                    </div>
+                </div>
 
                 <div class="row">
-
-                   @if (Model.Products != null && Model.Products.Any())
-{
-    foreach (var product in Model.Products)
-    {
-        <div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
-            <div class="product">
-                <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId" class="img-prod">
-                    <img class="img-fluid" src="@product.ImageUrl" alt="Product Image">
-                    <span class="status">@product.Discount.ToString("0") % off</span>
-                    <div class="overlay"></div>
-                </a>
-                <div class="text py-3 px-3">
-                    <h3>
-                        <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId">@product.Name</a>
-                    </h3>
-                    <div class="d-flex">
-                        <div class="pricing">
-                            <p class="price">
-                                <span class="mr-2 price-dc">₹@product.Price.ToString("0")</span>
-                                <span class="price-sale">
-                                    ₹@(Math.Round(product.Price - (product.Price * product.Discount / 100), 2).ToString("0.00"))
-                                </span>
-                            </p>
-                        </div>
-                        <div class="rating">
-                            <p class="text-right">
-                                @{
-                                    var rating = (int)(product?.Rating ?? 0);
-                                    for (int i = 1; i <= 5; i++)
-                                    {
-                                        if (i <= rating)
-                                        {
-                                            <a href="#"><span class="ion-ios-star"></span></a>
-                                        }
-                                        else
-                                        {
-                                            <a href="#"><span class="ion-ios-star-outline"></span></a>
-                                        }
-                                    }
-                                }
-                            </p>
-                        </div>
-                    </div>
-
-                    <div>
-                        @if (!string.IsNullOrEmpty(product?.ReasonForDiscount))
+                    @if (Model.Products != null && Model.Products.Any())
+                    {
+                        foreach (var product in Model.Products)
                         {
-                            <span class="text-danger">@product.ReasonForDiscount !</span>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="product">
+                                    <a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId" class="img-prod">
+                                        <img src="@product.ImageUrl" class="img-fluid" alt="@product.Name">
+                                        @if(product.Discount > 0) {
+                                            <span class="status">@product.Discount.ToString("0")% OFF</span>
+                                        }
+                                    </a>
+                                    <div class="text">
+                                        <h3><a asp-controller="Product" asp-action="Details" asp-route-ProductId="@product.ProductId">@product.Name</a></h3>
+                                        <div class="d-flex align-items-center justify-content-between mt-2">
+                                            <div class="pricing">
+                                                <p class="price mb-0">
+                                                    @if(product.Discount > 0) {
+                                                        <span class="price-dc">₹ @product.Price.ToString("0")</span>
+                                                        <span class="price-sale">₹ @(Math.Round(product.Price - (product.Price * product.Discount / 100), 2).ToString())</span>
+                                                    } else {
+                                                        <span class="price-sale">₹ @product.Price.ToString("0")</span>
+                                                    }
+                                                </p>
+                                            </div>
+                                            <div style="font-size:11px; color: var(--hc-teal);">
+                                                @for (int i = 1; i <= 5; i++) {
+                                                    if (i <= (int)(product.Rating)) {
+                                                        <i class="bi bi-star-fill"></i>
+                                                    } else {
+                                                        <i class="bi bi-star"></i>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        
+                                        @if(!string.IsNullOrEmpty(product.ReasonForDiscount)) {
+                                            <div class="mt-2 text-danger" style="font-size: 11px; font-weight: 600;">
+                                                ⚠ @product.ReasonForDiscount
+                                            </div>
+                                        }
+
+                                        <!-- Add to Cart & Buy Now Buttons Row -->
+                                        <div class="mt-3 d-flex flex-column gap-2">
+                                            <a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId" class="btn btn-primary btn-sm btn-block">
+                                                <i class="bi bi-cart-plus mr-1"></i> Add to Cart
+                                            </a>
+                                            <a asp-controller="Order" asp-action="BuyNow" asp-route-ProductId="@product.ProductId" class="btn btn-outline-primary btn-sm btn-block mt-2">
+                                                <i class="bi bi-lightning-fill mr-1"></i> Buy Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         }
-                    </div>
-
-                    @* <p class="bottom-area d-flex px-3">
-                        <a asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@product.ProductId" class="add-to-cart text-center py-2 mr-1">
-                            <span>Add to cart <i class="ion-ios-add ml-1"></i></span>
-                        </a>
-                         </p> *@
-           <p class="bottom-area d-flex px-3">
-    <a asp-controller="Product" asp-action="AddToCart" 
-       asp-route-ProductId="@product.ProductId" 
-       class="add-to-cart text-center py-2 mr-1">
-        <span>Add to cart <i class="ion-ios-add ml-1"></i></span>
-    </a>
-
-    @* {{-- ✅ Yeh naya Buy Now button --}} *@
-    <a asp-controller="Order" asp-action="BuyNow" 
-       asp-route-ProductId="@product.ProductId" 
-       class="buy-now text-center py-2 ml-1">
-        <span>Buy Now <i class="ion-ios-flash ml-1"></i></span>
-    </a>
-</p>
-                        @* <p class="text-center">
-                        <a asp-controller="Order" asp-action="CheckOut" asp-route-ProductId="@product.ProductId" class="btn btn-primary py-3 px-4">
-                            <span>Buy Now <i class="ion-ios-add ml-1"></i></span>
-                        </a>
-                    </p> *@
-                   
-                </div>
-            </div>
-        </div>
-    }
-}
-else
-{
-    <div class="col-12 text-center">
-        <h4>No products found.</h4>
-    </div>
-}
-
-
+                    }
+                    else
+                    {
+                        <div class="col-12 text-center py-5">
+                            <i class="bi bi-emoji-frown display-1 text-muted"></i>
+                            <h4 class="mt-3 text-muted">No medicines found in this category.</h4>
+                            <p class="text-muted">Try looking under another catalog section or check back later.</p>
+                            <a asp-action="Index" asp-route-category="all" class="btn btn-primary mt-3">Browse All Medicines</a>
+                        </div>
+                    }
                 </div>
 
-
-
-                @if(Model.Products.Count > 50){
-
-                <div class="row mt-5">
-                    <div class="col text-center">
-                        <div class="block-27">
-                            <ul>
-                                <li><a href="#">&lt;</a></li>
-                                <li class="active"><span>1</span></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&gt;</a></li>
-                            </ul>
+                <!-- Custom styled pagination if there are many items -->
+                @if(Model.Products != null && Model.Products.Count > 50) {
+                    <div class="row mt-5">
+                        <div class="col text-center">
+                            <div class="block-27">
+                                <ul style="display: inline-flex; gap: 8px; list-style: none; padding: 0;">
+                                    <li class="active" style="width: 40px; height: 40px; background: var(--hc-teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--hc-white); font-weight:700;">1</li>
+                                    <li style="width: 40px; height: 40px; border: 1px solid var(--hc-border); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><a href="#" style="color:var(--hc-text);">2</a></li>
+                                    <li style="width: 40px; height: 40px; border: 1px solid var(--hc-border); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><a href="#" style="color:var(--hc-text);">3</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-
                 }
 
-
-
             </div>
 
-
-
-
-           <div class="col-md-4 col-lg-2 sidebar">
-
-    <!-- All Products -->
-    <div class="sidebar-box-2">
-        <h2 class="heading mb-3">
-            <a asp-action="Index" asp-route-category="All">All Products</a>
-        </h2>
-    </div>
-
-    <!-- Skin Care -->
-    <div class="sidebar-box-2">
-        <h2 class="heading mb-4">Skin Care</h2>
-        <ul>
-            <li><a asp-action="Index" asp-route-category="SkinCare" asp-route-SubCategory="Creams">Creams</a></li>
-            <li><a asp-action="Index" asp-route-category="SkinCare" asp-route-SubCategory="Face Wash">Face Wash</a></li>
-            <li><a asp-action="Index" asp-route-category="SkinCare" asp-route-SubCategory="Lotions">Lotions</a></li>
-        </ul>
-    </div>
-
-    <!-- Baby Care -->
-    <div class="sidebar-box-2">
-        <h2 class="heading mb-4">Baby Care</h2>
-        <ul>
-            <li><a asp-action="Index" asp-route-category="babyCare" asp-route-SubCategory="Diapers">Diapers</a></li>
-            <li><a asp-action="Index" asp-route-category="babyCare" asp-route-SubCategory="Baby Lotion">Baby Lotion</a></li>
-            <li><a asp-action="Index" asp-route-category="babyCare" asp-route-SubCategory="Baby Oil">Baby Oil</a></li>
-        </ul>
-    </div>
-
-    <!-- First Aid -->
-    <div class="sidebar-box-2">
-        <h2 class="heading mb-4">First Aid</h2>
-        <ul>
-            <li><a asp-action="Index" asp-route-category="FirstAid" asp-route-SubCategory="Bandages">Bandages</a></li>
-            <li><a asp-action="Index" asp-route-category="FirstAid" asp-route-SubCategory="Antiseptic">Antiseptic</a></li>
-            <li><a asp-action="Index" asp-route-category="FirstAid" asp-route-SubCategory="Pain Relief">Pain Relief</a></li>
-        </ul>
-    </div>
-
-    <!-- OTC Medicines -->
-    <div class="sidebar-box-2">
-        <h2 class="heading mb-4">OTC Medicines</h2>
-        <ul>
-            <li><a asp-action="Index" asp-route-category="OtcMedicines" asp-route-SubCategory="Fever">Fever</a></li>
-            <li><a asp-action="Index" asp-route-category="OtcMedicines" asp-route-SubCategory="Cold & Flu">Cold & Flu</a></li>
-            <li><a asp-action="Index" asp-route-category="OtcMedicines" asp-route-SubCategory="Painkillers">Painkillers</a></li>
-        </ul>
-    </div>
-
-    <!-- Eye Care -->
-    <div class="sidebar-box-2">
-        <h2 class="heading mb-4">Eye Care</h2>
-        <ul>
-            <li><a asp-action="Index" asp-route-category="EyeCare" asp-route-SubCategory="Eye Drops">Eye Drops</a></li>
-            <li><a asp-action="Index" asp-route-category="EyeCare" asp-route-SubCategory="Lens Solution">Lens Solution</a></li>
-        </ul>
-    </div>
-
-    <!-- Prescription -->
-    <div class="sidebar-box-2">
-        <h2 class="heading mb-4">Prescription</h2>
-        <ul>
-            <li><a asp-action="Index" asp-route-category="Prescription" asp-route-SubCategory="Antibiotics">Antibiotics</a></li>
-            <li><a asp-action="Index" asp-route-category="Prescription" asp-route-SubCategory="Heart">Heart Medicines</a></li>
-            <li><a asp-action="Index" asp-route-category="Prescription" asp-route-SubCategory="Diabetes">Diabetes</a></li>
-        </ul>
-    </div>
-
-    <!-- Wellness -->
-    <div class="sidebar-box-2">
-        <h2 class="heading mb-4">Wellness</h2>
-        <ul>
-            <li><a asp-action="Index" asp-route-category="Wellness" asp-route-SubCategory="Vitamins">Vitamins</a></li>
-            <li><a asp-action="Index" asp-route-category="Wellness" asp-route-SubCategory="Supplements">Supplements</a></li>
-        </ul>
-    </div>
-
-    <!-- Personal Care -->
-    <div class="sidebar-box-2">
-        <h2 class="heading mb-4">Personal Care</h2>
-        <ul>
-            <li><a asp-action="Index" asp-route-category="PersonalCare" asp-route-SubCategory="Hair Care">Hair Care</a></li>
-            <li><a asp-action="Index" asp-route-category="PersonalCare" asp-route-SubCategory="Oral Care">Oral Care</a></li>
-        </ul>
-    </div>
-
-    <!-- Others -->
-    <div class="sidebar-box-2">
-        <h2 class="heading mb-4">Others</h2>
-        <ul>
-            <li><a asp-action="Index" asp-route-category="Others">View All</a></li>
-        </ul>
-    </div>
-
-</div>
         </div>
     </div>
 </section>

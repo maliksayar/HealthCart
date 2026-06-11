@@ -2,122 +2,144 @@
 @model HealthCart.Models.ViewModels.HybridViewModel
 
 @{
-    ViewData["Title"] = "Checkout & Verification";
+    ViewData["Title"] = "Order Verification";
 }
 
-<div class="container my-5">
-    <div class="card shadow-lg border-0">
+<!-- Page Header -->
+<div class="py-4" style="background: linear-gradient(135deg, var(--hc-dark) 0%, var(--hc-navy) 100%); border-bottom: 1px solid var(--hc-border);">
+    <div class="container text-center">
+        <h1 class="h3 mb-2" style="font-weight: 800; color: var(--hc-white);"><i class="bi bi-shield-check mr-2 text-info"></i>Checkout Verification</h1>
+        <p class="mb-0 text-muted" style="font-size:13px;">Review details and finalize your payment transaction</p>
+    </div>
+</div>
 
-       
+<section class="py-5" style="background: var(--hc-dark); min-height: 80vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            
+            <div class="col-lg-8">
+                
+                <!-- Messages -->
+                @if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-success text-center mb-4" style="border-radius: var(--hc-radius-md); background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10B981;">
+                        <i class="bi bi-check-circle-fill mr-2"></i> @TempData["Message"]
+                    </div>
+                }
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger text-center mb-4" style="border-radius: var(--hc-radius-md); background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #EF4444;">
+                        <i class="bi bi-exclamation-triangle-fill mr-2"></i> @TempData["ErrorMessage"]
+                    </div>
+                }
 
-        <div class="card-body p-5">
+                <div class="hc-glass-card p-5" style="border-radius: var(--hc-radius-lg);">
+                    
+                    <h3 class="mb-4 text-light" style="font-weight: 800;"><i class="bi bi-receipt mr-2 text-info"></i>Order Summary</h3>
+                    
+                    <div class="p-3 mb-4 rounded d-flex justify-content-between align-items-center" style="background: rgba(255,255,255,0.02); border: 1px solid var(--hc-border);">
+                        <div>
+                            <span class="text-muted" style="font-size:12px;">ORDER IDENTIFICATION CODE</span>
+                            <h6 class="mb-0 font-weight-bold text-light" id="orderId" style="font-family: monospace; font-size:15px;">@Model?.Order?.OrderId</h6>
+                        </div>
+                        <div>
+                            <span class="badge" style="background: rgba(0, 201, 167, 0.15); color: var(--hc-teal); border: 1px solid var(--hc-border); font-weight:700;">@Model?.Order?.OrderStatus</span>
+                        </div>
+                    </div>
 
-               @if (TempData["Message"] != null)
-            {
-                <div class="alert alert-success">
-                    <i class="bi bi-envelope-check me-2"></i> @TempData["Message"]
+                    <!-- Items List -->
+                    <div class="mb-4">
+                        <h5 class="text-light mb-3" style="font-weight: 700; font-size: 15px;"><i class="bi bi-box-seam text-info mr-2"></i>Prescription Items</h5>
+                        <div class="list-group list-group-flush" style="background: transparent;">
+                            @if (Model?.OrderItems != null)
+                            {
+                                @foreach (var item in Model.OrderItems)
+                                {
+                                    <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-3" style="background: transparent; border-bottom: 1px dashed rgba(255,255,255,0.05);">
+                                        <div>
+                                            <span class="text-light font-weight-bold">@item?.Product?.Name</span>
+                                            <small class="text-muted d-block">Quantity: @item?.Quantity</small>
+                                        </div>
+                                        <span class="text-success font-weight-bold" style="font-size:14px;">
+                                            ₹ @(string.Format("{0:0.00}", item?.Quantity * (item?.Product?.Price - (item?.Product?.Price * (item?.Product?.Discount ?? 0) / 100))))
+                                        </span>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Bill details -->
+                    <div class="mb-4 p-4 rounded" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--hc-border);">
+                        <h5 class="text-light mb-3" style="font-weight: 700; font-size: 15px;"><i class="bi bi-cash-stack text-info mr-2"></i>Billing Valuation</h5>
+                        <div class="d-flex justify-content-between mb-2" style="font-size: 13px;">
+                            <span class="text-muted">Shipping Logistics</span>
+                            <span class="text-light">₹ 5.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <span class="text-light font-weight-bold" style="font-size: 14px;">Total Payable</span>
+                            <h4 class="mb-0 text-success font-weight-bold">₹ <span id="amount">@((Model?.Order?.TotalPrice ?? 0) + 5.00m)</span></h4>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Address details -->
+                    <div class="mb-4">
+                        <h5 class="text-light mb-3" style="font-weight: 700; font-size: 15px;"><i class="bi bi-geo-alt text-info mr-2"></i>Recipient Address</h5>
+                        <address class="p-3 rounded text-muted" style="background: rgba(0, 0, 0, 0.15); border: 1px solid var(--hc-border); font-size: 13px; line-height: 1.6;">
+                            <strong class="text-light" style="font-size:14px;">@Model?.Address?.FirstName @Model?.Address?.LastName</strong><br />
+                            @Model?.Address?.Street<br />
+                            @Model?.Address?.City, @Model?.Address?.State - @Model?.Address?.Pincode<br />
+                            @Model?.Address?.Country<br />
+                            <i class="bi bi-telephone mr-1"></i> @Model?.Address?.Phone
+                        </address>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="mt-5 text-center">
+                        @if (Model?.Order?.OrderStatus == OrderStatus.Pending && TempData["EmailMessage"] == null)
+                        {
+                            <a asp-controller="Order" asp-action="SendEmail" asp-route-OrderId="@Model?.Order?.OrderId" class="btn btn-primary btn-lg">
+                                <i class="bi bi-envelope-check mr-2"></i> Verify Order via Email
+                            </a>
+                        }
+
+                        @if (Model?.Order?.OrderStatus == OrderStatus.Verified)
+                        {
+                            <button class="btn btn-primary btn-lg px-5" type="button" onclick="payNow()">
+                                <i class="bi bi-credit-card-2-front mr-2"></i> Pay Now via RazorPay
+                            </button>
+                        }
+
+                        @if (Model?.Order?.OrderStatus == OrderStatus.Cancelled)
+                        {
+                            <a asp-controller="User" asp-action="Orders" class="btn btn-outline-primary btn-lg">
+                                <i class="bi bi-arrow-left-circle mr-2"></i> Return to Orders History
+                            </a>
+                        }
+                    </div>
+
                 </div>
-            }
-            else if(TempData["ErrorMessage"] != null){
-                   <div class="alert alert-danger">
-                    <i class="bi bi-envelope-check me-2"></i> @TempData["ErrorMessage"]
-                </div>
-            }
-            <h3 class="mb-4"><i class="bi bi-credit-card-fill me-2 text-primary"></i> Checkout & Order Verification</h3>
-
-            <div class="mb-4">
-                <h5><i class="bi bi-receipt-cutoff me-2 text-secondary"></i> Order Summary</h5>
-                <p><strong>Order ID:</strong> <span class="badge bg-light text-dark" id="orderId">@Model?.Order?.OrderId</span></p>
-
-                <ul class="list-group">
-                    @foreach (var item in Model?.OrderItems)
-                    {
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong>@item?.Product?.Name</strong>
-                                <div class="text-muted small">Qty: @item?.Quantity</div>
-                            </div>
-                            <span class="text-success fw-bold">
-                               $   @(
-                                    string.Format("{0:0.00}", 
-                                        item?.Quantity * (item?.Product?.Price - (item?.Product?.Price * (item?.Product?.Discount ?? 0) / 100))
-                                    )
-                                )
-                            </span>
-                        </li>
-                    }
-                </ul>
-            </div>
-
-            <div class="mb-4">
-                <h5><i class="bi bi-cash-coin me-2 text-success"></i> Payment Details</h5>
-                <p><strong>Shipping Cost:</strong> ₹ 5.00</p>
-                <p class="fs-5"><strong>Total Amount:</strong> ₹ <span id="amount">@((Model?.Order?.TotalPrice ?? 0) + 5.00m)</span></p>
-            </div>
-
-            <div class="mb-4">
-                <h5><i class="bi bi-geo-alt-fill me-2 text-danger"></i> Shipping Address</h5>
-                <address class="border rounded p-3 bg-light">
-                    <strong>@Model?.Address?.FirstName @Model?.Address?.LastName</strong><br />
-                    @Model?.Address?.Street<br />
-                    @Model?.Address?.City, @Model?.Address?.State - @Model?.Address?.Pincode<br />
-                    @Model?.Address?.Country<br />
-                    <i class="bi bi-telephone"></i> @Model?.Address?.Phone
-                </address>
-            </div>
-
-          
-
-            <div class="mt-4">
-                @if (Model?.Order?.OrderStatus == OrderStatus.Pending && TempData["EmailMessage"] == null)
-                {
-                    <a asp-controller="Order" asp-action="SendEmail" asp-route-OrderId="@Model?.Order?.OrderId"
-                        class="btn btn-warning btn-sm">
-                        <i class="bi bi-envelope-fill me-2"></i> Verify Order via Email
-                    </a>
-                }
-
-                @if (Model?.Order?.OrderStatus == OrderStatus.Verified)
-                {
-                    <button class="btn btn-primary btn-sm" type="button" onclick="payNow()">
-                        <i class="bi bi-credit-card-2-front-fill me-2"></i> Pay Now
-                    </button>
-                }
-
-                @if (Model?.Order?.OrderStatus == OrderStatus.Cancelled)
-                {
-                    <a asp-controller="User" asp-action="Orders" class="btn btn-outline-primary btn-sm">
-                        <i class="bi bi-arrow-left-circle me-2"></i> Back to Your Orders
-                    </a>
-                }
             </div>
 
         </div>
     </div>
-</div>
+</section>
 
-
-
-
+<!-- Razorpay script -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-
-
 
 <script>
     async function payNow() {
-        console.log("Button Clicked");
-
-        const amount = Math.round(parseFloat(document.getElementById('amount').innerText.trim()) * 100);
-
-      
+        console.log("PayNow button clicked");
+        const amountText = document.getElementById('amount').innerText.trim();
+        const amount = Math.round(parseFloat(amountText) * 100);
         const orderId = document.getElementById('orderId').innerText.trim();
-  console.log(amount)
-  console.log(orderId)
 
+        console.log("Intent Amount:", amount);
+        console.log("Order ID:", orderId);
 
         if (!amount || amount <= 0 || !orderId) {
-            alert("Invalid amount or missing order ID");
+            alert("Invalid checkout data parameter");
             return;
         }
 
@@ -132,8 +154,8 @@
 
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error("Payment API Error:", errorText);
-                alert("Failed to create order");
+                console.error("Payment API Error Response:", errorText);
+                alert("Failed to initialize remote Payment Intent");
                 return;
             }
 
@@ -144,7 +166,7 @@
                 amount: order.amount,
                 currency: order.currency,
                 name: '@Model?.Address?.FirstName',
-                description: 'Payment Transaction',
+                description: 'Medicines Transaction',
                 order_id: order.orderId,
                 prefill: {
                     name: '@Model?.Address?.FirstName @Model?.Address?.LastName',
@@ -152,21 +174,21 @@
                     contact: '@Model?.Address?.Phone'
                 },
                 handler: function (response) {
-                    console.log("Payment Success:", response);
+                    console.log("Razorpay Successful Event:", response);
                     const redirectOrderId = document.getElementById('orderId').innerText.trim();
-                    const redirectUrl = `http://127.0.0.1:5036/Order/PaymentSuccess?OrderId=${redirectOrderId}`;
+                    const redirectUrl = `/Order/PaymentSuccess?OrderId=${redirectOrderId}`;
                     window.location.href = redirectUrl;
                 },
                 theme: {
-                    color: '#F37254'
+                    color: '#00C9A7'
                 }
             };
 
             const rzp = new Razorpay(options);
             rzp.open();
         } catch (err) {
-            console.error("Unexpected error:", err);
-            alert("An error occurred. Check console.");
+            console.error("Unexpected fetch execution exception:", err);
+            alert("An execution error occurred while processing transaction");
         }
     }
 </script>

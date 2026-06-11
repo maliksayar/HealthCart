@@ -1,179 +1,493 @@
 @model HealthCart.Models.DomainModels.Product
 
 @{
-    ViewData["Title"] = "Medicine Details";
+    ViewData["Title"] = Model?.Name ?? "Medicine Details";
+    decimal finalPrice = Model != null ? Math.Round(Model.Price - (Model.Price * Model.Discount / 100), 2) : 0;
+    int reviewCount = Model?.Reviews?.Count ?? 0;
+    double avgRating = reviewCount > 0 ? Model.Reviews.Average(r => r.Stars) : Model?.Rating ?? 0;
 }
 
 @if (Model == null)
 {
-    <div class="container mt-5">
-        <div class="alert alert-danger">
-            Product not found.
+    <div class="container mt-5 py-5 text-center">
+        <div class="alert alert-danger" style="border-radius: var(--hc-radius-md);">
+            <i class="bi bi-exclamation-octagon-fill mr-2"></i> Product not found.
         </div>
+        <a asp-controller="Product" asp-action="Index" asp-route-category="all" class="btn btn-primary mt-3">Back to Shop</a>
     </div>
     return;
 }
 
-@{
-    decimal finalPrice = Model.Price - (Model.Price * Model.Discount / 100);
-}
+<!-- Page-level styles -->
+<style>
+    .pd-img-wrap {
+        position: relative;
+        background: rgba(17, 31, 53, 0.55);
+        border: 1px solid var(--hc-border);
+        border-radius: var(--hc-radius-lg);
+        overflow: hidden;
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(8px);
+        transition: box-shadow .3s;
+    }
+    .pd-img-wrap:hover { box-shadow: 0 0 40px rgba(0, 201, 167, 0.18); }
+    .pd-img-wrap img {
+        max-height: 90%;
+        max-width: 90%;
+        object-fit: contain;
+        transition: transform .4s ease;
+    }
+    .pd-img-wrap:hover img { transform: scale(1.04); }
 
-<section class="container mt-5 mb-5">
+    .pd-badge-brand {
+        display: inline-block;
+        padding: 4px 14px;
+        background: rgba(0, 201, 167, 0.1);
+        color: var(--hc-teal);
+        border: 1px solid rgba(0, 201, 167, 0.25);
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
 
-    <div class="row">
+    .pd-title {
+        font-size: 2.1rem;
+        font-weight: 800;
+        color: var(--hc-white);
+        line-height: 1.2;
+        margin-bottom: 16px;
+    }
 
-        <!-- IMAGE -->
-        <div class="col-md-5">
-            <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/images/no-image.png" : Model.ImageUrl)"
-                 class="img-fluid rounded shadow"
-                 alt="@Model.Name" />
-        </div>
+    .pd-stars i { font-size: 14px; color: #f59e0b; }
+    .pd-stars i.empty { color: rgba(255,255,255,0.15); }
 
-        <!-- DETAILS -->
-        <div class="col-md-7">
+    .pd-price-box {
+        background: rgba(17, 31, 53, 0.5);
+        border: 1px solid var(--hc-border);
+        border-radius: var(--hc-radius-md);
+        padding: 20px 24px;
+        display: inline-block;
+        min-width: 260px;
+        margin-bottom: 24px;
+    }
+    .pd-price-label { font-size: 10px; letter-spacing: 1px; color: var(--hc-muted); margin-bottom: 8px; text-transform: uppercase; }
+    .pd-price-final { font-size: 2rem; font-weight: 800; color: var(--hc-white); }
+    .pd-price-original { font-size: 15px; color: var(--hc-muted); text-decoration: line-through; margin-left: 10px; }
+    .pd-discount-chip {
+        display: inline-block;
+        padding: 3px 10px;
+        background: rgba(16, 185, 129, 0.15);
+        color: #10B981;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-left: 8px;
+    }
 
-            <h2>@Model.Name</h2>
+    .pd-stock-in  { color: #10B981; font-weight: 600; font-size: 14px; }
+    .pd-stock-out { color: #ef4444; font-weight: 600; font-size: 14px; }
 
-            <p class="text-muted">
-                <strong>Brand:</strong> @Model.Brand <br />
-                <strong>Category:</strong> @Model.Category <br />
-                <strong>SubCategory:</strong> @Model.SubCategory
-            </p>
+    .pd-spec-row {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+    .pd-spec-item { font-size: 13px; }
+    .pd-spec-item span.lbl { color: var(--hc-muted); }
+    .pd-spec-item span.val { color: var(--hc-white); font-weight: 700; margin-left: 4px; }
 
-            <!-- RATING -->
-            <div class="mb-3">
-                @for (int i = 1; i <= 5; i++)
-                {
-                    if (i <= Model.Rating)
-                    {
-                        <span class="text-warning">&#9733;</span>
-                    }
-                    else
-                    {
-                        <span class="text-secondary">&#9734;</span>
-                    }
-                }
-                <span class="ml-2">(@(Model.Sold ?? 0) Sold)</span>
-            </div>
+    .pd-desc-box {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--hc-border);
+        border-radius: var(--hc-radius-md);
+        padding: 16px 20px;
+        margin-bottom: 24px;
+    }
+    .pd-desc-box h6 { color: var(--hc-white); font-weight: 700; margin-bottom: 8px; font-size: 13px; letter-spacing: .5px; text-transform: uppercase; }
+    .pd-desc-box p  { color: var(--hc-muted); font-size: 14px; line-height: 1.7; margin: 0; }
 
-            <!-- DISCOUNT -->
-            @if (!string.IsNullOrWhiteSpace(Model.ReasonForDiscount))
-            {
-                <span class="badge badge-success mb-2">
-                    @Model.ReasonForDiscount
-                </span>
-            }
+    .qty-input {
+        width: 110px !important;
+        background: rgba(17, 31, 53, 0.65) !important;
+        border: 1px solid var(--hc-border) !important;
+        color: var(--hc-white) !important;
+        border-radius: var(--hc-radius-sm) !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+    }
 
-            <!-- PRICE -->
-            <div class="mb-3">
-                @if (Model.Discount > 0)
-                {
-                    <h4>
-                        <span class="text-muted" style="text-decoration:line-through;">
-                            ₹@Model.Price
-                        </span>
-                        <span class="text-danger ml-2">
-                            ₹@finalPrice
-                        </span>
-                    </h4>
-                }
-                else
-                {
-                    <h4>₹@Model.Price</h4>
-                }
-            </div>
+    .btn-add-cart {
+        background: linear-gradient(135deg, var(--hc-teal) 0%, #00a896 100%);
+        color: #0a1628;
+        font-weight: 800;
+        border: none;
+        padding: 13px 30px;
+        border-radius: var(--hc-radius-md);
+        font-size: 15px;
+        transition: all .25s;
+        letter-spacing: .3px;
+    }
+    .btn-add-cart:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,201,167,.35); }
 
-            <!-- STOCK -->
-            @if (Model.Stock > 0)
-            {
-                <p class="text-success">
-                    In Stock (@Model.Stock available)
-                </p>
-            }
-            else
-            {
-                <p class="text-danger">Out of Stock</p>
-            }
+    .btn-buy-now {
+        background: transparent;
+        color: var(--hc-teal);
+        font-weight: 800;
+        border: 1px solid var(--hc-teal);
+        padding: 13px 30px;
+        border-radius: var(--hc-radius-md);
+        font-size: 15px;
+        transition: all .25s;
+    }
+    .btn-buy-now:hover { background: var(--hc-teal); color: #0a1628; transform: translateY(-1px); }
 
-            <!-- DESCRIPTION -->
-            <p>@Model.Description</p>
+    .pd-trust-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid var(--hc-border);
+    }
+    .pd-trust-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--hc-muted);
+        padding: 6px 12px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--hc-border);
+        border-radius: 20px;
+    }
+    .pd-trust-chip i { color: var(--hc-teal); font-size: 13px; }
 
-            <!-- ADD TO CART -->
-            @if (Model.Stock > 0)
-            {
-                <form asp-controller="Product"
-                      asp-action="AddToCart"
-                      asp-route-productId="@Model.ProductId"
-                      method="post">
+    /* Reviews */
+    .review-card {
+        background: rgba(17, 31, 53, 0.45);
+        border: 1px solid var(--hc-border);
+        border-radius: var(--hc-radius-md);
+        padding: 20px 24px;
+        margin-bottom: 16px;
+        transition: border-color .25s;
+    }
+    .review-card:hover { border-color: rgba(0, 201, 167, 0.3); }
+    .review-avatar {
+        width: 38px; height: 38px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--hc-teal), #00a896);
+        display: flex; align-items: center; justify-content: center;
+        color: #0a1628; font-weight: 800; font-size: 15px;
+        flex-shrink: 0;
+    }
 
-                    <input type="number"
-                           name="quantity"
-                           value="1"
-                           min="1"
-                           max="@Model.Stock"
-                           class="form-control mb-3"
-                           style="width:150px;" />
+    .rating-bar-wrap { margin-bottom: 6px; display: flex; align-items: center; gap: 10px; font-size: 12px; }
+    .rating-bar-bg { flex: 1; height: 6px; background: rgba(255,255,255,0.07); border-radius: 99px; overflow: hidden; }
+    .rating-bar-fill { height: 100%; background: linear-gradient(90deg, var(--hc-teal), #00a896); border-radius: 99px; }
 
-                    <button type="submit"
-                            class="btn btn-success">
-                        Add to Cart
-                    </button>
-                </form>
-            }
+    .no-review-box {
+        text-align: center;
+        padding: 40px;
+        border: 1px dashed var(--hc-border);
+        border-radius: var(--hc-radius-md);
+        background: rgba(255,255,255,0.01);
+    }
 
-        </div>
+    /* Section divider */
+    .hc-divider {
+        border: 0;
+        height: 1px;
+        background: var(--hc-border);
+        margin: 56px 0;
+    }
+
+    @@media (max-width: 767px) {
+        .pd-title { font-size: 1.5rem; }
+        .pd-price-final { font-size: 1.6rem; }
+        .pd-trust-row { gap: 8px; }
+        .btn-add-cart, .btn-buy-now { padding: 12px 20px; font-size: 14px; }
+    }
+</style>
+
+<!-- ░░ Breadcrumb Header ░░ -->
+<div class="py-4" style="background: linear-gradient(135deg, var(--hc-dark) 0%, var(--hc-navy) 100%); border-bottom: 1px solid var(--hc-border); position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -50%; right: -5%; width: 280px; height: 280px; background: radial-gradient(circle, rgba(0,201,167,.07) 0%, transparent 70%); pointer-events: none;"></div>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 p-0" style="font-size: 13px;">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" style="color: var(--hc-muted);">Home</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Product" asp-action="Index" asp-route-category="all" style="color: var(--hc-muted);">Products</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Product" asp-action="Index" asp-route-category="@Model.Category" style="color: var(--hc-muted); text-transform: capitalize;">@Model.Category</a></li>
+                <li class="breadcrumb-item active" style="color: var(--hc-teal); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" aria-current="page">@Model.Name</li>
+            </ol>
+        </nav>
     </div>
+</div>
 
-    <hr class="mt-5" />
+<!-- ░░ Main Details Section ░░ -->
+<section class="py-5" style="background: var(--hc-dark);">
+    <div class="container">
+        <div class="row">
 
-    <hr class="mt-5" />
-
-<h4>Customer Reviews</h4>
-
-@if (Model.Reviews != null && Model.Reviews.Any())
-{
-    foreach (var review in Model.Reviews)
-    {
-        <div class="card mb-3">
-            <div class="card-body">
-
-                <!-- Username -->
-                <h6>
-                    @(review.User != null ? review.User.Username : "Anonymous")
-                </h6>
-
-                <!-- Stars -->
-                <div>
-                    @for (int i = 1; i <= 5; i++)
+            <!-- ── Left: Product Image ── -->
+            <div class="col-lg-5 col-md-6 mb-5 mb-md-0">
+                <div class="pd-img-wrap">
+                    <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "https://via.placeholder.com/400x400/0f1f35/00c9a7?text=No+Image" : Model.ImageUrl)"
+                         alt="@Model.Name"
+                         id="pd-main-img" />
+                    @if (Model.Discount > 0)
                     {
-                        if (i <= review.Stars)
+                        <div style="position: absolute; top: 16px; left: 16px; background: linear-gradient(135deg,#ef4444,#dc2626); color: #fff; font-weight: 800; font-size: 13px; padding: 4px 12px; border-radius: 20px; letter-spacing: .3px;">
+                            @Model.Discount.ToString("0")% OFF
+                        </div>
+                    }
+                    @if (Model.Stock == 0)
+                    {
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 22, 40, 0.72); display: flex; align-items: center; justify-content: center; border-radius: var(--hc-radius-lg);">
+                            <span style="background: rgba(239,68,68,.2); color: #ef4444; border: 1px solid rgba(239,68,68,.4); border-radius: 8px; padding: 8px 20px; font-weight: 800; font-size: 14px;">OUT OF STOCK</span>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- ── Right: Product Info ── -->
+            <div class="col-lg-7 col-md-6">
+                <div class="pl-md-4">
+
+                    <span class="pd-badge-brand"><i class="bi bi-tag-fill mr-1"></i>@Model.Brand</span>
+                    <h1 class="pd-title">@Model.Name</h1>
+
+                    <!-- Stars -->
+                    <div class="d-flex align-items-center mb-3" style="gap: 10px;">
+                        <div class="pd-stars">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (i <= (int)avgRating)
+                                {
+                                    <i class="bi bi-star-fill"></i>
+                                }
+                                else if (i - avgRating < 1 && i - avgRating > 0)
+                                {
+                                    <i class="bi bi-star-half"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-star empty"></i>
+                                }
+                            }
+                        </div>
+                        <span style="font-size: 13px; color: var(--hc-muted);">@avgRating.ToString("0.0") / 5.0</span>
+                        <span style="font-size: 13px; color: var(--hc-muted);">(@reviewCount review@(reviewCount != 1 ? "s" : ""))</span>
+                        <span style="font-size: 13px; color: var(--hc-muted);">·</span>
+                        <span style="font-size: 13px; color: var(--hc-muted);">@(Model.Sold ?? 0) sold</span>
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.ReasonForDiscount))
+                    {
+                        <div class="mb-3">
+                            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 20px; font-size: 12px; font-weight: 700;">
+                                🏷 @Model.ReasonForDiscount
+                            </span>
+                        </div>
+                    }
+
+                    <!-- Price Box -->
+                    <div class="pd-price-box">
+                        <div class="pd-price-label">Customer Price</div>
+                        <div class="d-flex align-items-baseline flex-wrap">
+                            @if (Model.Discount > 0)
+                            {
+                                <span class="pd-price-final">₹@finalPrice.ToString("0.00")</span>
+                                <span class="pd-price-original">₹@Model.Price.ToString("0.00")</span>
+                                <span class="pd-discount-chip">@Model.Discount.ToString("0")% OFF</span>
+                            }
+                            else
+                            {
+                                <span class="pd-price-final">₹@Model.Price.ToString("0.00")</span>
+                            }
+                        </div>
+                        @if (Model.Discount > 0)
                         {
-                            <span class="text-warning">&#9733;</span>
+                            <div style="margin-top: 6px; font-size: 12px; color: #10B981; font-weight: 600;">
+                                You save ₹@((Model.Price - finalPrice).ToString("0.00"))
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Stock Status -->
+                    <div class="mb-4">
+                        @if (Model.Stock > 0)
+                        {
+                            <span class="pd-stock-in"><i class="bi bi-check-circle-fill mr-1"></i>In Stock — @Model.Stock unit@(Model.Stock != 1 ? "s" : "") available</span>
                         }
                         else
                         {
-                            <span class="text-secondary">&#9734;</span>
+                            <span class="pd-stock-out"><i class="bi bi-x-circle-fill mr-1"></i>Out of Stock</span>
                         }
+                    </div>
+
+                    <!-- Specs -->
+                    <div class="pd-spec-row">
+                        <div class="pd-spec-item"><span class="lbl">Category:</span><span class="val text-capitalize">@Model.Category</span></div>
+                        <div class="pd-spec-item"><span class="lbl">Sub-Category:</span><span class="val text-capitalize">@Model.SubCategory</span></div>
+                        <div class="pd-spec-item"><span class="lbl">Brand:</span><span class="val">@Model.Brand</span></div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="pd-desc-box">
+                        <h6><i class="bi bi-info-circle mr-1 text-info"></i>About this Medicine</h6>
+                        <p>@Model.Description</p>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    @if (Model.Stock > 0)
+                    {
+                        <form asp-controller="Product" asp-action="AddToCart" asp-route-ProductId="@Model.ProductId" method="post" id="add-to-cart-form">
+                            <div class="d-flex align-items-center flex-wrap" style="gap: 12px; margin-bottom: 12px;">
+                                <div>
+                                    <label class="text-muted d-block mb-1" style="font-size: 11px; letter-spacing: .5px; text-transform: uppercase;">Quantity</label>
+                                    <input type="number" name="quantity" id="pd-qty" value="1" min="1" max="@Model.Stock" class="form-control qty-input" />
+                                </div>
+                                <div class="pt-3">
+                                    <button type="submit" class="btn-add-cart" id="btn-add-cart">
+                                        <i class="bi bi-cart-plus mr-2"></i>Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <a asp-controller="Order" asp-action="BuyNow" asp-route-ProductId="@Model.ProductId" class="btn-buy-now d-inline-block" id="btn-buy-now">
+                            <i class="bi bi-lightning-charge-fill mr-2"></i>Buy Now
+                        </a>
                     }
+                    else
+                    {
+                        <button class="btn-add-cart" disabled style="opacity: .5; cursor: not-allowed;">
+                            <i class="bi bi-x-circle mr-2"></i>Unavailable
+                        </button>
+                    }
+
+                    <!-- Trust badges -->
+                    <div class="pd-trust-row">
+                        <span class="pd-trust-chip"><i class="bi bi-shield-check"></i>100% Authentic</span>
+                        <span class="pd-trust-chip"><i class="bi bi-truck"></i>Fast Delivery</span>
+                        <span class="pd-trust-chip"><i class="bi bi-arrow-counterclockwise"></i>Easy Returns</span>
+                        <span class="pd-trust-chip"><i class="bi bi-lock-fill"></i>Secure Payment</span>
+                    </div>
+
                 </div>
-
-                <!-- Review Text -->
-                <p class="mt-2">@review.ReviewText</p>
-
-                <small class="text-muted">
-                    @review.CreatedAt.ToString("dd MMM yyyy")
-                </small>
-
             </div>
         </div>
-    }
-}
-else
-{
-    <div class="alert alert-info">
-        No reviews yet.
+
+        <hr class="hc-divider" />
+
+        <!-- ░░ Reviews & Ratings ░░ -->
+        <div class="row">
+            <!-- Rating Summary left -->
+            <div class="col-lg-3 col-md-4 mb-5 mb-md-0">
+                <div style="text-align: center; padding: 30px 20px; background: rgba(17,31,53,.45); border: 1px solid var(--hc-border); border-radius: var(--hc-radius-lg);">
+                    <div style="font-size: 4rem; font-weight: 800; color: var(--hc-white); line-height:1;">@avgRating.ToString("0.0")</div>
+                    <div class="pd-stars my-2">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= (int)avgRating) { <i class="bi bi-star-fill"></i> }
+                            else { <i class="bi bi-star empty"></i> }
+                        }
+                    </div>
+                    <div style="font-size: 13px; color: var(--hc-muted);">Based on @reviewCount review@(reviewCount != 1 ? "s" : "")</div>
+
+                    <!-- Rating bars -->
+                    @if (reviewCount > 0)
+                    {
+                        <div class="mt-4" style="text-align: left;">
+                            @for (int star = 5; star >= 1; star--)
+                            {
+                                int cnt = Model.Reviews.Count(r => r.Stars == star);
+                                double pct = reviewCount > 0 ? cnt * 100.0 / reviewCount : 0;
+                                <div class="rating-bar-wrap">
+                                    <span style="color: var(--hc-muted); width: 24px; text-align:right; font-size: 11px;">@star</span>
+                                    <i class="bi bi-star-fill" style="font-size: 10px; color: #f59e0b;"></i>
+                                    <div class="rating-bar-bg">
+                                        <div class="rating-bar-fill" style="width: @pct.ToString("0")%;"></div>
+                                    </div>
+                                    <span style="color: var(--hc-muted); font-size: 11px; width: 20px;">@cnt</span>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Reviews list right -->
+            <div class="col-lg-9 col-md-8">
+                <h4 class="mb-4" style="font-weight: 800; color: var(--hc-white); display: flex; align-items: center; gap: 10px;">
+                    <i class="bi bi-chat-left-quote-fill text-info"></i> Customer Reviews
+                </h4>
+
+                @if (Model.Reviews != null && Model.Reviews.Any())
+                {
+                    @foreach (var review in Model.Reviews.OrderByDescending(r => r.CreatedAt))
+                    {
+                        string initials = review.User != null && review.User.Username.Length > 0
+                            ? review.User.Username.Substring(0, 1).ToUpper()
+                            : "U";
+                        <div class="review-card">
+                            <div class="d-flex align-items-start" style="gap: 14px;">
+                                <div class="review-avatar">@initials</div>
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-start flex-wrap" style="gap: 8px;">
+                                        <div>
+                                            <div style="font-weight: 700; color: var(--hc-white); font-size: 14px; margin-bottom: 3px;">
+                                                @(review.User != null ? review.User.Username : "Anonymous Customer")
+                                            </div>
+                                            <div class="pd-stars">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= review.Stars) { <i class="bi bi-star-fill"></i> }
+                                                    else { <i class="bi bi-star empty"></i> }
+                                                }
+                                            </div>
+                                        </div>
+                                        <small style="color: var(--hc-muted); font-size: 12px; white-space: nowrap;">
+                                            <i class="bi bi-calendar3 mr-1"></i>@review.CreatedAt.ToString("dd MMM yyyy")
+                                        </small>
+                                    </div>
+                                    <p class="mt-2 mb-0" style="color: var(--hc-muted); font-size: 14px; line-height: 1.65;">@review.ReviewText</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="no-review-box">
+                        <i class="bi bi-chat-square-dots" style="font-size: 3rem; color: var(--hc-muted);"></i>
+                        <p class="mt-3 mb-2" style="color: var(--hc-muted); font-size: 15px; font-weight: 600;">No reviews yet</p>
+                        <p style="color: var(--hc-muted); font-size: 13px;">Be the first to share your experience with this medicine.</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <hr class="hc-divider" />
+
+        <!-- ░░ Back CTA ░░ -->
+        <div class="text-center">
+            <p style="color: var(--hc-muted); font-size: 14px; margin-bottom: 16px;">Looking for something else?</p>
+            <a asp-controller="Product" asp-action="Index" asp-route-category="@Model.Category" class="btn btn-outline-primary mr-3">
+                <i class="bi bi-arrow-left mr-1"></i> More @Model.Category
+            </a>
+            <a asp-controller="Product" asp-action="Index" asp-route-category="all" class="btn btn-primary">
+                <i class="bi bi-grid-3x3-gap mr-1"></i> Browse All Medicines
+            </a>
+        </div>
+
     </div>
-}
-
-
 </section>

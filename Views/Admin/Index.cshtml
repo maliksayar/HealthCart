@@ -2,151 +2,115 @@
     ViewBag.Title = "Admin Dashboard";
 }
 
-
-
-
-<div class="container pt-5">
-
-
-@if (TempData["Message"] != null)
-{
-        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            @TempData["Message"]
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-}
-
-
-@if (TempData["ErrorMessage"] != null)
-{
-        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-            @TempData["ErrorMessage"]
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-}
-
-
-    
-
-    <div class="row">
-        <div class="col-lg-6">
-            <h3> Admin Dashboard</h3>
-            <h4>Welcome, @ViewBag.Username</h4>
-            <p>This is your admin dashboard where you can manage the application.</p>
-
-
-        </div>
-
-           <!-- Total Revenue -->
-        <div class="col-lg-6 mb-3">
-            <div class="card text-white bg-dark shadow-sm rounded-3 card-hover fade-in">
-                <div class="card-body d-flex justify-content-between align-items-center gap-2">
-                    <div>
-                        <h5 class="card-title text-light">Total Revenue This month </h5>
-                        <h3 class="text-light">₹ @ViewBag.TotalRevenue</h3>
-                    </div>
-                    <i class="bi bi-currency-rupee display-4 pt-3"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-  <div class="row mb-4">
-    <div class="col-md-12 d-flex flex-wrap gap-3">
-
-        <a class="btn btn-outline-dark shadow-sm d-flex align-items-center  mr-2 mb-2" asp-controller="admin" asp-action="UserDb">
-            <i class="bi bi-people-fill mr-2 "></i> Users Database
-        </a>
-
-
-        <a class="btn btn-outline-primary shadow-sm d-flex align-items-center mr-2 mb-2" asp-controller="admin" asp-action="ProductList">
-            <i class="bi bi-box-seam-fill mr-2 "></i> Products Database
-        </a>
-
-        <a class="btn btn-outline-success shadow-sm  d-flex align-items-center  mr-2 mb-2" asp-controller="admin" asp-action="OrderList">
-            <i class="bi bi-bag-fill mr-2 "></i> Orders Database
-        </a>
-
-     
-
+<!-- Page Header -->
+<div class="py-4" style="background: linear-gradient(135deg, var(--hc-dark) 0%, var(--hc-navy) 100%); border-bottom: 1px solid var(--hc-border);">
+    <div class="container text-center text-md-left">
+        <h1 class="h3 mb-1" style="font-weight: 800; color: var(--hc-white);"><i class="bi bi-speedometer2 mr-2 text-info"></i>Admin Control Center</h1>
+        <p class="mb-0 text-muted" style="font-size:13px;">Manage users database, control prescription listings, check sales, and dispatch shipments</p>
     </div>
 </div>
 
-
-    <div class="row mt-4">
-
-        <!-- Total Users -->
-        <div class="col-lg-3 mb-3">
-            <a asp-controller="admin" asp-action="UserDb"> 
-            <div class="card text-white bg-primary shadow-sm rounded-3 card-hover fade-in">
-                <div class="card-body d-flex justify-content-between align-items-center gap-2">
-                    <div>
-                        <h5 class="card-title">Total Users</h5>
-                        <h3>@ViewBag.TotalUsers</h3>
-                    </div>
-                    <i class="bi bi-people-fill display-4 pt-4"></i>
-                </div>
+<section class="py-5" style="background: var(--hc-dark); min-height: 80vh;">
+    <div class="container">
+        
+        <!-- Alerts -->
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show text-center mb-4" role="alert" style="border-radius: var(--hc-radius-md); background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10B981;">
+                @TempData["Message"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true" style="color:#10B981;">&times;</span>
+                </button>
             </div>
-            </a>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show text-center mb-4" role="alert" style="border-radius: var(--hc-radius-md); background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #EF4444;">
+                @TempData["ErrorMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true" style="color:#EF4444;">&times;</span>
+                </button>
+            </div>
+        }
+
+        <!-- Welcome Banner -->
+        <div class="hc-glass-card mb-4 p-4 d-flex flex-wrap justify-content-between align-items-center" style="background: rgba(17, 31, 53, 0.5);">
+            <div>
+                <h4 class="mb-1 text-light" style="font-weight: 800;">Welcome, @ViewBag.Username</h4>
+                <p class="mb-0 text-muted" style="font-size:13px;">Here is the summary analysis of HealthCart diagnostics</p>
+            </div>
+            <div class="d-flex flex-wrap gap-2 mt-3 mt-md-0">
+                <a class="btn btn-outline-primary btn-sm mr-2" asp-controller="admin" asp-action="UserDb">
+                    <i class="bi bi-people-fill mr-1"></i> User Base
+                </a>
+                <a class="btn btn-outline-primary btn-sm mr-2" asp-controller="admin" asp-action="ProductList">
+                    <i class="bi bi-box-seam-fill mr-1"></i> Catalog Inventory
+                </a>
+                <a class="btn btn-outline-primary btn-sm" asp-controller="admin" asp-action="OrderList">
+                    <i class="bi bi-receipt mr-1"></i> Order Pipeline
+                </a>
+            </div>
         </div>
 
-     
-
-        <!-- Total Products -->
-        <div class="col-lg-3 mb-3">
-            <a asp-controller="admin" asp-action="ProductList">
-       
-            <div class="card text-white bg-info shadow-sm rounded-3 card-hover fade-in">
-                <div class="card-body d-flex justify-content-between align-items-center gap-2">
-                    <div>
-                        <h5 class="card-title">Total Products</h5>
-                        <h3>@ViewBag.TotalProducts</h3>
+        <!-- Metric Grid Indicators -->
+        <div class="row">
+            
+            <!-- Revenue Card -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="hc-glass-card p-4 text-center">
+                    <div class="ai-icon-wrapper mb-3" style="width: 50px; height: 50px; font-size:24px;">
+                        <i class="bi bi-currency-rupee"></i>
                     </div>
-                    <i class="bi bi-box-seam-fill display-4 pt-4"></i>
+                    <span class="text-muted d-block uppercase mb-1" style="font-size:11px; letter-spacing:0.5px;">TOTAL REVENUE</span>
+                    <h3 class="mb-0 font-weight-bold text-success">₹ @ViewBag.TotalRevenue</h3>
                 </div>
             </div>
 
-                     
-            </a>
+            <!-- Users Count -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <a asp-controller="admin" asp-action="UserDb" style="text-decoration:none;">
+                    <div class="hc-glass-card p-4 text-center">
+                        <div class="ai-icon-wrapper mb-3" style="width: 50px; height: 50px; font-size:24px; color: var(--hc-blue); background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.2);">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <span class="text-muted d-block uppercase mb-1" style="font-size:11px; letter-spacing:0.5px;">TOTAL USERS</span>
+                        <h3 class="mb-0 font-weight-bold text-light">@ViewBag.TotalUsers</h3>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Products Count -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <a asp-controller="admin" asp-action="ProductList" style="text-decoration:none;">
+                    <div class="hc-glass-card p-4 text-center">
+                        <div class="ai-icon-wrapper mb-3" style="width: 50px; height: 50px; font-size:24px; color: var(--hc-amber); background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.2);">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+                        <span class="text-muted d-block uppercase mb-1" style="font-size:11px; letter-spacing:0.5px;">TOTAL MEDICINES</span>
+                        <h3 class="mb-0 font-weight-bold text-light">@ViewBag.TotalProducts</h3>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Orders Count -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <a asp-controller="admin" asp-action="OrderList" style="text-decoration:none;">
+                    <div class="hc-glass-card p-4 text-center">
+                        <div class="ai-icon-wrapper mb-3" style="width: 50px; height: 50px; font-size:24px;">
+                            <i class="bi bi-cart-check"></i>
+                        </div>
+                        <span class="text-muted d-block uppercase mb-1" style="font-size:11px; letter-spacing:0.5px;">TOTAL ORDERS</span>
+                        <h3 class="mb-0 font-weight-bold text-light">@ViewBag.TotalOrders</h3>
+                    </div>
+                </a>
+            </div>
+
         </div>
 
-        <!-- Total Orders -->
-        <div class="col-lg-3 mb-3">
-            <a asp-controller="admin" asp-action="OrderList">
-            <div class="card text-white bg-success shadow-sm rounded-3 card-hover fade-in">
-                <div class="card-body d-flex justify-content-between align-items-center gap-2">
-                    <div>
-                        <h5 class="card-title">Total Orders</h5>
-                        <h3>@ViewBag.TotalOrders</h3>
-                    </div>
-                    <i class="bi bi-bag-check-fill display-4 pt-4"></i>
-                </div>
-            </div>
-            </a>
-        </div>
-
-         <div class="col-lg-3 mb-3">
-            <a asp-controller="admin" asp-action="OrderList">
-            <div class="card text-white bg-black shadow-sm rounded-3 card-hover fade-in">
-                <div class="card-body d-flex justify-content-between align-items-center gap-2">
-                    <div >
-                        <h5 class="card-title text-light">Dispatched</h5>
-                        <h3 class="text-light" >@ViewBag.TotalOrders</h3>
-                    </div>
-                    <i class="bi bi-truck display-4 pt-4"></i>
-                </div>
-            </div>
-            </a>
+        <!-- Documentation Admin Guide Section -->
+        <div class="mt-4">
+            <partial name="~/Views/Shared/AdminGuide.cshtml" />
         </div>
 
     </div>
-
-
-
-    <partial name="~/Views/Shared/AdminGuide.cshtml" />
+</section>

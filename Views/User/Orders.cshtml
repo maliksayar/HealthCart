@@ -1,150 +1,174 @@
-﻿@using HealthCart.Types
+@using HealthCart.Types
 @model HealthCart.Models.ViewModels.OrderViewModel
 
 @{
-    ViewData["title"] = "Orders";
+    ViewData["Title"] = "My Orders";
 }
 
-
-
-<div class="container my-4">
-
-
-
-
-
-    <div class="mb-3">
-        <a asp-action="Orders" asp-route-OrderFilter="Recent" class="btn btn-outline-primary btn-sm">Recent</a>
-        <a asp-action="Orders" asp-route-OrderFilter="Intransit" class="btn btn-outline-info btn-sm">In Transit</a>
-        <a asp-action="Orders" asp-route-OrderFilter="Cancelled" class="btn btn-outline-danger btn-sm">Cancelled</a>
+<!-- Page Header -->
+<div class="py-4" style="background: linear-gradient(135deg, var(--hc-dark) 0%, var(--hc-navy) 100%); border-bottom: 1px solid var(--hc-border);">
+    <div class="container text-center text-md-left">
+        <h1 class="h3 mb-0" style="font-weight: 800; color: var(--hc-white);"><i class="bi bi-box2-heart mr-2 text-info"></i>Order History</h1>
+        <p class="mb-0 text-muted" style="font-size:13px;">Monitor and track your current drug shipment prescriptions</p>
     </div>
+</div>
 
+<section class="py-5" style="background: var(--hc-dark); min-height: 70vh;">
+    <div class="container">
+        
+        <!-- Filter Tabs -->
+        <div class="mb-4 d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
+            <a asp-action="Orders" asp-route-OrderFilter="Recent" class="btn btn-outline-primary btn-sm mr-2 mb-2">
+                <i class="bi bi-clock-history"></i> Recent Orders
+            </a>
+            <a asp-action="Orders" asp-route-OrderFilter="Intransit" class="btn btn-outline-primary btn-sm mr-2 mb-2">
+                <i class="bi bi-truck"></i> In Transit
+            </a>
+            <a asp-action="Orders" asp-route-OrderFilter="Cancelled" class="btn btn-outline-primary btn-sm mb-2">
+                <i class="bi bi-x-circle"></i> Cancelled
+            </a>
+        </div>
 
+        <h4 class="mb-4 font-weight-bold text-capitalize text-light" style="font-size: 18px;">
+            @ViewBag.OrderFilter Orders
+        </h4>
 
-
-
-    <p class="my-3 h4">@ViewBag.OrderFilter Orders</p>
-
-    @if (Model != null && Model.Orders != null && Model.Orders.Any())
-    {
-        foreach (var order in Model.Orders)
+        @if (Model != null && Model.Orders != null && Model.Orders.Any())
         {
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header bg-primary text-white">
-                    <div class="d-flex justify-content-between">
-                        <span><strong>Order #:</strong> @order.OrderId.ToString().Substring(0,
-                                                3)@order.OrderId.ToString().Substring(order.OrderId.ToString().Length - 3)</span>
-                            <span><strong>Date:</strong> @(order.DateCreated.HasValue ?
-                                                order.DateCreated.Value.ToUniversalTime().AddHours(10).ToString("d MMMM yyyy") : "N/A")</span>
-                                <span>
-                                    <strong>Status:</strong>
-                                    @if (order.OrderStatus == OrderStatus.Pending)
-                                    {
-                                        <span class="badge bg-warning text-dark">Pending</span>
-                                    }
-                                    else if (order.OrderStatus == OrderStatus.Verified)
-                                    {
-                                        <span class="badge bg-success">Verified</span>
-                                    }
-                                    else if (order.OrderStatus == OrderStatus.InTransit)
-                                    {
-                                        <span class="badge bg-info">In Transit</span>
-                                    }
-                                    else if (order.OrderStatus == OrderStatus.Cancelled)
-                                    {
-                                        <span class="badge bg-danger">Cancelled</span>
-                                    }
-                                </span>
-                                <span><strong>Total:</strong> @order.TotalPrice.ToString("C")</span>
-
-                            </div>
+            foreach (var order in Model.Orders)
+            {
+                <div class="hc-glass-card mb-4 p-0 overflow-hidden" style="background: rgba(17, 31, 53, 0.45); border-radius: var(--hc-radius-lg);">
+                    
+                    <!-- Card Header -->
+                    <div class="px-4 py-3 d-flex flex-wrap justify-content-between align-items-center gap-2" style="background: rgba(255, 255, 255, 0.02); border-bottom: 1px solid var(--hc-border);">
+                        <div>
+                            <span class="text-muted" style="font-size:12px;">ORDER ID</span>
+                            <h6 class="mb-0 font-weight-bold text-light" style="font-family: monospace;">
+                                HC-#@order.OrderId.ToString().Substring(0, 4)...@order.OrderId.ToString().Substring(order.OrderId.ToString().Length - 4)
+                            </h6>
                         </div>
-                        <div class="card-body">
-                            @if (order.OrderItems != null && order.OrderItems.Any())
-                            {
-                                <table class="table align-middle">
+                        <div>
+                            <span class="text-muted d-block text-md-right" style="font-size:12px;">DATE</span>
+                            <span class="font-weight-bold text-light" style="font-size:13px;">
+                                @(order.DateCreated.HasValue ? order.DateCreated.Value.ToUniversalTime().AddHours(10).ToString("dd MMM yyyy") : "N/A")
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-muted d-block text-md-right" style="font-size:12px;">STATUS</span>
+                            @if (order.OrderStatus == OrderStatus.Pending) {
+                                <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245,158,11,0.3); font-weight:700;">Pending</span>
+                            } else if (order.OrderStatus == OrderStatus.Verified) {
+                                <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16,185,129,0.3); font-weight:700;">Verified</span>
+                            } else if (order.OrderStatus == OrderStatus.InTransit) {
+                                <span class="badge" style="background: rgba(59, 130, 246, 0.15); color: #3B82F6; border: 1px solid rgba(59,130,246,0.3); font-weight:700;">In Transit</span>
+                            } else if (order.OrderStatus == OrderStatus.Cancelled) {
+                                <span class="badge" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239,68,68,0.3); font-weight:700;">Cancelled</span>
+                            }
+                        </div>
+                        <div>
+                            <span class="text-muted d-block text-md-right" style="font-size:12px;">TOTAL VALUE</span>
+                            <span class="text-success font-weight-bold" style="font-size:15px;">
+                                ₹ @order.TotalPrice.ToString("0.00")
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="p-4">
+                        @if (order.OrderItems != null && order.OrderItems.Any())
+                        {
+                            <div class="table-responsive">
+                                <table class="table mb-0" style="color: var(--hc-text);">
                                     <thead>
-                                        <tr>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Qty</th>
-                                            <th scope="col">Subtotal</th>
+                                        <tr style="color: var(--hc-muted); font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                            <th class="border-0 pl-0">Product Details</th>
+                                            <th class="border-0 text-center">Unit Price</th>
+                                            <th class="border-0 text-center">Quantity</th>
+                                            <th class="border-0 text-right pr-0">Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var item in order.OrderItems)
                                         {
-                                            <tr>
-                                                <td>@item?.Product?.Name ( @item?.Quantity )</td>
-                                                <td>
-                                                    <img src="@item?.Product?.ImageUrl" alt="@item?.Product?.Name" class="img-thumbnail"
-                                                         style="max-width: 60px;" />
+                                            <tr style="border-bottom: 1px dashed rgba(255,255,255,0.03);">
+                                                <td class="align-middle pl-0 py-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="mr-3 p-1 rounded" style="background: rgba(255,255,255,0.02); border:1px solid var(--hc-border); width: 45px; height: 45px; display:flex; align-items:center; justify-content:center;">
+                                                            <img src="@item?.Product?.ImageUrl" alt="@item?.Product?.Name" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                                        </div>
+                                                        <span class="font-weight-bold text-light">@item?.Product?.Name</span>
+                                                    </div>
                                                 </td>
-                                                <td>@item?.Product?.Price.ToString("C")</td>
-                                                <td>@item?.Quantity</td>
-                                                <td>@(item?.Product?.Price * item?.Quantity) ₹</td>
+                                                <td class="align-middle text-center">₹ @item?.Product?.Price.ToString("0.00")</td>
+                                                <td class="align-middle text-center font-weight-bold">@item?.Quantity</td>
+                                                <td class="align-middle text-right pr-0 font-weight-bold text-info">₹ @((item?.Product?.Price * item?.Quantity)?.ToString("0.00"))</td>
                                             </tr>
                                         }
                                     </tbody>
                                 </table>
-                            }
-                            else
-                            {
-                                <div class="alert alert-info">No items in this order.</div>
-                            }
-                        </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info py-2" style="border-radius: var(--hc-radius-sm);">No prescription items in this order.</div>
+                        }
+                    </div>
 
-
-                        <div class="card-footer">
-
-                            @if (order.OrderStatus != OrderStatus.Cancelled)
-                            {
-
-                                <div class="d-flex justify-content-between">
-                                    <span><strong>Estimated Delivery Date:</strong></span>
-                                    @* <span><strong>Payment Method:</strong> @order.PaymentMethod</span> *@
-                                </div>
-                                <address>
-                                    @(order.ShippingDate.HasValue ? order.ShippingDate.Value.ToUniversalTime().AddHours(10).ToString("d MMMM yyyy") : "N/A")
-
-                                </address>
-                                <p class="text-muted">
-                                    Please note: The estimated delivery date is an approximation and actual delivery may take less or more
-                                    time than shown.
-                                </p>
-                            }
-
-                            @if (order.OrderStatus == OrderStatus.Pending)
-                            {
-                                <a class="btn btn-outline-primary" asp-controller="Order" asp-action="SendEmail"
-                                   asp-route-OrderId="@order.OrderId"> Verify order through Email </a>
-
-                                <a class="btn btn-black" asp-controller="Order" asp-action="cancel" asp-route-OrderId="@order.OrderId">
-                                    Cancel Order </a>
+                    <!-- Card Footer -->
+                    <div class="px-4 py-3" style="background: rgba(0, 0, 0, 0.1); border-top: 1px solid rgba(255,255,255,0.03);">
+                        <div class="row align-items-center">
+                            <div class="col-md-7 mb-3 mb-md-0">
+                                @if (order.OrderStatus != OrderStatus.Cancelled)
+                                {
+                                    <div class="d-flex align-items-center text-muted" style="font-size: 13px;">
+                                        <i class="bi bi-calendar-event mr-2 text-info"></i>
+                                        <span>Estimated Delivery: <strong class="text-light">@(order.ShippingDate.HasValue ? order.ShippingDate.Value.ToUniversalTime().AddHours(10).ToString("dd MMMM yyyy") : "Processing")</strong></span>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-5 text-md-right">
+                                @if (order.OrderStatus == OrderStatus.Pending)
+                                {
+                                    <a class="btn btn-primary btn-sm mr-2" asp-controller="Order" asp-action="SendEmail" asp-route-OrderId="@order.OrderId">
+                                        <i class="bi bi-envelope-check mr-1"></i> Verify via Email
+                                    </a>
+                                    <a class="btn btn-outline-danger btn-sm" asp-controller="Order" asp-action="cancel" asp-route-OrderId="@order.OrderId">
+                                        <i class="bi bi-x-circle mr-1"></i> Cancel
+                                    </a>
                                 }
 
                                 @if (order.OrderStatus == OrderStatus.Verified && order.PaymentStatus == PaymentStatus.RazorPay)
                                 {
-                                    <a class="btn btn-success" asp-controller="Order" asp-action="PayWithRazorPay" asp-route-OrderId="@order.OrderId">
-                                     Pay Now (RazorPay)
-                                       </a>
+                                    <a class="btn btn-success btn-sm" asp-controller="Order" asp-action="PayWithRazorPay" asp-route-OrderId="@order.OrderId">
+                                        <i class="bi bi-wallet2 mr-1"></i> Pay Now (RazorPay)
+                                    </a>
                                 }
-
 
                                 @if (order.OrderStatus == OrderStatus.InTransit)
                                 {
-                                    <a class="btn btn-black " asp-controller="Order" asp-action="cancel" asp-route-OrderId="@order.OrderId">
-                                        Check Status </a>
-                                    }
-
-
-                                </div>
+                                    <span class="text-info font-weight-bold" style="font-size:13px;">
+                                        <i class="bi bi-truck mr-1"></i> Parcel is in transit
+                                    </span>
+                                }
                             </div>
-                        }
-                    }
-    else
-                    {
-                        <div class="alert alert-warning">No orders found.</div>
-                    }
+                        </div>
+                    </div>
+
                 </div>
+            }
+        }
+        else
+        {
+            <!-- No Orders -->
+            <div class="text-center py-5">
+                <div class="hc-glass-card mx-auto py-5 px-4" style="max-width: 600px;">
+                    <i class="bi bi-receipt text-muted display-4"></i>
+                    <h4 class="mt-4 font-weight-bold text-light">No Orders Found</h4>
+                    <p class="text-muted mb-4">You haven't placed any orders in this category yet. Start shopping authentic medicines now!</p>
+                    <a asp-controller="Product" asp-action="Index" asp-route-category="all" class="btn btn-primary">Go to Shop</a>
+                </div>
+            </div>
+        }
+
+    </div>
+</section>
